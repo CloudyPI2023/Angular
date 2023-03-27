@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import{CategoryComponent} from "./Entites/Category/category.component"
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ProductListComponent } from './Modules/Product/product-list/product-list.component';
 
 const routes: Routes =[
   {
@@ -20,11 +20,11 @@ const routes: Routes =[
     }]
   },
   {
-    path: '/Category/all-categories',
-    component:CategoryComponent,
-    loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-    //pathMatch: 'full',
-  }
+    path: '/products/all-products',
+    redirectTo: '/Modules/Product/product-list',
+    pathMatch: 'full',
+  },
+  
 ];
 
 @NgModule({
