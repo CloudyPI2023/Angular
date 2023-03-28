@@ -1,0 +1,51 @@
+
+<br><br><br><br>
+<div class="col-md-12">
+  <div class="card card-plain">
+    
+      <div class="card-header card-header-success">
+          <h4 class="card-title mt-0"> Delivery Persons List</h4>
+          
+          <p class="card-category"> </p>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+            <table class = "table table-striped">
+              <thead class="">
+                 <th>ID</th>
+                 <th>Full Name</th>
+                 <th>Email </th>
+                 <th> Phone Number </th>
+                 <th>CIN </th>
+                 <th> Address </th>
+                 <th> Hire Date </th>
+                 <th> Vehicule Type </th>
+                 <th> Delivery Area </th>
+                 <th> Availability </th>
+              <th style="text-align: center;"> Actions </th> 
+             </thead>
+             <tbody>
+                 <tr *ngFor = "let  deliveryPerson of deliveryPersons" >
+                     <td> {{  deliveryPerson.idDeliveryP}} </td>
+                     <td> {{  deliveryPerson.nomPrenomDeliveryP}} </td>
+                     <td> {{  deliveryPerson.emailDeliveryP}} </td>
+                     <td> {{  deliveryPerson.phoneNumberDeliveryP}} </td>
+                     <td> {{  deliveryPerson.cindeliveryP}} </td>
+                     <td> {{  deliveryPerson.addressDeliveryP}} </td>
+                     <td> {{ deliveryPerson.hireDateDeliveryP}}</td>
+                     <td> {{ deliveryPerson.vehiculeType}}</td>
+                     <td> {{ deliveryPerson.deliveryArea}}</td>
+                     <td> {{ deliveryPerson.availabilityDeliveryP}}</td>
+                     
+        
+                 </tr> 
+               
+         
+             </tbody>
+               </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+
