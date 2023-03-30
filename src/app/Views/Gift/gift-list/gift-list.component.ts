@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gift } from '../gift';
-import { GiftService } from '../gift.service';
+import { Gift } from '../../../Models/gift';
+import { GiftService } from '../../../services/gift.service';
 
 @Component({
   selector: 'app-gift-list',

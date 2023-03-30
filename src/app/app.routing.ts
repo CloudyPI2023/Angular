@@ -4,7 +4,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ProductListComponent } from './Modules/Product/product-list/product-list.component';
+import { ProductListComponent } from './Views/Product/product-list/product-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes =[
   {
@@ -24,6 +25,14 @@ const routes: Routes =[
     redirectTo: '/Modules/Product/product-list',
     pathMatch: 'full',
   },
+  {
+    path:'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path:'all-products',
+    component: ProductListComponent
+  }
   
 ];
 

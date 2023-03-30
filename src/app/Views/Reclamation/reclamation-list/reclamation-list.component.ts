@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Reclamation } from '../reclamation';
-import { ReclamationService } from '../reclamation.service';
+import { Reclamation } from '../../../Models/reclamation';
+import { ReclamationService } from '../../../services/reclamation.service';
 
 @Component({
   selector: 'app-reclamation-list',

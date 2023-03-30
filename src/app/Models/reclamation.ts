@@ -1,5 +1,5 @@
-import { Product } from "../../Models/product";
-import {User} from "../User/user"
+import { Product } from "../Models/product";
+import {User} from "../Models/user"
 
 export class Reclamation {
     idReclamation:number;
