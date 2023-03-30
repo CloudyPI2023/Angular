@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-danger"
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
                         <h4 class="card-title ">Table of all products</h4>
                         <p class="card-category"> Products can be considered as drugs</p>
                     </div>
@@ -11,31 +12,31 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         ID
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Reference
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Product name
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Category name
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Product price
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Quantity
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Availability
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Expiration Date
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Created by
                                     </th>
                                 </thead>
@@ -76,9 +77,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-8" style="margin: auto;">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-danger"
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
                         <h4 class="card-title ">Table of all reclamations</h4>
                         <p class="card-category"> Reclamation about certain products</p>
                     </div>
@@ -86,19 +88,19 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         ID
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Reclamation date
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Sent by
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         About product
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Reclamation description
                                     </th>
                                 </thead>
@@ -117,7 +119,7 @@
                                             {{r.product.nameProduct}}
                                         </td>
                                         <td>
-                                           {{r.descriptionReclamation}}
+                                            {{r.descriptionReclamation}}
                                         </td>
                                     </tr>
 
@@ -127,9 +129,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-8" style="margin: auto;">
                 <div class="card card-plain">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-danger"
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
                         <h4 class="card-title mt-0"> Table of categories </h4>
                         <p class="card-category"> Categories for several products</p>
                     </div>
@@ -137,16 +140,16 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead class="">
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         ID
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Category name
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Category description
                                     </th>
-                                    <th>
+                                    <th style="font-weight: bold;">
                                         Actions
                                     </th>
 
@@ -160,19 +163,60 @@
                                             {{c.nameCategory}}
                                         </td>
                                         <td>
-                                           {{c.descriptionCategory}}
+                                            {{c.descriptionCategory}}
                                         </td>
-                                       <!-- <td>
-                                            <button type="button",class="btn btn-outline-danger" (click)="deleteCategory(c.idCategory)">DELETE</button>
-                                        </td>-->
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </div>
 </div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6" style="margin: auto;">
+                <div class="card">
+                    <div class="card-header card-header-danger"
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; color:antiquewhite">
+                        <h4 class="card-title">Add Category</h4>
+                        <p class="card-category">Try adding new fields!</p>
+                    </div>
+                    <div class="card-body">
+                        <form onsubmit="return valider()" name="formAddCategory">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input name= "nameCategory" [(ngModel)]="category.nameCategory" matInput placeholder="Category name"
+                                        type="text" style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
+                                </div>
+                                <div class="col-md-6">
+                                    <input [(ngModel)]="category.descriptionCategory" matInput
+                                        placeholder="Category description" type="text"
+                                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="AddCategory(category)">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function valider(){
+        var nameCategory=window.document.formAddCategory.nameCategory.value;
+        var descriptionCategory=window.document.formAddCategory.descriptionCategory.value;
+        if((nameCategory=="")||(descriptionCategory=="")){
+            alert ("Please verify fields!");
+                return false; 
+        }
+
+    }
+</script>

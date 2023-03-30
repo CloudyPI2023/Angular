@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   categories: Category[];
   reclamations: Reclamation[];
+  category: Category = new Category();
 
   constructor(private ps: ProductService,private cs:CategoryService,private rs:ReclamationService,
     private router: Router) { }
@@ -48,4 +49,13 @@ export class ProductListComponent implements OnInit {
   /* deleteCategory( idCategory: any){
     this.cs.deleteCategory(idCategory).subscribe(() => this.getCategories());
   }*/
+
+  AddCategory(category:any){
+    this.cs.createCategory(this.category).subscribe( data =>{
+      console.log(data);
+      this.getCategories();
+    },
+    error => console.log(error));
+  }
+  
 }
