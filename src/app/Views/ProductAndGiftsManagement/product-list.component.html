@@ -1,0 +1,178 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Table of all products</h4>
+                        <p class="card-category"> Products can be considered as drugs</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Reference
+                                    </th>
+                                    <th>
+                                        Product name
+                                    </th>
+                                    <th>
+                                        Category name
+                                    </th>
+                                    <th>
+                                        Product price
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        Availability
+                                    </th>
+                                    <th>
+                                        Expiration Date
+                                    </th>
+                                    <th>
+                                        Created by
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of products">
+                                        <td>
+                                            {{p.idProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.referenceProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.nameProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.categoryProduct.nameCategory}}
+                                        </td>
+                                        <td>
+                                            {{p.priceProduct}} DT
+                                        </td>
+                                        <td>
+                                            {{p.quantityProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.availabilityProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.expirationDateProduct}}
+                                        </td>
+                                        <td>
+                                            {{p.userProduct.firstName}} {{p.userProduct.lastName}}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Table of all reclamations</h4>
+                        <p class="card-category"> Reclamation about certain products</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Reclamation date
+                                    </th>
+                                    <th>
+                                        Sent by
+                                    </th>
+                                    <th>
+                                        About product
+                                    </th>
+                                    <th>
+                                        Reclamation description
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let r of reclamations">
+                                        <td>
+                                            {{r.idReclamation}}
+                                        </td>
+                                        <td>
+                                            {{r.dateReclamation}}
+                                        </td>
+                                        <td>
+                                            {{r.userProduct.firstName}} {{r.userProduct.lastName}}
+                                        </td>
+                                        <td>
+                                            {{r.product.nameProduct}}
+                                        </td>
+                                        <td>
+                                           {{r.descriptionReclamation}}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0"> Table of categories </h4>
+                        <p class="card-category"> Categories for several products</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Category name
+                                    </th>
+                                    <th>
+                                        Category description
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let c of categories">
+                                        <td>
+                                            {{c.idCategory}}
+                                        </td>
+                                        <td>
+                                            {{c.nameCategory}}
+                                        </td>
+                                        <td>
+                                           {{c.descriptionCategory}}
+                                        </td>
+                                       <!-- <td>
+                                            <button type="button",class="btn btn-outline-danger" (click)="deleteCategory(c.idCategory)">DELETE</button>
+                                        </td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>

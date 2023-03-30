@@ -11,8 +11,8 @@ export class Product {
     descriptionProduct:String;
     priceProduct:number;
     quantityProduct:number;
-    AvailabilityProduct:number;
-    ExpirationDateProduct:Date;
+    availabilityProduct:number;
+    expirationDateProduct:Date;
     userProduct:User[];
     categoryProduct:Category[];
     ReclamationsProduct:Reclamation[]

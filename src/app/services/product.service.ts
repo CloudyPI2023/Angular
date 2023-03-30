@@ -13,6 +13,6 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
   
   getAllProducts(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-products");
+    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-productsBack");
   }
 }

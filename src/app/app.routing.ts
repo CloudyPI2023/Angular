@@ -4,7 +4,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ProductListComponent } from './Views/Product/product-list/product-list.component';
+import { ProductListComponent } from './Views/ProductAndGiftsManagement/product-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes =[
@@ -20,17 +20,13 @@ const routes: Routes =[
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
   },
-  {
-    path: '/products/all-products',
-    redirectTo: '/Modules/Product/product-list',
-    pathMatch: 'full',
-  },
+  
   {
     path:'dashboard',
     component: DashboardComponent
   },
   {
-    path:'all-products',
+    path:'Product and gifts management',
     component: ProductListComponent
   }
   
