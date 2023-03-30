@@ -46,9 +46,9 @@ export class ProductListComponent implements OnInit {
       this.categories = data;
     });
   }
-  /* deleteCategory( idCategory: any){
+  deleteCategory( idCategory: any){
     this.cs.deleteCategory(idCategory).subscribe(() => this.getCategories());
-  }*/
+  }
 
   AddCategory(category:any){
     this.cs.createCategory(this.category).subscribe( data =>{
@@ -57,5 +57,11 @@ export class ProductListComponent implements OnInit {
     },
     error => console.log(error));
   }
-  
+  updateCategory(idCategory:any,category:any){
+    this.cs.updateCategory(idCategory,this.category).subscribe(data=>{
+      console.log(data);
+      this.getCategories();
+    })
+  }
+
 }

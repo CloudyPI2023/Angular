@@ -156,15 +156,22 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let c of categories">
+                                       
                                         <td>
                                             {{c.idCategory}}
                                         </td>
-                                        <td>
-                                            {{c.nameCategory}}
+                                       
+                                        <td >
+                                            <input *ngIf="c.nameCategory" [(ngModel)]="c.nameCategory" style="background-color: transparent; border-color: transparent;" >
                                         </td>
                                         <td>
-                                            {{c.descriptionCategory}}
+                                            <input *ngIf="c.descriptionCategory" [(ngModel)]="c.descriptionCategory" style="background-color: transparent; border-color: transparent;" >
                                         </td>
+                                        <td>
+                                            <button class="btn btn-outline-primary" (click)="updateCategory(c.idCategory,this.c)">Edit</button>
+                                            <td>
+                                            <button class="btn btn-outline-danger" (click)="deleteCategory(c.idCategory)">Delete</button>
+                                        
                                     </tr>
 
                                 </tbody>
