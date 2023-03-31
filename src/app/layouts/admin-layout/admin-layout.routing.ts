@@ -7,8 +7,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { UserComponent } from 'app/user/user.component';
-import { DeliveryPersonComponent} from 'app/delivery-person/delivery-person.component';
+import { UserComponent } from 'app/views/user-management/user.component'; 
+import { DeliveryPersonComponent } from 'app/views/deliveryP-management/delivery-person.component'; 
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -55,7 +55,7 @@ export const AdminLayoutRoutes: Routes = [
     // }
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'users',           component: UserComponent },
-    { path: 'delivery',       component: DeliveryPersonComponent },
+    { path: 'deliveryPersons',       component: DeliveryPersonComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },

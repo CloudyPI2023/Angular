@@ -4,8 +4,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { UserComponent } from './user/user.component';
-
+import { UserComponent } from './views/user-management/user.component';
+import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component';
 
 const routes: Routes =[
   {
@@ -21,6 +21,7 @@ const routes: Routes =[
     }]
   },
   {path: 'users', component: UserComponent},
+  {path: 'deliveryPersons', component: DeliveryPersonComponent},
 
 ];
 
@@ -29,7 +30,7 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-       useHash: true
+       useHash: false
     })
   ],
   exports: [

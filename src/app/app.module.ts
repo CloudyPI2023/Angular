@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {  UserComponent } from './user/user.component';
-import { DeliveryPersonComponent } from './delivery-person/delivery-person.component';
+import { UserComponent } from './views/user-management/user.component'; 
+import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component'; 
 
 @NgModule({
   imports: [

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryPerson } from './delivery-person';
+import { DeliveryPerson } from 'app/models/delivery-person'; 
 import { DeliveryPersonService } from './delivery-person.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
