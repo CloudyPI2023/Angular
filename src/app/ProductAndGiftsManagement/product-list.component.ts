@@ -6,8 +6,8 @@ import { Reclamation } from 'app/Models/reclamation';
 import { CategoryService } from 'app/services/category.service';
 import { GiftService } from 'app/services/gift.service';
 import { ReclamationService } from 'app/services/reclamation.service';
-import { Product } from '../../Models/product';
-import { ProductService } from '../../services/product.service'
+import { Product } from '../Models/product';
+import { ProductService } from '../services/product.service'
 
 @Component({
   selector: 'app-product-list',
@@ -78,8 +78,8 @@ export class ProductListComponent implements OnInit {
    }
   }
   
-  updateCategory(idCategory:any,category:any){
-    this.cs.updateCategory(idCategory,this.category).subscribe(data=>{
+  updateCategory(category:any){
+    this.cs.updateCategory(category).subscribe(data=>{
       console.log(data);
       this.getCategories();
     })

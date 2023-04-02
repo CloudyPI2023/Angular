@@ -24,8 +24,8 @@ export class CategoryService {
     return this.httpClient.get<Category>(`${this.baseURL}`+"/retrieve-category/"+`${idCategory}`);
   }
 
-  updateCategory(idCategory: number, category: Category): Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}`+"/update-category/"+`${idCategory}`, category);
+  updateCategory(category: Category): Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}`+"/update-category/",category);
   }
 
   deleteCategory(idCategory: number): Observable<Object>{
