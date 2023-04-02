@@ -1,6 +1,6 @@
 import {Category} from "./category"
-import {User} from "../Models/user"
-import { Reclamation } from "../Models/reclamation";
+import {User} from "./user"
+import { Reclamation } from "./reclamation";
 
 
 export class Product {
