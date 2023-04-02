@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Donation } from 'app/models/donation';
+import { DonationService } from 'app/services/donationService/donation.service';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-donation',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonationComponent implements OnInit {
 
-  constructor() { }
+  donations: Donation[]; 
+
+  constructor(private donationService: DonationService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.getDonations(); 
+  }
+
+  private getDonations(){
+    this.donationService.getDonationList().subscribe(data => {
+      this.donations = data;
+    });
   }
 
 }
