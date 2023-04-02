@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Association } from 'app/models/association';
+import { RequestService } from 'app/services/requestService/request.service';
+
 
 @Component({
   selector: 'app-request',
@@ -6,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./request.component.scss']
 })
 export class RequestComponent implements OnInit {
+  requests: Request[];
+  association: Association[];
 
-  constructor() { }
+  constructor(private requestService: RequestService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.getRequests();
+  }
+
+  private getRequests(){
+    this.requestService.getRequestList().subscribe(data => {
+      this.requests = data;
+    });
   }
 
 }

@@ -1,1 +1,69 @@
-<p>request works!</p>
+
+            
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Requests</h4>
+                        <p class="card-category"> All Requests For PharmaLife</p>
+                        <button type="button" class="btn btn-warning btn-rounded">New</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        id
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th>
+                                        Type
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Association
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                    
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor ="let request of requests">
+                                        <td>{{request.idRequest}}</td>  
+                                        <td>{{request.nameRequest}}</td> 
+                                        <td>{{request.descriptionRequest}}</td> 
+                                        <td>{{request.requestType}}</td>  
+                                        <td>{{request.dateRequest}}</td> 
+                                        <td>{{request.statusRequest}}</td> 
+                                      
+                                        <td>{{request.Association}}</td> 
+                                        
+                                        <td>
+                                            <button type="button" class="btn btn-link btn-sm btn-rounded">edit</button>
+                                            <button type="button" class="btn btn-link btn-sm btn-rounded">delete</button>
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+  
+
+
+  
+
+
