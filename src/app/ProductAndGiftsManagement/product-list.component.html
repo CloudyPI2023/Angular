@@ -1,24 +1,23 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10" style="margin: auto;">
                 <div class="card">
-                    <div class="card-header card-header-danger"
-                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
-                        <h4 class="card-title ">Table of all products</h4>
-                        <p class="card-category"> Products can be considered as drugs</p>
+                    <div 
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
+                        <h4 class="card-title " style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;">Table of all products</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                    <th style="font-weight: bold;">
+                                    <th >
                                         ID
                                     </th>
-                                    <th style="font-weight: bold;">
+                                    <th style="font-weight: bold">
                                         Reference
                                     </th>
-                                    <th style="font-weight: bold;">
+                                    <th style="font-weight: bold">
                                         Product name
                                     </th>
                                     <th style="font-weight: bold;">
@@ -27,7 +26,7 @@
                                     <th style="font-weight: bold;">
                                         Product price
                                     </th>
-                                    <th style="font-weight: bold;">
+                                    <th style="font-weight:bold">
                                         Quantity
                                     </th>
                                     <th style="font-weight: bold;">
@@ -79,15 +78,16 @@
             </div>
             <div class="col-md-8" style="margin: auto;">
                 <div class="card card-plain">
-                    <div class="card-header card-header-danger"
-                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
-                        <h4 class="card-title mt-0"> Table of gifts </h4>
+                    <div 
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
+                        <h4 class="card-title mt-0" style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;"> 
+                            Table of all gifts </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead class="">
-                                    <th style="font-weight: bold;">
+                                    <th>
                                         ID
                                     </th>
                                     <th style="font-weight: bold;">
@@ -134,16 +134,16 @@
             </div>
             <div class="col-md-8" style="margin: auto;">
                 <div class="card">
-                    <div class="card-header card-header-danger"
-                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
-                        <h4 class="card-title ">Table of all reclamations</h4>
-                        <p class="card-category"> Reclamations about products</p>
+                    <div 
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
+                        <h4 class="card-title "style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;">
+                            Table of all reclamations</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                    <th style="font-weight: bold;">
+                                    <th >
                                         ID
                                     </th>
                                     <th style="font-weight: bold;">
@@ -153,7 +153,10 @@
                                         Sent by
                                     </th>
                                     <th style="font-weight: bold;">
-                                        About product
+                                        Email
+                                    </th>
+                                    <th style="font-weight: bold;">
+                                        Product name
                                     </th>
                                     <th style="font-weight: bold;">
                                         Reclamation description
@@ -171,6 +174,9 @@
                                             {{r.userProduct.firstName}} {{r.userProduct.lastName}}
                                         </td>
                                         <td>
+                                            {{r.userProduct.email}}
+                                        </td>
+                                        <td>
                                             {{r.product.nameProduct}}
                                         </td>
                                         <td>
@@ -185,17 +191,17 @@
                 </div>
             </div>
             <div class="col-md-8" style="margin: auto;">
-                <div class="card card-plain">
-                    <div class="card-header card-header-danger"
-                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
-                        <h4 class="card-title mt-0"> Table of categories </h4>
-                        <p class="card-category"> Categories for several products</p>
+                <div class="card card-plain" >
+                    <div class=""
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
+                        <h4 class="card-title mt-0"style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;"> 
+                            Table of all categories </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead class="">
-                                    <th style="font-weight: bold;">
+                                    <th>
                                         ID
                                     </th>
                                     <th style="font-weight: bold;">
@@ -232,53 +238,49 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6" style="margin: auto;">
-                <div class="card">
-                    <div class="card-header card-header-danger"
-                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; color:antiquewhite">
-                        <h4 class="card-title">Add Category</h4>
-                        <p class="card-category">Try adding new fields!</p>
+                        <div class="card">
+                        <div 
+                        style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #d4d9d4;">
+                        <h4 class="card-title"
+                        style=" color:black; font-weight: bold; text-align: center;">Add Category</h4>
+    
                     </div>
                     <div class="card-body">
-                        <form name="formAddCategory">
+                        <form name="formAddCategory" id="formAddCategory">
                             <div class="row">
                                 <div class="col-md-6">
                                     <input name= "nameCategory" [(ngModel)]="category.nameCategory" matInput placeholder="Category name"
-                                        type="text" style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
+                                        type="text" style=" border-radius: 36px;margin-top: 9px; padding: 12px;margin-left: 36px;" required>
                                 </div>
                                 <div class="col-md-6">
                                     <input [(ngModel)]="category.descriptionCategory" matInput
                                         placeholder="Category description" type="text"
-                                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;">
+                                        style=" border-radius: 36px;margin-top: 9px; padding: 12px;" required>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
                                 (click)="AddCategory(category)" >Add</button>
                         </form>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-<!--<script>
-    function valider(){
-        var nameCategory=formAddCategory.nameCategory.value;
-        var descriptionCategory=formAddCategory.descriptionCategory.value;
-        if((nameCategory=="")||(descriptionCategory=="")){
-            alert ("Please verify fields!");
-                return false; 
-        }
 
-    }
-</script>-->
+<script>
+    const form = document.getElementById('formAddCategory');
+    form.addEventListener('submit', (event) => {
+      const requiredFields = form.querySelectorAll('input[required]');
+      for (const field of requiredFields) {
+        if (field.value.trim() === '') {
+          event.preventDefault();
+          alert('Please fill in all required fields');
+          break;
+        }
+      }
+    });
+  </script>
