@@ -15,6 +15,9 @@ export class CategoryService {
   getAllCategories(): Observable<Category[]>{
     return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categories");
   }
+  getAllCategoriesArchived(): Observable<Category[]>{
+    return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categoriesArchived");
+  }
 
   createCategory(category: Category): Observable<Object>{
     return this.httpClient.post(`${this.baseURL}`+"/add-category", category);
@@ -31,4 +34,10 @@ export class CategoryService {
   deleteCategory(idCategory: number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}`+"/delete-category/"+`${idCategory}`);
   }
+  setArchivedCategory(category:Category):Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}`+"/archive-category/",category);
+
+  }
+
+
 }

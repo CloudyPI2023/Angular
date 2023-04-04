@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-10" style="margin: auto;">
                 <div class="card">
-                    <div 
+                    <div class="card-header card-header-danger"
                         style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
-                        <h4 class="card-title " style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;">Table of all products</h4>
+                        <h4 class="card-title " style=" color: rgb(255, 255, 255);  text-align: center;">Table of all products</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -78,9 +78,9 @@
             </div>
             <div class="col-md-8" style="margin: auto;">
                 <div class="card card-plain">
-                    <div 
+                    <div class="card-header card-header-danger"
                         style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
-                        <h4 class="card-title mt-0" style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;"> 
+                        <h4 class="card-title mt-0" style=" color: rgb(255, 255, 255);  text-align: center;"> 
                             Table of all gifts </h4>
                     </div>
                     <div class="card-body">
@@ -134,9 +134,9 @@
             </div>
             <div class="col-md-8" style="margin: auto;">
                 <div class="card">
-                    <div 
+                    <div class="card-header card-header-danger"
                         style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
-                        <h4 class="card-title "style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;">
+                        <h4 class="card-title "style=" color: rgb(255, 255, 255);  text-align: center;">
                             Table of all reclamations</h4>
                     </div>
                     <div class="card-body">
@@ -192,9 +192,9 @@
             </div>
             <div class="col-md-8" style="margin: auto;">
                 <div class="card card-plain" >
-                    <div class=""
+                    <div class="card-header card-header-danger"
                         style=" border-radius: 36px;margin-top: 9px; padding: 12px; background-color: #6d876d;">
-                        <h4 class="card-title mt-0"style=" color: rgb(41, 40, 40); font-weight: bold; text-align: center;"> 
+                        <h4 class="card-title mt-0"style=" color: rgb(255, 255, 255);  text-align: center;"> 
                             Table of all categories </h4>
                     </div>
                     <div class="card-body">
@@ -231,7 +231,7 @@
                                         <td >
                                             <button class="btn btn-outline-primary" (click)="updateCategory(c)">Edit</button>
                                             <td>
-                                            <button class="btn btn-outline-danger" (click)="deleteCategory(c.idCategory)">Delete</button>
+                                            <button class="btn btn-outline-danger" (click)="setArchivedCategory(c)">Archive</button>
                                         
                                     </tr>
 
@@ -246,25 +246,69 @@
     
                     </div>
                     <div class="card-body">
-                        <form name="formAddCategory" id="formAddCategory">
+                        <form [formGroup]="myForm" name="myForm" id="myForm" >
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input name= "nameCategory" [(ngModel)]="category.nameCategory" matInput placeholder="Category name"
+                                    <input id="nameCategory" name= "nameCategory" formControlName="myInput" [(ngModel)]="category.nameCategory" matInput placeholder="Category name"
                                         type="text" style=" border-radius: 36px;margin-top: 9px; padding: 12px;margin-left: 36px;" required>
                                 </div>
                                 <div class="col-md-6">
                                     <input [(ngModel)]="category.descriptionCategory" matInput
+                                    id="description" name="description" formControlName="myInput"
                                         placeholder="Category description" type="text"
                                         style=" border-radius: 36px;margin-top: 9px; padding: 12px;" required>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                (click)="AddCategory(category)" >Add</button>
+                               (click)="AddCategory(category)" >Add</button>
                         </form>
                     </div>
                     </div>
                 </div>
                 </div>
+            </div>
+            <div class="col-md-8" style="margin: auto;">
+                <div class="card card-plain" >
+            <div class="card-header card-header-danger"
+            style=" border-radius: 36px;margin-top: 9px; padding: 12px; ">
+            <h4 class="card-title mt-0"style=" color: rgb(255, 255, 255);  text-align: center;"> 
+                Table of archived categories </h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="">
+                        <th>
+                            ID
+                        </th>
+                        <th style="font-weight: bold;">
+                            Category name
+                        </th>
+                        <th style="font-weight: bold;">
+                            Category description
+                        </th>
+                       
+
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of categoriesArchived">
+                           
+                            <td>
+                                {{c.idCategory}}
+                            </td>
+                           
+                            <td >
+                                <input *ngIf="c.nameCategory" [(ngModel)]="c.nameCategory" style="background-color: transparent; border-color: transparent;" >
+                            </td>
+                            <td>
+                                <input *ngIf="c.descriptionCategory" [(ngModel)]="c.descriptionCategory" style="background-color: transparent; border-color: transparent;" >
+                            </td>
+                           
+                            
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
 
         </div>
@@ -273,14 +317,31 @@
 
 <script>
     const form = document.getElementById('formAddCategory');
-    form.addEventListener('submit', (event) => {
+    form.addEventListener("submit", (event) => {
       const requiredFields = form.querySelectorAll('input[required]');
       for (const field of requiredFields) {
-        if (field.value.trim() === '') {
+        if (field.value.trim() == '') {
           event.preventDefault();
           alert('Please fill in all required fields');
           break;
         }
       }
     });
+  </script>
+
+<script type="text/javascript">
+    function required()
+{
+var empt = document.forms["formAddCategory"]["nameCategory"].value;
+if (empt == "")
+{
+alert("Please input a Value");
+return false;
+}
+else 
+{
+alert('Code has accepted : you can try another');
+return true; 
+}
+}
   </script>

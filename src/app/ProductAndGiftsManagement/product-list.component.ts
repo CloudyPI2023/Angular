@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'app/Models/category';
 import { Gift } from 'app/Models/gift';
@@ -18,12 +19,19 @@ export class ProductListComponent implements OnInit {
 
   products: Product[];
   categories: Category[];
+  categoriesArchived:Category[];
   reclamations: Reclamation[];
   gifts:Gift[];
   category: Category = new Category();
+  myForm: FormGroup;
 
   constructor(private ps: ProductService,private cs:CategoryService,private rs:ReclamationService,private gs:GiftService,
-    private router: Router) { }
+    private router: Router,private fb: FormBuilder) { 
+      this.myForm = this.fb.group({
+        myInput: ['', Validators.required]
+
+      });
+    }
 
   ngOnInit(): void {
     //this.getALL();
@@ -31,6 +39,7 @@ export class ProductListComponent implements OnInit {
     this.getProducts();
     this.getReclamations();
     this.getGifts();
+    this.getAllCategoriesArchived();
   }
 
   
@@ -51,6 +60,11 @@ export class ProductListComponent implements OnInit {
       this.categories = data;
     });
   }
+  getAllCategoriesArchived(){
+    this.cs.getAllCategoriesArchived().subscribe(data => {
+      this.categoriesArchived = data;
+    });
+  }
 
   getGifts(){
     this.gs.getAllGifts().subscribe(data => {
@@ -63,11 +77,13 @@ export class ProductListComponent implements OnInit {
   }
 
   AddCategory(category:any){
+    console.log(category.nameCategory);
+    if(category.nameCategory!=null||category.nameCategory!=''){
     this.cs.createCategory(this.category).subscribe( data =>{
       console.log(data);
       this.getCategories();
     },
-    error => console.log(error));
+    error => console.log(error));}
   }
 
  valider(ca:Category)
@@ -82,6 +98,13 @@ export class ProductListComponent implements OnInit {
     this.cs.updateCategory(category).subscribe(data=>{
       console.log(data);
       this.getCategories();
+    })
+  }
+  setArchivedCategory(category:any){
+    this.cs.setArchivedCategory(category).subscribe(data=>{
+      console.log(data);
+      this.getCategories();
+      this.getAllCategoriesArchived();
     })
   }
 
