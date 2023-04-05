@@ -231,7 +231,7 @@
                                         <td >
                                             <button class="btn btn-outline-primary" (click)="updateCategory(c)">Edit</button>
                                             <td>
-                                            <button class="btn btn-outline-danger" (click)="setArchivedCategory(c)">Archive</button>
+                                            <button class="btn btn-outline-info" (click)="setArchivedCategory(c)">Archive</button>
                                         
                                     </tr>
 
@@ -287,6 +287,9 @@
                         <th style="font-weight: bold;">
                             Category description
                         </th>
+                        <th>
+                            Actions
+                        </th>
                        
 
                     </thead>
@@ -303,6 +306,9 @@
                             <td>
                                 <input *ngIf="c.descriptionCategory" [(ngModel)]="c.descriptionCategory" style="background-color: transparent; border-color: transparent;" >
                             </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="setArchivedCancelCategory(c)">Cancel</button>
+                        
                            
                             
                         </tr>

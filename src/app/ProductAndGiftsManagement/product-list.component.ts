@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   categories: Category[];
   categoriesArchived:Category[];
+  categoriesCancelArchived:Category[];
   reclamations: Reclamation[];
   gifts:Gift[];
   category: Category = new Category();
@@ -40,6 +41,7 @@ export class ProductListComponent implements OnInit {
     this.getReclamations();
     this.getGifts();
     this.getAllCategoriesArchived();
+    //this.getAllCategoriesCancelArchived();
   }
 
   
@@ -102,6 +104,13 @@ export class ProductListComponent implements OnInit {
   }
   setArchivedCategory(category:any){
     this.cs.setArchivedCategory(category).subscribe(data=>{
+      console.log(data);
+      this.getCategories();
+      this.getAllCategoriesArchived();
+    })
+  }
+  setArchivedCancelCategory(category:any){
+    this.cs.setArchivedCancelCategory(category).subscribe(data=>{
       console.log(data);
       this.getCategories();
       this.getAllCategoriesArchived();
