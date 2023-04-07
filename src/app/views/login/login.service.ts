@@ -14,9 +14,10 @@ export class LoginService {
 
   formModel = this.fb.group({
 
-   Email: ['', Validators.email],
+   Email: ['',Validators.required,
+              Validators.email],
    Passwords: this.fb.group({
-     Password: ['', [Validators.required, Validators.minLength(4)]]
+     Password: ['', [Validators.required, Validators.minLength(7)]]
    }),
   
    
