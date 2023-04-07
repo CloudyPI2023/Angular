@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { UserComponent } from './views/user-management/user.component';
 import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component';
+import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes =[
   {
@@ -22,7 +23,7 @@ const routes: Routes =[
   },
   {path: 'users', component: UserComponent},
   {path: 'deliveryPersons', component: DeliveryPersonComponent},
-
+  {path: 'login', component:LoginComponent}
 ];
 
 @NgModule({

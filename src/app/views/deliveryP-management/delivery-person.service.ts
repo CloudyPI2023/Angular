@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DeliveryPerson } from '../../models/delivery-person';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,10 @@ export class DeliveryPersonService {
 
 
   constructor(private httpClient: HttpClient) {}
-
+  token = localStorage.getItem('token');
+  options = {
+    headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)
+  };
   getDeliveryPersonsList() : Observable<DeliveryPerson[]>{
      return this.httpClient.get<DeliveryPerson[]>(this.baseURL+"/DeliveryPerson/all-DeliveryPersons");
 

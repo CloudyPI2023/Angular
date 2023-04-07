@@ -8,7 +8,8 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { UserComponent } from './views/user-management/user.component'; 
-import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component'; 
+import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-p
     AdminLayoutComponent,
     UserComponent,
     DeliveryPersonComponent,
+    LoginComponent,
 
   ],
   providers: [],

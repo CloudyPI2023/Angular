@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'app/models/user';
 import { environment } from 'environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class UserService {
 
@@ -13,28 +13,32 @@ export class UserService {
 
 
   constructor(private httpClient: HttpClient) {}
-
+  token = localStorage.getItem('token');
+  options = {
+    headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)
+  };
   getUsersList() : Observable<User[]>{
-     return this.httpClient.get<User[]>(this.baseURL+"/User/all-Users");
+    console.log(this.options);
+     return this.httpClient.get<User[]>(`${this.baseURL+"/User/all-Users"}`, this.options);
 
   }
 
   createUser(user: User): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL+"/User/add-User"}`, user);
+    return this.httpClient.post(`${this.baseURL+"/User/add-User"}`, user, this.options);
   }
 
   getUserById(idUser: number): Observable<User>{
-    return this.httpClient.get<User>(`${this.baseURL+"/User/retrieve-User"}/${idUser}`);
+    return this.httpClient.get<User>(`${this.baseURL+"/User/retrieve-User"}/${idUser}`, this.options);
   }
 
 
   public updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.baseURL+"/User/update-User"}`, user);
+    return this.httpClient.put<User>(`${this.baseURL+"/User/update-User"}`, user, this.options);
   }
 
 
   deleteUser(id: number): Observable<Object>{
-    return this.httpClient.delete(`${this.baseURL+"/User/delete-User"}/${id}`);  
+    return this.httpClient.delete(`${this.baseURL+"/User/delete-User"}/${id}`, this.options);  
   }
 
 }
