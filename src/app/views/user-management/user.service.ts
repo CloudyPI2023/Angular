@@ -17,6 +17,7 @@ export class UserService {
   options = {
     headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)
   };
+  
   getUsersList() : Observable<User[]>{
     console.log(this.options);
      return this.httpClient.get<User[]>(`${this.baseURL+"/User/all-Users"}`, this.options);
