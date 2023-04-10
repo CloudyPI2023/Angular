@@ -7,13 +7,20 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    isSelected?:any;
+    items?:any;
 
 
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: ''},
     { path: '/user-profile', title: 'User management',  icon:'person', class: ''},
-    { path:'/Product and gifts management',title: 'Product and gifts',  icon:'content_paste',class:''},
+    { path:'/Product and gifts management',title: 'Product and gifts',  icon:'content_paste',
+   /* isSelected: path => path.indexOf('/Product and gifts management') === 0,
+    items: [
+      { icon: 'pie-chart', label: 'List', path: '/items/list' },
+      { icon: 'pie-chart', label: 'New', path: '/items/new' },
+    ],*/class:''},
     { path: '/typography', title: 'Donation and association',  icon:'library_books', class: ''},
     { path: '/icons', title: 'Event and reservation',  icon:'bubble_chart', class: ''},
     { path: '/maps', title: 'Article and comment',  icon:'location_on', class: ''},

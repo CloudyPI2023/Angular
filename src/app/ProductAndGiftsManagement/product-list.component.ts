@@ -17,7 +17,8 @@ import { ProductService } from '../services/product.service'
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
+  productsExpired: Product[];
+  productsNotExpired: Product[];
   categories: Category[];
   categoriesArchived:Category[];
   categoriesCancelArchived:Category[];
@@ -37,7 +38,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     //this.getALL();
     this.getCategories();
-    this.getProducts();
+    this.getAllProductsExpired();
+    this.getAllProductsNotExpired();
     this.getReclamations();
     this.getGifts();
     this.getAllCategoriesArchived();
@@ -45,11 +47,17 @@ export class ProductListComponent implements OnInit {
   }
 
   
-  private getProducts(){
-    this.ps.getAllProducts().subscribe(data => {
-      this.products = data;
+  private getAllProductsExpired(){
+    this.ps.getAllProductsExpired().subscribe(data => {
+      this.productsExpired = data;
     });
   }
+  private getAllProductsNotExpired(){
+    this.ps.getAllProductsNotExpired().subscribe(data => {
+      this.productsNotExpired = data;
+    });
+  }
+
 
   private getReclamations(){
     this.rs.getAllReclamations().subscribe(data => {
