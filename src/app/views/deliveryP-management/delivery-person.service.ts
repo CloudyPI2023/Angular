@@ -17,26 +17,26 @@ export class DeliveryPersonService {
     headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)
   };
   getDeliveryPersonsList() : Observable<DeliveryPerson[]>{
-     return this.httpClient.get<DeliveryPerson[]>(this.baseURL+"/DeliveryPerson/all-DeliveryPersons");
+     return this.httpClient.get<DeliveryPerson[]>(this.baseURL+"/DeliveryPerson/all-DeliveryPersons", this.options);
 
   }
 
   createDeliveryPerson(DeliveryPerson: DeliveryPerson): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL+"/DeliveryPerson/add-DeliveryPerson"}`, DeliveryPerson);
+    return this.httpClient.post(`${this.baseURL+"/DeliveryPerson/add-DeliveryPerson"}`, DeliveryPerson, this.options);
   }
 
   getDeliveryPersonById(idDeliveryP: number): Observable<DeliveryPerson>{
-    return this.httpClient.get<DeliveryPerson>(`${this.baseURL+"/DeliveryPerson/retrieve-DeliveryPerson"}/${idDeliveryP}`);
+    return this.httpClient.get<DeliveryPerson>(`${this.baseURL+"/DeliveryPerson/retrieve-DeliveryPerson"}/${idDeliveryP}`, this.options);
   }
 
 
   public updateDeliveryPerson(DeliveryPerson: DeliveryPerson): Observable<DeliveryPerson> {
-    return this.httpClient.put<DeliveryPerson>(`${this.baseURL+"/DeliveryPerson/update-DeliveryPerson"}`, DeliveryPerson);
+    return this.httpClient.put<DeliveryPerson>(`${this.baseURL+"/DeliveryPerson/update-DeliveryPerson"}`, DeliveryPerson, this.options);
   }
 
 
   deleteDeliveryPerson(idDeliveryP: number): Observable<Object>{
-    return this.httpClient.delete(`${this.baseURL+"/DeliveryPerson/delete-DeliveryPerson"}/${idDeliveryP}`);  
+    return this.httpClient.delete(`${this.baseURL+"/DeliveryPerson/delete-DeliveryPerson"}/${idDeliveryP}`, this.options);  
   }
 
 }

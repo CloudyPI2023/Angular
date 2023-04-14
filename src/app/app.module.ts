@@ -10,6 +10,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { UserComponent } from './views/user-management/user.component'; 
 import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component';
 import { LoginComponent } from './views/login/login.component';
+import {NgToastModule} from 'ng-angular-popup';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { LoginComponent } from './views/login/login.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    NgToastModule
   ],
   declarations: [
     AppComponent,

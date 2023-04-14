@@ -3,7 +3,7 @@ import { UserLogin } from './user-login';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +12,7 @@ import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   user:UserLogin = new UserLogin();
-  constructor(private fb: FormBuilder, private service: LoginService, private route: Router) { }
+  constructor(private fb: FormBuilder, private service: LoginService, private route: Router, private toast: NgToastService) { }
     /*formModel = {
       email: '',
       password: ''
@@ -56,11 +56,14 @@ export class LoginComponent implements OnInit {
           console.log(res.access_token)
           localStorage.setItem('token', res.access_token);
           localStorage.setItem('username', res.user);
-          alert("Welcome")
+          //alert("Welcome")
+          this.toast.success({detail:'Success',summary:'You are successfully logged in !',position:'tr',duration:2000})
           this.route.navigateByUrl('');       
         },
         (error) => {
-          alert(console.log() )
+          //alert(console.log() )
+          this.toast.error({detail:'Error',summary:'Email or password is incorrect',position:'tr',duration:3000})
+
         this.route.navigate(['/login']);
         }
       );
