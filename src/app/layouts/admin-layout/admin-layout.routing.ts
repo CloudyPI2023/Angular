@@ -8,7 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { ProductListComponent } from 'app/ProductAndGiftsManagement/product-list.component';
+import { ProductManagementComponent } from 'app/views/product-management/product-management.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -55,7 +55,7 @@ export const AdminLayoutRoutes: Routes = [
     // }
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
-    { path:'Product and gifts management', component: ProductListComponent },
+    { path:'product-management', component: ProductManagementComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },

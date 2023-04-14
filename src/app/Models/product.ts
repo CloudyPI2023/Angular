@@ -12,6 +12,7 @@ export class Product {
     priceProduct:number;
     quantityProduct:number;
     //availabilityProduct:number;
+    expired:number;
     expirationDateProduct:Date;
     userProduct:User[];
     categoryProduct:Category[];

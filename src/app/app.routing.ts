@@ -4,8 +4,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ProductListComponent } from './ProductAndGiftsManagement/product-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductManagementComponent } from './views/product-management/product-management.component';
 
 const routes: Routes =[
   {
@@ -26,8 +26,8 @@ const routes: Routes =[
     component: DashboardComponent
   },
   {
-    path:'Product and gifts management',
-    component: ProductListComponent
+    path:'product-management',
+    component: ProductManagementComponent
   }
   
 ];

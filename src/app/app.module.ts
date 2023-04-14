@@ -7,7 +7,10 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ProductListComponent } from './ProductAndGiftsManagement/product-list.component';
+import { ProductManagementComponent } from './views/product-management/product-management.component';
+import { CategoryManagementComponent } from './views/category-management/category-management.component';
+import { GiftManagementComponent } from './views/gift-management/gift-management.component';
+import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
 
 
 
@@ -24,7 +27,10 @@ import { ProductListComponent } from './ProductAndGiftsManagement/product-list.c
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ProductListComponent,
+    ProductManagementComponent,
+    CategoryManagementComponent,
+    GiftManagementComponent,
+    ReclamationManagementComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
