@@ -29,8 +29,11 @@ export class AssociationService {
     return this.httpClient.get<Association>(`${this.url}/retrieveAssociation/${idAssociation}`);
   }
 
-  updateAssociation(idAssociation:number, association: Association):Observable<Object>{
+  updateAssociation1(idAssociation:number, association: Association):Observable<Object>{
     return this.httpClient.put(`${this.url}/updateAssociation/${idAssociation}`, association);
+  }
+  public updateAssociation(association: Association): Observable<Association> {
+    return this.httpClient.put<Association>(`${this.url+"/updateAssociation"}`, association);
   }
 
   deleteAssociation(idAssociation: number): Observable<Object>{
