@@ -12,6 +12,7 @@ export class GiftService {
 
   constructor(private httpClient: HttpClient) { }
   
+  
   getAllGifts(): Observable<Gift[]>{
     return this.httpClient.get<Gift[]>(`${this.baseURL}`+"/all-gifts");
   }

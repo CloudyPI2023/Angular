@@ -20,7 +20,8 @@ export class CategoryService {
   getAllCategoriesCancelArchived(): Observable<Category[]>{
     return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categories");
   }
-
+ 
+  
   createCategory(category: Category): Observable<Object>{
     return this.httpClient.post(`${this.baseURL}`+"/add-category", category);
   }

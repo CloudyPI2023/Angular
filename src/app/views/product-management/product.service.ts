@@ -20,6 +20,7 @@ export class ProductService {
   getAllProducts(): Observable<Product[]>{
     return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-products");
   }
+  
   OnDetailsProduct(idProduct: number): Observable<Product>{
     return this.httpClient.get<Product>(`${this.baseURL}`+"/retrieve-product/"+`${idProduct}`);
   }

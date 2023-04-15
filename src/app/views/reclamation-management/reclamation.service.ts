@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ReclamationService {
 
+  
   private baseURL = "http://localhost:8082/PharmaLife/Reclamation";
 
   constructor(private httpClient: HttpClient) { }
