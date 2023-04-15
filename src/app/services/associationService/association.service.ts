@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class AssociationService {
 
  
+  
    url=environment.apiBaseUrl+"associations";
  
    constructor(private httpClient: HttpClient) { }
@@ -17,11 +18,11 @@ export class AssociationService {
   
  
    getAssociationList(): Observable<Association[]>{
-    return this.httpClient.get<Association[]>(this.url + 'retrieveAllAssociations');
+    return this.httpClient.get<Association[]>(this.url + '/retrieveAllAssociations');
    }
 
    createAssociation(association: Association): Observable<any>{
-     return this.httpClient.post(this.url + 'addAssociation', association);
+     return this.httpClient.post(this.url + '/addAssociation', association);
    }
 
    getAssociationById(idAssociation: number): Observable<Association>{

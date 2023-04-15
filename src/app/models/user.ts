@@ -9,8 +9,6 @@ export class User {
     adress: string;
     city: string;
     password: string;
-    isVerified: boolean;
-    token: string;
     role: string;
     donationsUser: Donation;
 }

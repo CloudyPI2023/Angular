@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AssociationComponent } from './association/association.component';
-import { DonationComponent } from './donation/donation.component';
-import { RequestComponent } from './request/request.component';
+import { AssociationComponent } from './donation-association/association/association.component';
+import { DonationComponent } from './donation-association/donation/donation.component';
+import { RequestComponent } from './donation-association/request/request.component';
+import { DonationAssociationComponent } from './donation-association/donation-association.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { RequestComponent } from './request/request.component';
     AssociationComponent,
     DonationComponent,
     RequestComponent,
+    DonationAssociationComponent,
 
   ],
   providers: [],

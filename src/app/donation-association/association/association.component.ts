@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Association } from 'app/models/association';
 import { AssociationService } from 'app/services/associationService/association.service';
 
+
+
 @Component({
   selector: 'app-association',
   templateUrl: './association.component.html',
@@ -15,13 +17,7 @@ export class AssociationComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-    this.getAssociations();
+ 
   }
-  private getAssociations(){
-    this.associationService.getAssociationList().subscribe(data => { 
-      this.associations = data;
-    });
-   
-  } 
-
+ 
 }

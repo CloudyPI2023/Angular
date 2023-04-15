@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8082/PharmaLife'
+  apiBaseUrl: 'http://localhost:8082/PharmaLife/'
 };
