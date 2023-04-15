@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { NgToastComponent } from 'ng-angular-popup';
 import { CategoryService } from './category.service';
 import { Category } from 'app/Models/category';

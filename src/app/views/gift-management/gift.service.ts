@@ -15,4 +15,8 @@ export class GiftService {
   getAllGifts(): Observable<Gift[]>{
     return this.httpClient.get<Gift[]>(`${this.baseURL}`+"/all-gifts");
   }
+
+  OnDetailsGift(idGift: number): Observable<Gift>{
+    return this.httpClient.get<Gift>(`${this.baseURL}`+"/retrieve-gift/"+`${idGift}`);
+  }
 }

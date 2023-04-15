@@ -17,5 +17,8 @@ export class ReclamationService {
   getAllReclamations(): Observable<Reclamation[]>{
     return this.httpClient.get<Reclamation[]>(`${this.baseURL}`+"/all-reclamations");
   }
+  OnDetailsReclamation(idReclamation: number): Observable<Reclamation>{
+    return this.httpClient.get<Reclamation>(`${this.baseURL}`+"/retrieve-reclamation/"+`${idReclamation}`);
+  }
 
 }

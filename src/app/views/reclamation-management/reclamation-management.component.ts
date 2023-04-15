@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Gift } from 'app/Models/gift';
 import { GiftService } from 'app/services/gift.service';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { ReclamationService } from './reclamation.service';
+import { Reclamation } from 'app/Models/reclamation';
 
 @Component({
   selector: 'app-reclamation-management',
@@ -11,17 +13,40 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class ReclamationManagementComponent implements OnInit {
 
-  constructor(private gs:GiftService,router:Router,toast:NgToastService) { }
-  gifts:Gift[];
+  constructor(private rs:ReclamationService,private router:Router,toast:NgToastService) { }
+  reclamations:Reclamation[];
+  detailsReclamation:Reclamation;
 
   
   ngOnInit(): void {
-    this.getGifts();
+    this.getReclamations();
   }
-  getGifts(){
-    this.gs.getAllGifts().subscribe(data => {
-      this.gifts = data;
+  getReclamations(){
+    this.rs.getAllReclamations().subscribe(data => {
+      this.reclamations = data;
     });
+    
+  }
+  public OnDetailsProduct(idReclamation: number){
+    this.rs.OnDetailsReclamation(idReclamation).subscribe(
+      (response: Reclamation) => {
+        console.log(response);
+      });
+  }
+
+  public onOpenModal(reclamation: Reclamation, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+   
+    if(mode == 'details'){
+      this.detailsReclamation = reclamation;
+      button.setAttribute('data-target', '#reclamationDetailsModal');
+    }
+    container?.appendChild(button);
+    button.click();
   }
 
 }

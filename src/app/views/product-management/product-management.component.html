@@ -1,5 +1,11 @@
 <br><br><br><br>
-
+<div style="display: flex; justify-content: center; align-items: center;">
+    <button class="btn btn-outline-primary" style="margin-right: 30px;" [routerLink]="['/product-management']">Products</button>
+    <button class="btn btn-outline-info" [routerLink]="['/category-management']">Categories</button>
+    <button class="btn btn-outline-info" [routerLink]="['/gift-management']">Gifts</button>
+    <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
+  </div>
+  <br>
 <nav class="navbar navbar-expand-lg navbar-toggler bg-white">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,10 +14,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <h1 style="margin-left: 10px;font-size: 30px;">Product list</h1>
-      <!--<li class="nav-item active">
-               <a style="margin-left: 900px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
-                </a>
-             </li>-->
+     
     </ul>
   </div>
 </nav>
@@ -70,7 +73,7 @@
 
 
 <!-- Details Product Modal -->
-<div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel"
+<div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -83,52 +86,52 @@
       </div>
       <div class="modal-body">
         <form #editForm="ngForm">
-          <input type="hidden" ngModel="{{detailsProduct?.idProduct}}" name="idUser" class="form-control" id="idUser"
-            placeholder="idUser">
+          <input type="hidden" ngModel="{{detailsProduct?.idProduct}}" name="idProduct" class="form-control" id="idProduct"
+            placeholder="idProduct">
 
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.referenceProduct}}" name="referenceProduct"
-              class="form-control" id="referenceProduct" aria-describedby="emailHelp" readonly>
+              class="form-control" id="referenceProduct" aria-describedby="referenceProduct" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left">
             <input type="text" ngModel="{{detailsProduct?.nameProduct}}" name="nameProduct" class="form-control"
-              id="nameProduct" aria-describedby="emailHelp" readonly>
+              id="nameProduct" aria-describedby="nameProduct" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left">
             <input type="text" ngModel="{{detailsProduct?.categoryProduct.nameCategory}}" name="nameCategory"
-              class="form-control" id="nameCategory" aria-describedby="emailHelp" readonly>
+              class="form-control" id="nameCategory" aria-describedby="nameCategory" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.priceProduct}}" name="priceProduct" class="form-control"
-              id="priceProduct" aria-describedby="emailHelp" readonly>
+              id="priceProduct" aria-describedby="priceProduct" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.quantityProduct}}" name="quantityProduct" class="form-control"
-              id="quantityProduct" aria-describedby="emailHelp" readonly>
+              id="quantityProduct" aria-describedby="quantityProduct" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.expirationDateProduct}}" name="expirationDateProduct"
-              class="form-control" id="expirationDateProduct" aria-describedby="emailHelp" readonly>
+              class="form-control" id="expirationDateProduct" aria-describedby="expirationDateProduct" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.userProduct.firstName}}" name="firstName" class="form-control"
-              id="firstName" aria-describedby="emailHelp" readonly>
+              id="firstName" aria-describedby="firstName" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.userProduct.lastName}}" name="lastName" class="form-control"
-              id="lastName" aria-describedby="emailHelp" readonly>
+              id="lastName" aria-describedby="lastName" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.userProduct.email}}" name="email" class="form-control"
-              id="email" aria-describedby="emailHelp" readonly>
+              id="email" aria-describedby="email" readonly>
             <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
           </div>
 
