@@ -39,10 +39,12 @@
         <tr *ngFor="let p of allProducts">
           <td> {{ p.referenceProduct}} </td>
           <td> {{ p.nameProduct}} </td>
-          <td> {{ p.categoryProduct.nameCategory}} </td>
+          <td> {{ p.categoryProduct.nameCategory}}</td>
           <td> {{ p.priceProduct}} DT</td>
           <td> {{p.quantityProduct}}</td>
-          <td></td>
+          <td>
+            image 
+          </td>
           <td>{{p.expirationDateProduct}}</td>
           <td>{{p.userProduct.firstName}} {{p.userProduct.lastName}}</td>
           <td>{{p.userProduct.email}}</td>

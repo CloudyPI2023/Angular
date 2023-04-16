@@ -15,6 +15,7 @@ export class GiftManagementComponent implements OnInit {
   gifts:Gift[];
   detailsGift?:Gift;
   ngOnInit(): void {
+    this.getGifts();
   }
   getGifts(){
     this.gs.getAllGifts().subscribe(data => {
