@@ -46,4 +46,9 @@ export class CategoryService {
 
   }
 
+  setArchive (category:Category):Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}`+"/set-archive-category/",category);
+
+  }
+
 }

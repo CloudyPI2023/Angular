@@ -5,7 +5,7 @@ export class Reclamation {
     idReclamation:number;
     descriptionReclamation:String;
     dateReclamation:String;
-    archived:Boolean;
+    archived:number;
 
     //NoSQL
     idUser:number;

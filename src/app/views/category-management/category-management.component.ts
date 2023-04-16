@@ -47,5 +47,48 @@ export class CategoryManagementComponent implements OnInit {
   }
   
 
+  public onUpdateArchive(c: Category) {
+    this.cs.setArchive(c).subscribe(
+      (response: Category) => {
+        console.log(response);
+        this.toast.success({detail:'Success',summary:'Successfully updated !',position:'tr',duration:2000})
+        this.getAllCategories();
+      },
+      (error: HttpErrorResponse) => {
+        //alert(error.message);
+        this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})
+      }
+    );
+  }
+  public onAddCategory(addForm: NgForm): void {
+    document.getElementById('add-Category-form')!.click();
+    this.cs.createCategory(addForm.value).subscribe(
+      (response: Category) => {
+        console.error
+        console.log(response);
+        this.toast.success({detail:'Success',summary:'Successfully added !',position:'tr',duration:2000})
+        this.getAllCategories();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        this.toast.error({detail:'Error',summary:'Check fields !',position:'tr',duration:2000})
+        alert(error.message);
+      }
+    );
+  }
+  public onOpenModal(user: Category, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+   
+    if (mode === 'add') {
+  
+      button.setAttribute('data-target', '#addCategoryModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
 
 }

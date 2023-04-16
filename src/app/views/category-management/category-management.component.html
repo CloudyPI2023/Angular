@@ -1,12 +1,10 @@
 <br><br><br><br>
 <div style="display: flex; justify-content: center; align-items: center;">
-    <button class="btn btn-outline-primary" style="margin-right: 30px;" [routerLink]="['/product-management']">Products</button>
-    <button class="btn btn-outline-info" [routerLink]="['/category-management']">Categories</button>
-    <button class="btn btn-outline-info" [routerLink]="['/gift-management']">Gifts</button>
-    <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
-
-    
-  </div>
+  <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
+</div>
   <br>
 <nav class="navbar navbar-expand-lg navbar-toggler bg-white">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
@@ -17,7 +15,10 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <h1 style="margin-left: 10px;font-size: 30px;">Category list</h1>
-     
+      <li class="nav-item active">
+        <a style="margin-left: 900px;color: white; background: #4d82a3;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+         </a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -25,21 +26,36 @@
   <div class="table-responsive" id="main-container">
     <table class="table table-striped">
       <thead class="">
-        <th> Created by </th>
-        <th>Begins at</th>
-        <th> Ends at </th>
-        <th> Assigned to </th>
+        <th> Category name </th>
+        <th>Category description</th>
+        <th> Status </th>
+        <th rowspan="2"> Actions </th>
       </thead>
       <tbody>
-       <!-- <tr *ngFor="let g of gifts">
-          <td> {{ g.userGift.firstName}} {{ g.userGift.lastName}}</td>
-          <td> {{ g.beginsAtGift}} </td>
-          <td> {{ g.endsAtGift}} </td>
-          
-
-          
+       <tr *ngFor="let c of categories">
+        <td>
+          <input *ngIf="c.nameCategory" [(ngModel)]="c.nameCategory"
+              style="background-color: transparent; border-color: transparent;">
+      </td>
+      <td>
+          <input *ngIf="c.descriptionCategory"
+              [(ngModel)]="c.descriptionCategory"
+              style="background-color: transparent; border-color: transparent;">
+      </td>
+          <td> 
+          <span [ngClass]="{'green-tick': c.archived, 'red-cross': !c.archived}">
+            <i *ngIf="c.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+            <i *ngIf="!c.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
+          </span>
+        </td>
+        <td>
+          <a class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Edit"
+          (click)="onUpdateCategory(c)"><i class="fa fa-pencil"></i></a>
+          <a  class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Archive"
+          (click)="onUpdateArchive(c)"><i class="fa fa-archive" aria-hidden="true"></i></a>
+        </td>
         
-        </tr>-->
+        </tr>
 
 
       </tbody>
@@ -49,53 +65,44 @@
 
   </div>
 </div>
-
-
-
-
-<!-- Details Gift Modal -->
-<div class="modal fade" id="giftDetailsModal" tabindex="-1" role="dialog" aria-labelledby="giftDetailsModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
+ <!-- Add Category Modal -->
+ <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width: 600px;">
     <div class="modal-content">
-      <div class="modal-header">
-      <!--  <h5 class="modal-title" id="giftDetailsModalLabel"> Details gift with id {{detailsGift?.idGift }}
-        </h5>
+     <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>Add Category</B></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <form #editForm="ngForm">
-          <input type="hidden" ngModel="{{detailsGift?.idGift}}" name="idGift" class="form-control" id="idGift"
-            placeholder="idGift">
-
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.firstName}}" name="firstName"
-              class="form-control" id="firstName" aria-describedby="firstName" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+     </div>
+       <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddCategory(addForm)" novalidate>
+          <div class="form-group">            
+           <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel name="nameCategory" class="form-control" id="nameCategory" aria-describedby="name" placeholder="Name category" required>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
+            </div>
+            <div class="input_box" style="float:left;">
+              <input type="text" ngModel name="descriptionCategory" class="form-control" id="descriptionCategory" aria-describedby="description" placeholder="description category" required>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
+                <br><br>
+            </div>
           </div>
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.lastName}}" name="lastName"
-              class="form-control" id="lastName" aria-describedby="lastName" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+          <div class="modal-footer" style="float:left;justify-content: center;" >
+             <button type="button" id="add-Category-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" >Save</button>
           </div>
-          <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsGift?.beginsAtGift}}" name="beginsAtGift" class="form-control"
-              id="beginsAtGift" aria-describedby="beginsAtGift" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
-          </div>
-          <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsGift?.endsAtGift}}" name="endsAtGift" class="form-control"
-              id="endsAtGift" aria-describedby="endsAtGift" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
-          </div>
-                    <br>
-        </form>
-      </div>
+          </form>
+       </div>
     </div>
-  </div>-->
+  </div>
 </div>
+
+
+
+
+
+
 
 
 

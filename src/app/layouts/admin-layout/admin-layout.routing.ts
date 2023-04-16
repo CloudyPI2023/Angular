@@ -9,6 +9,9 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ProductManagementComponent } from 'app/views/product-management/product-management.component';
+import { CategoryManagementComponent } from 'app/views/category-management/category-management.component';
+import { GiftManagementComponent } from 'app/views/gift-management/gift-management.component';
+import { ReclamationManagementComponent } from 'app/views/reclamation-management/reclamation-management.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -56,6 +59,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path:'product-management', component: ProductManagementComponent },
+    { path:'category-management', component: CategoryManagementComponent },
+    { path:'gift-management', component: GiftManagementComponent },
+    { path:'reclamation-management', component: ReclamationManagementComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },

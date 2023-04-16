@@ -1,10 +1,10 @@
 <br><br><br><br>
 <div style="display: flex; justify-content: center; align-items: center;">
-    <button class="btn btn-outline-primary" style="margin-right: 30px;" [routerLink]="['/product-management']">Products</button>
-    <button class="btn btn-outline-info" [routerLink]="['/category-management']">Categories</button>
-    <button class="btn btn-outline-info" [routerLink]="['/gift-management']">Gifts</button>
-    <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
-  </div>
+  <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
+</div>
   
   <br>
 <nav class="navbar navbar-expand-lg navbar-toggler bg-white">
@@ -38,7 +38,7 @@
           <td> {{r.product.nameProduct}} </td>
           <td style="text-align: center;">
             <span [ngClass]="{'green-tick': !r.archived, 'red-cross': r.archived}">
-              <i *ngIf="!r.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+              <i *ngIf="!r.archived" class="fa fa-spinner" aria-hidden="true" style="color:  #4d82a3;font-size: 18px;"></i>
               <i *ngIf="r.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
             </span>
           </td>
@@ -78,33 +78,35 @@
         <form #editForm="ngForm">
           <input type="hidden" ngModel="{{detailsReclamation?.idReclamation}}" name="idReclamation" class="form-control" id="idReclamation"
             placeholder="idReclamation">
-
+            
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{detailsReclamation?.product.nameProduct}}" name="nameProduct"
+                class="form-control" id="nameProduct" aria-describedby="nameProduct" readonly>
+              <div class="icon"><i class="fa fa-shopping-cart" aria-hidden="true" style="color: #4d82a3;"></i></div>
+            </div>
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{detailsReclamation?.descriptionReclamation}}" name="nameProduct"
+                class="form-control" id="nameProduct" aria-describedby="nameProduct" readonly>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style="color: #4d82a3;"></i></div>
+            </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsReclamation?.dateReclamation}}" name="dateReclamation"
               class="form-control" id="dateReclamation" aria-describedby="dateReclamation" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+            <div class="icon"><i class="fa fa-calendar" aria-hidden="true" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
           <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsReclamation?.userProduct.firstName}}" name="firstName" class="form-control"
-              id="firstName" aria-describedby="firstName" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+            <input type="text" ngModel="{{detailsReclamation?.userProduct.firstName}} {{detailsReclamation?.userProduct.lastName}}" name="firstName" class="form-control"
+              id="user" aria-describedby="user" readonly>
+            <div class="icon"><i class="fa fa-user" style="color: #4d82a3;"></i></div>
           </div>
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsReclamation?.userProduct.lastName}}" name="lastName" class="form-control"
-              id="lastName" aria-describedby="lastName" readonly>
-            <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
+          <div class="input_box" style="float:left">
+            <input type="text" ngModel="{{detailsReclamation?.userProduct.email}}" name="email" class="form-control"
+              id="email" aria-describedby="email" readonly>
+            <div class="icon"><i class="fa fa-envelope" style="color: #4d82a3;"></i></div>
           </div>
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsReclamation?.product.nameProduct}}" name="nameProduct"
-              class="form-control" id="nameProduct" aria-describedby="nameProduct" readonly>
-            <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
-          </div>
-          
-         
          
 
-
-          <div class="form-group" style="float:left;align-items: center;">
+          <!--<div class="form-group" style="float:left;align-items: center;">
             <label *ngIf="detailsReclamation.archived" for="status" style="color: green;font-size: 17px;"><i class="fa fa-toggle-on"></i> Status: <label
                 style="color: black;font-size: 17px">
                archived
@@ -115,7 +117,7 @@
                 style="color: black;font-size: 17px">
                In progress
               </label> </label><br>
-          </div>
+          </div>-->
           <br>
         </form>
       </div>
