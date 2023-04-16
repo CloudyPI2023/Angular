@@ -1,62 +1,61 @@
 <br><br><br><br>
+     <div class="col-md-12">
+      <div class="card">
+          <div class="card-header card-header-success">
+              <h4 class="card-title">Associations</h4>
+              <p class="card-category"> All Associations For PharmaLife
+              <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded" (click)="onOpenModal(null!, 'add')">New</button>
+            </p>
+            </div>
 
-<nav class="navbar navbar-expand-lg navbar-toggler bg-white">
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarColor02">
-          <ul class="navbar-nav mr-auto">
-            <h1 style="margin-left: 10px;font-size: 30px;">Association List</h1>
-             <li class="nav-item active">
-               <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">association_add</i>
-                </a>
-             </li>
-          </ul>
-   </div>
- </nav>
- <div class="card-body" >
- <div class="table-responsive" id="main-container">  
-  <table class = "table table-striped">
-    <thead class="">
-       <th>Id</th>
-       <th>Name </th>
-       <th> Address </th>
-       <th>Email </th>
-       <th> Logo </th>
-       <th> Description </th>
-       <th> Phone Number </th>
-       <th> Country </th>
-     
+          <div class="card-body">
+              <div class="table-responsive">
+                <table class = "table table-striped">
+                  <thead class="">
+                     <th>Id</th>
+                     <th>Name </th>
+                     <th> Address </th>
+                     <th>Email </th>
+                     <th> Logo </th>
+                     <th> Description </th>
+                     <th> Phone Number </th>
+                     <th> Country </th>
+                   
+              
+                  <th style="text-align: center;"> Actions </th> 
+                 </thead>
+                 <tbody>
+                     <tr *ngFor = "let  association of associations" >
+                      <td>{{association.idAssociation}}</td>  
+                      <td>{{association.associationName}}</td> 
+                      <td>{{association.adressAssociation}}</td> 
+                      <td>{{association.emailAssocation}}</td> 
+                      <td>{{association.logoAssocation}}</td>  
+                      <td>{{association.descriptionAssocation}}</td>  
+                      <td>{{association.phoneNumberAssocation}}</td>  
+                      <td>{{association.countryAssocation}}</td> 
+                         <td style="text-align: center;">
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'edit')">edit</button>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'delete')">delete</button>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" >Detail</button>
+              
+                     </tr> 
+                   
+              
+                 </tbody>
+                   </table>
+              </div>
+          </div>
+      </div>
+  </div>
 
-    <th style="text-align: center;"> Actions </th> 
-   </thead>
-   <tbody>
-       <tr *ngFor = "let  association of associations" >
-        <td>{{association.idAssociation}}</td>  
-        <td>{{association.associationName}}</td> 
-        <td>{{association.adressAssociation}}</td> 
-        <td>{{association.emailAssocation}}</td> 
-        <td>{{association.logoAssocation}}</td>  
-        <td>{{association.descriptionAssocation}}</td>  
-        <td>{{association.phoneNumberAssocation}}</td>  
-        <td>{{association.countryAssocation}}</td> 
-           <td style="text-align: center;">
-            <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
-        <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
-        <a (click)="onOpenModal(association, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a></td>
-
-       </tr> 
-     
-
-   </tbody>
-     </table>
 
    <!-- Add Association Modal -->
    <div class="modal fade" id="addAssociationModal" tabindex="-1" role="dialog" aria-labelledby="addAssociationModalLabel" aria-hidden="true" >
       <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width: 2000px;">
+        <div class="modal-content" style="width: 900px;">
          <div class="modal-header">
-            <h5 class="modal-title" id="addAssociationModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>Add Association</B></h5>
+            <h5 class="modal-title" id="addAssociationModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Association</B></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -65,41 +64,43 @@
               <form #addForm="ngForm" (ngSubmit)="onAddAssociation(addForm)" novalidate >
               <div class="form-group" >
 
-
-               <div class="input_box">
+              <div class="row">
+               <div class="input_box col-md-6">
                   <input type="text" ngModel name="associationName" class="form-control" id="associationName" aria-describedby="emailHelp" placeholder="associationName" required>
                   <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
                 </div>
-                <div class="input_box">
-                  <input type="text" ngModel name="emailAssocation" class="form-control" id="emailAssocation" aria-describedby="emailHelp" placeholder="emailAssocation" required>
+                <div class="input_box col-md-6">
+                  <input type="text" ngModel name="logoAssocation" class="form-control" id="logoAssocation" aria-describedby="logoAssocation" placeholder="logoAssocation" required>
+                  <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input_box col-md-6">
+                  <input type="text" ngModel name="emailAssocation" class="form-control" id="emailAssocation" aria-describedby="emailHelp" placeholder="user@example.com" required>
                   <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
                 </div>
-
-                <div class="input_box">
+                <div class="input_box col-md-6">
                   <input type="number" ngModel name="phoneNumberAssocation" class="form-control" id="phoneNumberAssocation" aria-describedby="phoneNumberAssocation" placeholder="phoneNumberAssocation" required>
                   <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
                 </div>
+              </div>
 
-                <div class="input_box">
-                    <input type="text" ngModel name="logoAssocation" class="form-control" id="logoAssocation" aria-describedby="logoAssocation" placeholder="logoAssocation" required>
-                    <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
-                </div>
-               
-
-                <div class="input_box">
+              <div class="row">
+                <div class="input_box col-md-6">
+                  <input type="text" ngModel name="countryAssocation" class="form-control" id="countryAssocation" aria-describedby="countryAssocation" placeholder="countryAssocation" required>
+                  <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+                </div> 
+                <div class="input_box col-md-6">
                   <input type="text" ngModel name="adressAssociation" class="form-control" id="adressAssociation" aria-describedby="adressAssociation" placeholder="Address" required>
                   <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
                 </div>
+              </div>
 
-                <div class="input_box">
-                  <input type="text" ngModel name="descriptionAssocation" class="form-control" id="descriptionAssocation" aria-describedby="descriptionAssocation" placeholder="descriptionAssocation" required>
-                  <div class="icon"><i class="fa fa-calendar" style="color: darkgreen;"></i></div>
-                </div>
-
-                <div class="input_box">
-                  <input type="text" ngModel name="countryAssocation" class="form-control" id="countryAssocation" aria-describedby="countryAssocation" placeholder="countryAssocation" required>
-                  <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
-                </div> 
+              <div class="input_box">
+                <input type="textarea" ngModel name="descriptionAssocation" class="form-control" id="descriptionAssocation" aria-describedby="descriptionAssocation" placeholder="description" required>
+                <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+              </div> 
 
  
               </div>
@@ -112,6 +113,7 @@
         </div>
       </div>
   </div>
+
   
 <!-- Edit Association Modal -->
 <div class="modal fade" id="updateAssociationModal" tabindex="-1" role="dialog" aria-labelledby="updateAssociationModalLabel" aria-hidden="true">
@@ -199,11 +201,6 @@
 </div>
 
 </div>
-
-
-
-
-
 
 
 

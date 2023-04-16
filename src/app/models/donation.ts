@@ -7,7 +7,7 @@ export class Donation {
      quantityDonation: number;
      imageDonation: string;
      dateDonation: Date; 
-     donationType: string;
+     donationType: string; 
      statusDonation: string;
      idRequest!: number;
      userDonation: User;

@@ -9,9 +9,9 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { AssociationComponent } from 'app/donation-association/association/association.component';
+import { DonationAssociationComponent } from 'app/donation-association/donation-association.component';
 import { DonationComponent } from 'app/donation-association/donation/donation.component';
 import { RequestComponent } from 'app/donation-association/request/request.component';
-import { DonationAssociationComponent } from 'app/donation-association/donation-association.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -65,8 +65,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
 
-    { path: 'associations',        component: AssociationComponent },
-    { path: 'DonationAssociation',        component: DonationAssociationComponent },
+    { path: 'associations',   component: AssociationComponent },
+    { path: 'donations',   component: DonationComponent },
+    { path: 'requests',   component: RequestComponent },
+    { path: 'DonationAssociation',  component: DonationAssociationComponent },
 
 
 

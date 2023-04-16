@@ -8,9 +8,9 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AssociationComponent } from './donation-association/association/association.component';
+import { DonationAssociationComponent } from './donation-association/donation-association.component';
 import { DonationComponent } from './donation-association/donation/donation.component';
 import { RequestComponent } from './donation-association/request/request.component';
-import { DonationAssociationComponent } from './donation-association/donation-association.component';
 
 @NgModule({
   imports: [
@@ -26,9 +26,9 @@ import { DonationAssociationComponent } from './donation-association/donation-as
     AppComponent,
     AdminLayoutComponent,
     AssociationComponent,
+    DonationAssociationComponent,
     DonationComponent,
     RequestComponent,
-    DonationAssociationComponent,
 
   ],
   providers: [],
