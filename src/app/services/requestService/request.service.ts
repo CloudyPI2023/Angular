@@ -25,9 +25,13 @@ export class RequestService {
     return this.httpClient.get<Request>(`${this.url}/retrieveRequest/${idRequest}`);
   }
 
-  updateRequest(idRequest:number, request: Request):Observable<Object>{
+  updateRequest1(idRequest:number, request: Request):Observable<Object>{
     return this.httpClient.put(`${this.url}/updateRequest/${idRequest}`, request);
   } 
+
+  public updateRequest(request: Request): Observable<Request> {
+    return this.httpClient.put<Request>(`${this.url+"/updateRequest"}`, request);
+  }
 
   deleteRequest(idRequest: number): Observable<Object>{
     return this.httpClient.delete(`${this.url}/cancelRequest/${idRequest}`);

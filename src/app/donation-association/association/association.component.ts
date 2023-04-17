@@ -38,6 +38,13 @@ export class AssociationComponent implements OnInit {
         console.log(response);
       });
   }
+
+  public RequestAssociation(idAssociation: number){
+    this.associationService.getAssociationById(idAssociation).subscribe(
+      (response: Association) => {
+        console.log(response);
+      });
+  }
   
   public onAddAssociation(addForm: NgForm): void {
     document.getElementById('add-Association-form')!.click();
@@ -93,11 +100,17 @@ export class AssociationComponent implements OnInit {
   
       button.setAttribute('data-target', '#addAssociationModal');
     }
+    if (mode === 'detail') {
+  
+      button.setAttribute('data-target', '#detailAssociationModal');
+    }
+    if (mode === 'request') {
+  
+      button.setAttribute('data-target', '#requestAssociationModal');
+    }
     container?.appendChild(button);
     button.click();
   }
-
-
 
 
  

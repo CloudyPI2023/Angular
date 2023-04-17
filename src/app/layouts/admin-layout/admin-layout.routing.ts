@@ -13,6 +13,8 @@ import { DonationAssociationComponent } from 'app/donation-association/donation-
 import { DonationComponent } from 'app/donation-association/donation/donation.component';
 import { RequestComponent } from 'app/donation-association/request/request.component';
 
+
+
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -66,6 +68,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',        component: UpgradeComponent },
 
     { path: 'associations',   component: AssociationComponent },
+   
     { path: 'donations',   component: DonationComponent },
     { path: 'requests',   component: RequestComponent },
     { path: 'DonationAssociation',  component: DonationAssociationComponent },

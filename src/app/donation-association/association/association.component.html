@@ -44,7 +44,9 @@
                          <td style="text-align: center;">
                           <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'edit')">edit</button>
                           <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'delete')">delete</button>
-                          <button type="button" class="btn btn-link btn-sm btn-rounded" >Detail</button></td>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'detail')">detail</button>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(association, 'request')">Requests</button>
+                         
 
                           <!--
                           <td style="text-align: center;">
@@ -215,8 +217,142 @@
      </div>
   
 </div>
-
 </div>
+
+
+
+
+ <!-- Detail Association Modal -->
+ <div class="modal fade" id="detailAssociationModal" tabindex="-1" role="dialog" aria-labelledby="detailAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content" style="width: 700px;">
+        <div class="modal-header">
+           <h5 class="modal-title" id="detailAssociationModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Association : {{editAssociation?.idAssociation }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #detailForm="ngForm">
+           
+            <div class="col-md-12">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                      <h4 class="card-title">Alec Thompson</h4>
+                      <p class="card-description">
+                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                      </p>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Imprimer</a>
+                  </div>
+              </div>
+          </div>  
+           
+            
+      
+          <br>
+
+
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button data-dismiss="modal" class="btn btn-success">Imprimer</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+
+
+ <!-- Request Association Modal -->
+ <div class="modal fade" id="requestAssociationModal" tabindex="-1" role="dialog" aria-labelledby="requestAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content" style="width: 700px;">
+        <div class="modal-header">
+           <h5 class="modal-title" id="requestAssociationModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> Requests </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #detailForm="ngForm">
+           
+            <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Employees Stats</h4>
+                      <p class="card-category">New employees on 15th September, 2016</p>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Salary</th>
+                              <th>Country</th>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>Dakota Rice</td>
+                                  <td>$36,738</td>
+                                  <td>Niger</td>
+                              </tr>
+                              <tr>
+                                  <td>2</td>
+                                  <td>Minerva Hooper</td>
+                                  <td>$23,789</td>
+                                  <td>Curaçao</td>
+                              </tr>
+                              <tr>
+                                  <td>3</td>
+                                  <td>Sage Rodriguez</td>
+                                  <td>$56,142</td>
+                                  <td>Netherlands</td>
+                              </tr>
+                              <tr>
+                                  <td>4</td>
+                                  <td>Philip Chaney</td>
+                                  <td>$38,735</td>
+                                  <td>Korea, South</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+            
+      
+          <br>
+
+
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button data-dismiss="modal" class="btn btn-success">Edit</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 
