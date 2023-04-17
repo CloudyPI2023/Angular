@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Article } from '../Models/article';
-import { ArticleService } from '../../services/article.service';
+import { Article } from 'app/Models/article';
+import { ArticleService } from 'app/services/article.service';
 
 @Component({
   selector: 'app-article',
@@ -27,18 +27,18 @@ export class ArticleComponent implements OnInit {
   
 
   addArticle(event: Article): void {
-    this.articleService.addEvent(article).subscribe(() => {
+    this.articleService.addArticle(article).subscribe(() => {
       this.getAllArticles();
       this.showForm = false;
     });
   }
 
   editArticle(article: Article): void {
-    this.articleService.updateEvent(article).subscribe();
+    this.articleService.updateArticle(article).subscribe();
   }
 
   deleteArticle(idArticle: number): void {
-    this.articleService.deleteEvent(idArticle).subscribe(() => {
+    this.articleService.deleteArticle(idArticle).subscribe(() => {
       this.getAllArticles();
     });
   }
