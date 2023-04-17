@@ -102,6 +102,6 @@ export class DonationComponent implements OnInit {
     button.click();
   }
 
- 
+  //
 
 }
