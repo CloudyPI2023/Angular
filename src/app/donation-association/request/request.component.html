@@ -1,1 +1,449 @@
-<p>request works!</p>
+<br><br><br><br>
+
+     <div class="col-md-12">
+      <div class="card">
+          <div class="card-header card-header-success">
+              <h4 class="card-title">Request</h4>
+              <p class="card-category"> All Requests For PharmaLife
+                
+            <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded" (click)="onOpenModal(null!, 'add')">New</button>
+              
+            </p>
+      
+             <!-- <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+               </a>-->
+           
+            </div>
+
+          <div class="card-body">
+              <div class="table-responsive" id="main-container">
+                <table class = "table table-striped">
+                  <thead class="">
+                     <th>#</th>
+                     <th>Name </th>
+                     <th> Description </th>
+                     <th> Type </th>
+                     <th> Date </th>
+                     <th> Status </th>
+                     <th> Association </th>
+                     
+                   
+              
+                  <th style="text-align: center;"> Actions </th> 
+                 </thead>
+                 <tbody>
+                    <tr *ngFor = "let  request of requests" >
+                        <td>{{request.idRequest}}</td>  
+                        <td>{{request.nameRequest}}</td> 
+                        <td>{{request.descriptionRequest}}</td> 
+                        <td>{{request.requestType}}</td>  
+                        <td>{{request.dateRequest}}</td> 
+                        <td>{{request.statusRequest}}</td> 
+                      
+                        <td>{{request.Association}}</td> 
+
+                         <td style="text-align: center;">
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(request, 'edit')">edit</button>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(request, 'delete')">delete</button>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(request, 'detail')">detail</button>
+
+                         
+
+                          <!--
+                          <td style="text-align: center;">
+                            <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
+                        <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+                        <a (click)="onOpenModal(association, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a></td>-->
+              
+                    </tr>
+                   
+              
+                 </tbody>
+                   </table>
+              </div>
+          </div>
+      </div>
+  </div>
+
+   <!-- Add Request Modal -->
+   <div class="modal fade" id="addRequestModal" tabindex="-1" role="dialog" aria-labelledby="addRequestModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 800px;">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addRequestModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Request</B></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+           <div class="modal-body" >
+              <form #addForm="ngForm" (ngSubmit)="onAddRequest(addForm)" novalidate >
+              <div class="form-group" >
+
+              <div class="row">
+               <div class="input_box col-md-6">
+                  <input type="text" ngModel name="nameRequest" class="form-control" id="nameRequest" aria-describedby="emailHelp" placeholder="nameRequest" required>
+                  <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+                </div>
+                <div class="input_box col-md-6">
+                  <input type="date" ngModel name="dateRequest" class="form-control" id="dateRequest" aria-describedby="dateRequest" placeholder="dateRequest" required>
+                  <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input_box col-md-6">
+                  <input type="text" ngModel name="requestType" class="form-control" id="requestType" aria-describedby="emailHelp" placeholder="requestType" required>
+                  <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+                </div>
+                <div class="input_box col-md-6">
+                  <input type="text" ngModel name="statusRequest" class="form-control" id="statusRequest" aria-describedby="statusRequest" placeholder="statusRequest" required>
+                  <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+                </div>
+              </div>
+
+             
+                <div class="input_box">
+                  <input type="text" ngModel name="Association" class="form-control" id="Association" aria-describedby="Association" placeholder="Association" required>
+                  <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+                </div> 
+               
+
+              <div class="input_box">
+                <input type="textarea" ngModel name="descriptionRequest" class="form-control" id="descriptionRequest" aria-describedby="descriptionRequest" placeholder="description" required>
+                <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+              </div> 
+
+ 
+              </div>
+              <div class="modal-footer">
+                 <button type="button" id="add-Request-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" >Save</button>
+              </div>
+              </form>
+           </div>
+        </div>
+      </div>
+  </div>
+
+  
+<!-- Edit Request Modal -->
+<div class="modal fade" id="updateRequestModal" tabindex="-1" role="dialog" aria-labelledby="updateRequestModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content" style="width: 800px;">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateRequestModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> Edit Request : {{editRequest?.idRequest }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{editRequest?.idRequest}}" name="idRequest" class="form-control" id="idRequest" placeholder="idRequest">
+
+            <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editRequest?.nameRequest}}" name="nameRequest" class="form-control" id="nameRequest" aria-describedby="emailHelp" placeholder="nameRequest" required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="date" ngModel="{{editRequest?.dateRequest}}" name="dateRequest" class="form-control" id="dateRequest" aria-describedby="dateRequest" placeholder="dateRequest" required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editRequest?.requestType}}" name="requestType" class="form-control" id="requestType" aria-describedby="requestType" placeholder="requestType" required>
+              <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editRequest?.statusRequest}}" class="form-control" name="statusRequest" id="statusRequest" aria-describedby="statusRequest" placeholder="statusRequest" required>
+              <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editRequest?.Association}}" name="Association" class="form-control" id="Association" aria-describedby="Association" placeholder="Association" required>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
+            </div>
+         
+          
+
+          <div class="input_box">
+            <input type="text" ngModel="{{editRequest?.descriptionRequest}}" name="descriptionRequest" class="form-control" id="descriptionRequest" aria-describedby="descriptionRequest" placeholder="descriptionRequest" required>
+            <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+          </div>
+            
+      
+          <br>
+
+
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateRequest(editForm.value)" data-dismiss="modal" class="btn btn-success">Edit</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteRequestModal" tabindex="-1" role="dialog" aria-labelledby="deleteRequestModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteRequestModalLabel">Delete Request</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete {{deleteRequest?.nameRequest}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteRequest(deleteRequest?.idRequest)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  
+</div>
+</div>
+
+
+
+
+ <!-- Detail Request Modal -->
+ <div class="modal fade" id="detailRequestModal" tabindex="-1" role="dialog" aria-labelledby="detailRequestModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content" style="width: 700px;">
+        <div class="modal-header">
+           <h5 class="modal-title" id="detailRequestModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Request : {{editRequest?.idRequest }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #detailForm="ngForm">
+           
+            <div class="col-md-12">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                      <h4 class="card-title">Alec Thompson</h4>
+                      <p class="card-description">
+                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                      </p>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Imprimer</a>
+                  </div>
+              </div>
+          </div>  
+           
+            
+      
+          <br>
+
+
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button data-dismiss="modal" class="btn btn-success">Imprimer</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+   .button {
+     background-color: #4CAF50; /* Green */
+     border: none;
+     color: white;
+     padding: 15px 32px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 16px;
+     margin: 4px 2px;
+     cursor: pointer;
+   }
+   
+   .button2 {background-color: #66BA63;} /* green */
+   .button3 {background-color: #80D07D;} /* Red */ 
+   .button4 {background-color: #5C905A; color: black;} /* Gray */ 
+   .button5 {background-color: #555555;} /* Black */
+
+
+
+html,body{
+  display: grid;
+  height: 100vh;
+  place-items:center;
+  background: #be2edd;
+}
+.main_div{
+  width: 365px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+.main_div .title{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.main_div .social_icons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.social_icons a{
+  display: block;
+  height: 45px;
+  width: 100%;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+.social_icons a span{
+  margin-left: 5px;
+  font-size: 18px;
+}
+.social_icons a:first-child{
+  margin-right: 5px;
+  background: #4267B2;
+}
+.social_icons a:first-child:hover{
+  background: #375695;
+}
+.social_icons a:last-child{
+  margin-left: 5px;
+  background: #1DA1F2;
+}
+.social_icons a:last-child:hover{
+  background: #0d8bd9;
+}
+form {
+  margin-top: 25px;
+}
+form .input_box{
+  height: 50px;
+  width: 100%;
+  position: relative;
+  margin-top: 15px;
+}
+.input_box input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 45px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+.input_box input:focus{
+  border-color: darkcyan;
+}
+.input_box .icon{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: grey;
+}
+form .option_div{
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.option_div .check_box{
+  display: flex;
+  align-items: center;
+}
+.option_div span{
+  margin-left: 5px;
+  font-size: 16px;
+  color: #333;
+}
+.option_div .forget_div a{
+  font-size: 16px;
+  color: darkcyan;
+}
+.button input{
+  padding-left: 0;
+  background: darkcyan;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.button input:hover{
+  background: darkcyan;
+}
+form .sign_up{
+  text-align: center;
+  margin-top: 25px;
+}
+.sign_up a{
+  color: darkcyan;
+}
+form a{
+  text-decoration: none;
+}
+form a:hover{
+  text-decoration: underline;
+}
+
+
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form :where(.select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+
+
+ 
+   </style>
