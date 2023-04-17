@@ -1,8 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RequestService } from 'app/services/requestService/request.service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
+//import { Request } from "app/models/request";
+import { RequestService } from "app/services/requestService/request.service";
+
 
 @Component({
   selector: 'app-request',
@@ -96,10 +98,9 @@ export class RequestComponent implements OnInit {
   
       button.setAttribute('data-target', '#detailRequestModal');
     }
-  
     container?.appendChild(button);
     button.click();
   }
-  //
+
 
 }

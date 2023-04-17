@@ -7,5 +7,5 @@ export class Request {
     requestType: string;
     dateRequest: Date;
     statusRequest: string; 
-    association!: Association[];
+    association: Association[];
 }
