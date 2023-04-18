@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductManagementComponent } from './views/product-management/product-management.component';
+import { ArticleComponent } from './views/article/article.component';
 
 const routes: Routes =[
   {
@@ -28,6 +29,10 @@ const routes: Routes =[
   {
     path:'product-management',
     component: ProductManagementComponent
+  },
+  {
+    path:'article-management',
+    component: ArticleComponent
   }
   
 ];

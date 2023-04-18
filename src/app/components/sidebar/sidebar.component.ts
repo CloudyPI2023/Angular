@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-profile', title: 'User management',  icon:'person', class: ''},
     { path:'/product-management',title: 'Product and gifts',  icon:'content_paste',class:''},
     { path: '/typography', title: 'Donation and association',  icon:'library_books', class: ''},
-    { path: '/icons', title: 'Event and reservation',  icon:'bubble_chart', class: ''},
+    { path: '/app-article', title: 'Event and reservation',  icon:'bubble_chart', class: ''},
     { path: '/maps', title: 'Article and comment',  icon:'location_on', class: ''},
     { path: '/notifications', title: 'Pruchase and order',  icon:'notifications', class: '' },
     { path: '/upgrade', title: 'Contact',  icon:'unarchive', class: 'active-pro' },

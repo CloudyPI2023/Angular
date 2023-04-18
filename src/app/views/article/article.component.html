@@ -1,0 +1,69 @@
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title ">Articles</h4>
+            <p class="card-category"> All Articles For PharmaLife</p>
+            <button type="button" class="btn btn-warning btn-rounded">New</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class=" text-primary">
+                   
+                        <th>
+                            id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                      
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                     
+                    </thead>
+                    <tbody>
+                        <tr *ngFor ="let article of articles">
+                      
+                            <td>{{article.idArticle}}</td>  
+                            <td>{{article.NameArticle}}</td> 
+                            <td>{{article.DescriptionArticle}}</td> 
+                            <td>{{article.ImageArticle}}</td>  
+                            <td>{{article.DateArticle}}</td> 
+                            <td>
+                                <span class="badge badge-success rounded-pill d-inline">{{article.statusarticle}}</span>
+                                
+                            </td> 
+                            <td>{{article.userArticle}}</td> 
+                              
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">edit</button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">delete</button>
+                            </td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

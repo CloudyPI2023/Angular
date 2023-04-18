@@ -11,6 +11,7 @@ import { ProductManagementComponent } from './views/product-management/product-m
 import { CategoryManagementComponent } from './views/category-management/category-management.component';
 import { GiftManagementComponent } from './views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
+import { ArticleComponent } from './views/article/article.component';
 
 
 
@@ -31,6 +32,7 @@ import { ReclamationManagementComponent } from './views/reclamation-management/r
     CategoryManagementComponent,
     GiftManagementComponent,
     ReclamationManagementComponent,
+    ArticleComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Article } from 'app/Models/article';
-import { ArticleService } from 'app/services/article.service';
+import { Article } from '../../Models/article';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-article',
@@ -10,10 +10,11 @@ import { ArticleService } from 'app/services/article.service';
 })
 export class ArticleComponent implements OnInit {
 
-  articles: Article[] = [];
+  articleS: Article[] = [];
   showForm = false;
   article: Article = new Article();
   closeResult: string | undefined;
+  content: any;
 
   constructor(private articleService: ArticleService, private modalService: NgbModal) { }
 
@@ -22,11 +23,11 @@ export class ArticleComponent implements OnInit {
   }
 
   getAllArticles(): void {
-    this.articleService.getAllArticles().subscribe(articles => this.articles = articles as Article[]);
+    this.articleService.getAllArticles().subscribe(articles => this.articleS = articles as Article[]);
   }
   
 
-  addArticle(event: Article): void {
+  addArticle(article: Article): void {
     this.articleService.addArticle(article).subscribe(() => {
       this.getAllArticles();
       this.showForm = false;
@@ -45,9 +46,9 @@ export class ArticleComponent implements OnInit {
 
   open(content: any): void {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = Closed with: ${result};
+      this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = Dismissed ${this.getDismissReason(reason)};
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
@@ -57,7 +58,7 @@ export class ArticleComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return with: ${reason};
+      return `with: ${reason}`;
     }
   }
 
@@ -69,3 +70,4 @@ export class ArticleComponent implements OnInit {
     this.showForm = false;
   }
 }
+
