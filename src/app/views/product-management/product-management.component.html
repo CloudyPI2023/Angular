@@ -54,9 +54,6 @@
               <i *ngIf="p.expired" class="fa fa-times" style="color: red;font-size: 18px;"></i>
             </span>
           </td>
-          <!-- <td>
-                <span [style.color]="user.enabled ? 'green' : 'red'">&#10004;</span><span [style.color]="user.enabled ? 'red' : 'green'">&#10008;</span>
-            </td>-->
           <td style="text-align: center;">
 
             <a (click)="onOpenModal(p, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip"
@@ -72,6 +69,19 @@
 
 
   </div>
+</div>
+<!--Pie chart 
+<div style="display: block">
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType">
+  </canvas>
+</div>
+-->
+<!-- Create chart here. -->
+<div class="chartContainer">
+  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle" [dataLabels]="chartDataLabels"></apx-chart>
 </div>
 
 

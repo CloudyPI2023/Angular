@@ -3,13 +3,35 @@ import { ProductService } from './product.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Product } from '../../Models/product';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
+
 
 @Component({
   selector: 'app-product-management',
   templateUrl: './product-management.component.html',
-  styleUrls: ['./product-management.component.css']
+  styleUrls: ['./product-management.component.css'],
+ 
 })
 export class ProductManagementComponent implements OnInit {
+  chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
+
+  chartDetails: ApexChart = {
+    type: 'donut',
+    toolbar: {
+      show: true
+    }
+  };
+
+  chartLabels = ["Apple", "Microsoft", "Facebook", "Google"];
+
+  chartTitle: ApexTitleSubtitle = {
+    text: 'Leading Companies',
+    align: 'center'
+  };
+
+  chartDataLabels: ApexDataLabels = {
+    enabled: true
+  };
 
   productsExpired: Product[];
   productsNotExpired: Product[];
@@ -18,9 +40,21 @@ export class ProductManagementComponent implements OnInit {
 
   constructor(private ps:ProductService,router:Router,private toast: NgToastService) { }
 
+  hashMapProductCategory: Map<String, number>;
 
-  ngOnInit(): void {
+  ngOnInit(): void {         
     this.getAllProducts();
+    this.statisticsProductCategory();
+    
+
+  }
+ 
+  private statisticsProductCategory(){
+    this.ps.statisticsProductCategory().subscribe(data=>{
+      this.hashMapProductCategory=data;
+      
+      console.log(this.hashMapProductCategory);
+    })
   }
   private getAllProducts(){
     this.ps.getAllProducts().subscribe(data => {

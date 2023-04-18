@@ -3,6 +3,7 @@ import { GiftService } from './gift.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Gift } from 'app/Models/gift';
+import { Product } from 'app/Models/product';
 
 @Component({
   selector: 'app-gift-management',
@@ -14,8 +15,11 @@ export class GiftManagementComponent implements OnInit {
   constructor(private gs:GiftService ,router:Router,private toast: NgToastService) { }
   gifts:Gift[];
   detailsGift?:Gift;
+  productsForOneGift?:Product[];
+
   ngOnInit(): void {
     this.getGifts();
+    this.productsForOneGift;
   }
   getGifts(){
     this.gs.getAllGifts().subscribe(data => {
@@ -29,6 +33,13 @@ export class GiftManagementComponent implements OnInit {
         console.log(response);
       });
   }  
+
+  public getAllProductsForGift(idGift:number){
+    this.gs.getAllProductsForGift(idGift).subscribe(data => {
+      this.productsForOneGift = data;
+      console.log(data);
+    });
+  }
   
   public onOpenModal(gift: Gift, mode: string): void {
     const container = document.getElementById('main-container');

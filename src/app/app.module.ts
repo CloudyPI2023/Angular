@@ -11,6 +11,11 @@ import { ProductManagementComponent } from './views/product-management/product-m
 import { CategoryManagementComponent } from './views/category-management/category-management.component';
 import { GiftManagementComponent } from './views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import {NgToastModule} from 'ng-angular-popup';
+
 
 
 
@@ -23,6 +28,10 @@ import { ReclamationManagementComponent } from './views/reclamation-management/r
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    BrowserModule,
+    NgChartsModule,
+    NgApexchartsModule,
+    NgToastModule
   ],
   declarations: [
     AppComponent,

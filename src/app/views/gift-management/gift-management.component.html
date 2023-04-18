@@ -28,10 +28,17 @@
         <th> Assigned to </th>
       </thead>
       <tbody>
-        <tr *ngFor="let g of gifts">
+        <tr *ngFor="let g of gifts ">
           <td> {{ g.userGift.firstName}} {{ g.userGift.lastName}}</td>
           <td> {{ g.beginsAtGift}} </td>
           <td> {{ g.endsAtGift}} </td>
+          <td>{{g.productsGift.nameProduct}}
+            <!--<select style="background-color: #333;">
+              <option value="name products"> </option>
+
+            </select>-->
+           
+          </td>
           
         </tr>
 

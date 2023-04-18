@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Gift } from 'app/Models/gift';
+import { Product } from 'app/Models/product';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,4 +21,9 @@ export class GiftService {
   OnDetailsGift(idGift: number): Observable<Gift>{
     return this.httpClient.get<Gift>(`${this.baseURL}`+"/retrieve-gift/"+`${idGift}`);
   }
+
+  getAllProductsForGift(idGift:number): Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/productsForGift"+`${idGift}`);
+  }
+
 }

@@ -24,4 +24,8 @@ export class ProductService {
   OnDetailsProduct(idProduct: number): Observable<Product>{
     return this.httpClient.get<Product>(`${this.baseURL}`+"/retrieve-product/"+`${idProduct}`);
   }
+
+  statisticsProductCategory(): Observable<Map<String,number>>{
+    return this.httpClient.get<Map<String,number>>(`${this.baseURL}`+"/statisticsProductCategory/");
+  }
 }
