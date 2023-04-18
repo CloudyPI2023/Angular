@@ -6,6 +6,8 @@ import { Product } from '../../Models/product';
 import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 
 
+
+
 @Component({
   selector: 'app-product-management',
   templateUrl: './product-management.component.html',
@@ -13,6 +15,7 @@ import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } 
  
 })
 export class ProductManagementComponent implements OnInit {
+    
   chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
 
   chartDetails: ApexChart = {
@@ -32,7 +35,6 @@ export class ProductManagementComponent implements OnInit {
   chartDataLabels: ApexDataLabels = {
     enabled: true
   };
-
   productsExpired: Product[];
   productsNotExpired: Product[];
   allProducts:Product[];
@@ -46,7 +48,7 @@ export class ProductManagementComponent implements OnInit {
     this.getAllProducts();
     this.statisticsProductCategory();
     
-
+    
   }
  
   private statisticsProductCategory(){
@@ -56,6 +58,9 @@ export class ProductManagementComponent implements OnInit {
       console.log(this.hashMapProductCategory);
     })
   }
+
+
+  
   private getAllProducts(){
     this.ps.getAllProducts().subscribe(data => {
       this.allProducts = data;
@@ -84,11 +89,16 @@ export class ProductManagementComponent implements OnInit {
     button.click();
   }
 
-  public getDateDiffInDays(dateString1: string): number {
+  public getDateDiffInDays(dateString1: string): String {
     const date1 = new Date(dateString1);
     const date2 = new Date();
     const diffMs = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-    return diffDays;
+    if(date2< date1){
+      return "Still available for "+diffDays+" days.";
+    }
+    else{
+    return "Expired "+diffDays+" days ago.";
+    }
   }
 }

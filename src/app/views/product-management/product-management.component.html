@@ -70,17 +70,10 @@
 
   </div>
 </div>
-<!--Pie chart 
-<div style="display: block">
-  <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType">
-  </canvas>
-</div>
--->
+
+
 <!-- Create chart here. -->
-<div class="chartContainer">
+<div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
   <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle" [dataLabels]="chartDataLabels"></apx-chart>
 </div>
 
@@ -149,18 +142,12 @@
           <br>
           <div class="form-group" style="float:left; text-align: center;">
             <label for="expired" style="color: #4d82a3;font-size: 17px;"><i   class="fa fa-clock-o" aria-hidden="true"></i> 
-              Expired: <label style="color: black;font-size: 17px">
-                {{getDateDiffInDays(detailsProduct?.expirationDateProduct)}} days ago.
+             <label style="color: black;font-size: 17px">
+                {{getDateDiffInDays(detailsProduct?.expirationDateProduct)}} 
               </label> 
             </label>
             <br>
           </div>
-         <!-- <div class="form-group" style="float:left; text-align: center;">
-            <label for="archived" style="color: #4d82a3;font-size: 17px;"><i *ngIf="detailsProduct.categoryProduct.archived"   class="fa fa-archive" aria-hidden="true"></i> <label
-                style="color: black;font-size: 17px">
-                Category has been archived
-              </label> </label><br>
-          </div>-->
           <br>
         </form>
       </div>
