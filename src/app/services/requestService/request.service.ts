@@ -36,5 +36,9 @@ export class RequestService {
   deleteRequest(idRequest: number): Observable<Object>{
     return this.httpClient.delete(`${this.url}/cancelRequest/${idRequest}`);
   }
+
+  getListRequestByIdAssociation(idAssociation: number): Observable<Request>{
+    return this.httpClient.get<Request>(`${this.url}/getMyRequests/${idAssociation}`);
+  }
   
 }
