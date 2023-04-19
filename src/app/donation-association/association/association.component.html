@@ -111,7 +111,7 @@
 
               <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded"
                 (click)="onOpenModal(null!, 'add')">New</button>
-
+            
             </p>
 
             <!-- <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
@@ -124,39 +124,58 @@
               <table class="table table-striped">
                 <thead class="">
                   <th>#</th>
+                  <th> Created </th>
                   <th>Name </th>
-                  <th> Address </th>
+                  <!--<th> Address </th>-->
                   <th>Email </th>
                   <th> Logo </th>
-                  <th> Description </th>
+                 <!-- <th> Description </th>-->
                   <th> Phone Number </th>
                   <th> Country </th>
-
+                  <th> years </th>
 
                   <th style="text-align: center;"> Actions </th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let  association of associations">
+                  <tr *ngFor="let  association of associations" 
+                >
+                    
                     <td>{{association.idAssociation}}</td>
+                    <td>{{association.dateAssociation}}</td>
                     <td>{{association.associationName}}</td>
-                    <td>{{association.adressAssociation}}</td>
+                    <!--<td>{{association.adressAssociation}}</td>-->
                     <td>{{association.emailAssocation}}</td>
                     <td>{{association.logoAssocation}}</td>
-                    <td>{{association.descriptionAssocation}}</td>
+                    <!--<td>{{association.descriptionAssocation}}</td>-->
                     <td>{{association.phoneNumberAssocation}}</td>
                     <td>{{association.countryAssocation}}</td>
+                    <td>{{association.nbAnneeAssociation}}</td>
+
                     <td style="text-align: center;">
                       <button type="button" class="btn btn-link btn-sm btn-rounded"
                         (click)="onOpenModal(association, 'edit')">edit</button>
                       <button type="button" class="btn btn-link btn-sm btn-rounded"
                         (click)="onOpenModal(association, 'delete')">delete</button>
                       <button type="button" class="btn btn-link btn-sm btn-rounded"
-                        (click)="onOpenModal(association, 'detail')">detail</button>
+                        (click)="onOpenModal(association, 'detail')">More...</button>
+                      
                       <button type="button" class="btn btn-link btn-sm btn-rounded"
-                        (click)="onOpenModal(association, 'request')">Requests</button>
-
+                        (click)="onOpenModal(association, 'request')">Requests</button>  
+                        
+                      
+                        <span [ngClass]="{'green-tick': association.nbAnneeAssociation>=3}">
+                          <i *ngIf="association.nbAnneeAssociation>=3" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+                          
+                        </span>
 
                       <!--
+
+                          <button type="button" class="btn btn-link btn-sm btn-rounded"
+                        *ngFor="let association of associations"
+                        [hidden]="oldassociations.includes(association)"
+                        [disabled]="oldassociations.includes(association)"
+                        >test</button>
+
                           <td style="text-align: center;">
                             <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
                         <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
@@ -169,6 +188,12 @@
               </table>
             </div>
           </div>
+
+
+
+
+
+
         </div>
       </div>
     </div>
@@ -388,14 +413,14 @@
                 </a>
               </div>
               <div class="card-body">
-                <h6 class="card-category text-gray">{{detailsAssociation?.associationName}}</h6>
+                <h6 class="card-category text-gray">Name:{{detailsAssociation?.associationName}}</h6>
                 <div class="row">
-                <h4 class="card-title col-md-6">{{detailsAssociation?.phoneNumberAssocation}}</h4>
-                <h4 class="card-title col-md-6">{{detailsAssociation?.adressAssociation}}</h4>
+                <h4 class="card-title col-md-6">Phone:{{detailsAssociation?.phoneNumberAssocation}}</h4>
+                <h4 class="card-title col-md-6">Address:{{detailsAssociation?.adressAssociation}}</h4>
                 </div>
                 <div class="row">
-                <h4 class="card-title col-md-6">{{detailsAssociation?.logoAssocation}}</h4>
-                <h4 class="card-title col-md-6">{{detailsAssociation?.countryAssocation}}</h4>
+                <h4 class="card-title col-md-6">Logo:{{detailsAssociation?.logoAssocation}}</h4>
+                <h4 class="card-title col-md-6">Country:{{detailsAssociation?.countryAssocation}}</h4>
                </div>
                 <p class="card-description">
                   {{detailsAssociation?.descriptionAssocation}}
@@ -419,6 +444,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 
@@ -481,7 +509,7 @@
 
           <div class="modal-footer">
             <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-            <button data-dismiss="modal" class="btn btn-success">ADD To Donations</button>
+            <button *ngIf="requestAssociationA.nbAnneeAssociation<3" data-dismiss="modal" class="btn btn-success" [routerLink]="['/donations']" >GO To Donations</button>
           </div>
         </form>
       </div>
@@ -719,4 +747,12 @@
     border-radius: 6px;
     padding: 0 15px;
   }
+
+  .red-text {
+  color: red;
+}
+.green-text {
+  color: green;
+}
+
 </style>
