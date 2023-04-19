@@ -21,19 +21,21 @@ export class AssociationComponent implements OnInit {
   public editAssociation?: Association;
   public deleteAssociation?: Association;
   public detailsAssociation?: Association;
+  public yearsAssociation?: Association;
   associations: Association[];
-
+  a: Association[];
+  oldassociations: Association[];
   idAssociation:number;
   public requestAssociation?: Request;
   public requestAssociationA?: Association;
   requests: any;
- // r: Request[];
- // total !: number;
+
 
   constructor(private associationService: AssociationService,private requestService: RequestService,private router: Router) { }
 
   ngOnInit(): void {
-    this.getAssociations();
+    this.getAssociations(); 
+    this.getOldAssociations();
   }
 
   public getRequests(idAssociation: number){
@@ -46,10 +48,16 @@ export class AssociationComponent implements OnInit {
   private getAssociations(){
     this.associationService.getAssociationList().subscribe(data => {
        this.associations = data;
-  
+     
     });
   }
-  
+
+  private getOldAssociations(){
+    this.associationService.getOldAssociationList().subscribe(data => {
+       this.oldassociations = data;
+    });
+  }
+
  /* public OnDetailsAssociation(idAssociation: number){
     this.associationService.getAssociationById(idAssociation).subscribe(
       (response: Association) => {
@@ -115,6 +123,7 @@ export class AssociationComponent implements OnInit {
       this.detailsAssociation = association;
       button.setAttribute('data-target', '#detailAssociationModal');
     }
+  
     if (mode === 'request') {
       //this.requestAssociation= this.requests;
        this.getRequests(association.idAssociation);

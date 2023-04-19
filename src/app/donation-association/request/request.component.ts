@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-//import { Request } from "app/models/request";
+import { Request } from "app/models/request";
 import { RequestService } from "app/services/requestService/request.service";
 
 
@@ -18,6 +18,7 @@ export class RequestComponent implements OnInit {
   public deleteRequest?: Request;
   public detailsRequest?: Request;
   requests: Request[];
+  r:any;
 
   constructor(private requestService: RequestService,private router: Router) { }
 
@@ -27,7 +28,7 @@ export class RequestComponent implements OnInit {
 
   private getRequests(){
     this.requestService.getRequestList().subscribe(data => {
-       this.requests = data;
+      this.requests = data;
   
     });
   }

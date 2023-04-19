@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Association } from 'app/models/association';
+import { Donation } from 'app/models/donation';
+import { AssociationService } from 'app/services/associationService/association.service';
+import { DonationService } from 'app/services/donationService/donation.service';
+import { RequestService } from 'app/services/requestService/request.service';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -7,8 +13,51 @@ import * as Chartist from 'chartist';
   styleUrls: ['./donation-association.component.scss']
 })
 export class DonationAssociationComponent implements OnInit {
+  
+  associations: Association[];
+  donations: Donation[];
+  requests: Request[];
 
-  constructor() { }
+  totalAssociation: number;
+  totalDonations: number;
+  totalRequests: number;
+
+  constructor(private associationService: AssociationService,private requestService: RequestService,
+    private donationService: DonationService,private router: Router) { }
+
+  
+
+  private getAssociations(){
+    this.associationService.getAssociationList().subscribe(data => {
+       this.associations = data;
+       this.totalAssociation = this.associations.length;
+    });
+  }
+
+  private getDonations(){
+    this.donationService.getDonationList().subscribe(data => {
+       this.donations = data;
+       this.totalDonations = this.donations.length;
+    });
+  }
+
+  /*private getRequests(){
+    this.requestService.getRequestList().subscribe(data => {
+       //this.requests = data;
+       this.totalRequests = this.requests.length;
+    });
+  }*/
+
+
+
+
+
+
+
+
+
+
+  //////////////////////////////////////////////stat//////////////////////////////////////////////////////////////////
 
   startAnimationForLineChart(chart){
     let seq: any, delays: any, durations: any;
@@ -68,6 +117,12 @@ startAnimationForBarChart(chart){
 };
 
   ngOnInit(): void {
+
+
+    this.getAssociations();
+    this.getDonations();
+   // this.getRequests();
+
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
     const dataDailySalesChart: any = {

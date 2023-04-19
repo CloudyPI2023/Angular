@@ -228,6 +228,104 @@
       </div>
   </div>
 
+  <!-- Edit Request Modal -->
+<div class="modal fade" id="updateRequestModal" tabindex="-1" role="dialog"
+aria-labelledby="updateRequestModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content" style="width: 800px;">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateRequestModalLabel"
+        style=" color: darkgreen;font-size: 20px;text-align: center;"> Edit Request :
+        {{editRequest?.idRequest }} </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <input type="hidden" ngModel="{{editRequest?.idRequest}}" name="idRequest" class="form-control"
+          id="idRequest" placeholder="idRequest">
+
+        <div class="row">
+          <div class="input_box col-md-6">
+            <input type="text" ngModel="{{editRequest?.nameRequest}}" name="nameRequest"
+              class="form-control" id="nameRequest" aria-describedby="emailHelp" placeholder="nameRequest"
+              required>
+            <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+          </div>
+          <div class="input_box col-md-6">
+            <input type="date" ngModel="{{editRequest?.dateRequest}}" name="dateRequest"
+              class="form-control" id="dateRequest" aria-describedby="dateRequest" placeholder="dateRequest"
+              required>
+            <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input_box col-md-6">
+            <input type="text" ngModel="{{editRequest?.requestType}}" name="requestType"
+              class="form-control" id="requestType" aria-describedby="emailHelp" placeholder="requestType"
+              required>
+            <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+          </div>
+          <div class="input_box col-md-6">
+            <input type="tel" ngModel="{{editRequest?.statusRequest}}" class="form-control"
+              name="statusRequest" id="statusRequest" aria-describedby="statusRequest"
+              placeholder="statusRequest" required>
+            <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+          </div>
+        </div>
+
+
+          
+
+        <div class="input_box">
+          <input type="text" ngModel="{{editRequest?.descriptionRequest}}" name="descriptionRequest"
+            class="form-control" id="descriptionRequest" aria-describedby="descriptionRequest"
+            placeholder="descriptionRequest" required>
+          <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+        </div>
+
+
+        <br>
+
+
+        <div class="modal-footer">
+          <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+          <button (click)="onUpdateRequest(editForm.value)" data-dismiss="modal"
+            class="btn btn-success">Edit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteRequestModal" tabindex="-1" role="dialog"
+aria-labelledby="deleteRequestModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteRequestModalLabel">Delete Request</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete {{deleteRequest?.nameRequest}}?</p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button (click)="onDeleteRequest(deleteRequest?.idRequest)" class="btn btn-danger"
+          data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
 
 
 

@@ -40,4 +40,9 @@ export class AssociationService {
     return this.httpClient.delete(`${this.url}/deleteAssociation/${idAssociation}`);
   }
 
+  getOldAssociationList(): Observable<Association[]>{
+    return this.httpClient.get<Association[]>(this.url + '/retrieveAssociationsPlusTroixAns');
+  }
+  
+
 }
