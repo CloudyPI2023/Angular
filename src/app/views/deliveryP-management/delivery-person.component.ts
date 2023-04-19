@@ -4,6 +4,7 @@ import { DeliveryPersonService } from './delivery-person.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-delivery-person',
@@ -16,9 +17,14 @@ export class DeliveryPersonComponent implements OnInit {
 
   deliveryPersons: DeliveryPerson[];
 
-  constructor(private deliveryPersonService: DeliveryPersonService,private router: Router ) { }
+  constructor(private deliveryPersonService: DeliveryPersonService,private router: Router ,private toast: NgToastService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('token') == null){
+      this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
+      this.router.navigateByUrl('/login');
+      }
+
     this.getDeliveryPersons();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+//import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,9 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    public userName : String;
 
+    
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
@@ -23,6 +26,13 @@ export class NavbarComponent implements OnInit {
     ngOnInit(){
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
+
+    
+      //Get the token and extract the username 
+    /*  const token = localStorage.getItem('token');
+      const decodedToken = jwt_decode(token);
+      const userName = decodedToken.name;*/
+
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
         this.sidebarClose();
@@ -122,6 +132,7 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+
 
 
 

@@ -28,6 +28,14 @@ export class UserService {
     return this.httpClient.post(`${this.baseURL+"/User/add-User"}`, user, this.options);
   }
 
+  uploadFile( file: File , idUser : number ) : Observable<any>{  
+    let url = this.httpClient + "/User/uploadImage/" + idUser ;  
+    const formdata: FormData = new FormData();  
+    formdata.append('file', file);  
+    return this.httpClient.post(url , formdata);  
+  }  
+
+
   getUserById(idUser: number): Observable<User>{
     return this.httpClient.get<User>(`${this.baseURL+"/User/retrieve-User"}/${idUser}`, this.options);
   }

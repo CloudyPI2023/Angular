@@ -6,7 +6,8 @@ import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { data } from 'jquery';
 import { NgToastService } from 'ng-angular-popup';
-
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -17,18 +18,50 @@ export class UserComponent implements OnInit {
   public deleteUser?: User;
   public detailsUser?: User;
   users: User[];
+  selectedFile: File;
 
-  constructor(private userService: UserService,private router: Router,private toast: NgToastService ) { }
+  userFile : any;
+  public imagePath: any;
+  imgURL: any;
+  public message: string;
+
+
+
+  pageSize = 4; // maximum number of items to display per page
+  totalPages: number; // total number of pages
+  currentPage = 1; // current page number
+
+  constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient ) { }
 
   ngOnInit(): void {
 
-    if(localStorage.getItem('token') != null){
-      // alert("you are not allowed")
-       this.router.navigateByUrl('/users');
+    if(localStorage.getItem('token') == null){
+       this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
+       this.router.navigateByUrl('/login');
        }
-
     this.getUsers();
+
+    this.totalPages = Math.ceil(this.users.length / this.pageSize);
+        
+    
   }
+  totalPagesArray() {
+    return Array(this.totalPages).fill(0).map((x, i) => i + 1);
+  }
+
+  onPageChange(pageNumber: number) {
+  if (pageNumber < 1 || pageNumber > this.totalPages) {
+    return; // Do nothing if page number is out of range
+  }
+  this.currentPage = pageNumber;
+  // Fetch items from the database based on the current page number and items per page
+  // ...
+}
+
+
+
+
+
 
 
 private getUsers(){
@@ -59,6 +92,54 @@ public onAddUser(addForm: NgForm): void {
     }
   );
 }
+
+onFileSelected(event : any) {
+  console.log(event);
+  if (event.target.files.length > 0)
+  {
+    const file = event.target.files[0];
+    this.userFile = file;
+   // this.f['profile'].setValue(file);
+
+  var mimeType = event.target.files[0].type;
+  if (mimeType.match(/image\/*/) == null) {
+    this.message = "Only images are supported.";
+    return;
+  }
+
+  var reader = new FileReader();
+  
+  this.imagePath = file;
+  reader.readAsDataURL(file); 
+  reader.onload = (_event) => { 
+    this.imgURL = reader.result; 
+  }
+}
+
+}
+
+/*onUpload() {
+  console.log(this.selectedFile);
+  
+  //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+  const uploadImageData = new FormData();
+  uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+  //Make a call to the Spring Boot Application to save the image
+  this.httpClient.post('', uploadImageData, { observe: 'response' })
+    .subscribe((response) => {
+      if (response.status === 200) {
+        this.message = 'Image uploaded successfully';
+      } else {
+        this.message = 'Image not uploaded successfully';
+      }
+    }
+    );
+
+
+}*/
+
+
 
 public onUpdateUser(user: User) {
   this.userService.updateUser(user).subscribe(
