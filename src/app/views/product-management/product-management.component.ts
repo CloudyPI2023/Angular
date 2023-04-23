@@ -8,6 +8,8 @@ import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } 
 
 
 
+
+
 @Component({
   selector: 'app-product-management',
   templateUrl: './product-management.component.html',
@@ -28,7 +30,7 @@ export class ProductManagementComponent implements OnInit {
   chartLabels = ["Apple", "Microsoft", "Facebook", "Google"];
 
   chartTitle: ApexTitleSubtitle = {
-    text: 'Leading Companies',
+    text: 'Products accourding to their categories',
     align: 'center'
   };
 
@@ -39,10 +41,11 @@ export class ProductManagementComponent implements OnInit {
   productsNotExpired: Product[];
   allProducts:Product[];
   detailsProduct?:Product;
+  hashMapProductCategory:  Map<String, number> = new Map<string, number>();
 
   constructor(private ps:ProductService,router:Router,private toast: NgToastService) { }
 
-  hashMapProductCategory: Map<String, number>;
+ 
 
   ngOnInit(): void {         
     this.getAllProducts();
@@ -54,7 +57,13 @@ export class ProductManagementComponent implements OnInit {
   private statisticsProductCategory(){
     this.ps.statisticsProductCategory().subscribe(data=>{
       this.hashMapProductCategory=data;
+      console.log("dataaaa"+data);
+      //const arraykeys=[...this.hashMapProductCategory.keys()];
+      //const arrayvalues=[...this.hashMapProductCategory.values()];
       
+
+      //this.chartLabels=arraykeys;
+      //this.chartSeries=arrayvalues;
       console.log(this.hashMapProductCategory);
     })
   }

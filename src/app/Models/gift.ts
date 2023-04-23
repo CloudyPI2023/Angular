@@ -7,5 +7,6 @@ export class Gift {
     endsAtGift:Date;
     productsGift:Product[];
     userGift:User[];
+    description:String;
 
 }

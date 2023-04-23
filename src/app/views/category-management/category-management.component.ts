@@ -51,12 +51,12 @@ export class CategoryManagementComponent implements OnInit {
     this.cs.setArchive(c).subscribe(
       (response: Category) => {
         console.log(response);
-        this.toast.success({detail:'Success',summary:'Successfully updated !',position:'tr',duration:2000})
+        this.toast.success({detail:'Success',summary:'Successfully archived !',position:'tr',duration:1000})
         this.getAllCategories();
       },
       (error: HttpErrorResponse) => {
         //alert(error.message);
-        this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})
+        this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:1000})
       }
     );
   }

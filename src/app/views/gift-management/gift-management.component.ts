@@ -19,11 +19,13 @@ export class GiftManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGifts();
-    this.productsForOneGift;
+   // console.log(this.productsForOneGift);
   }
   getGifts(){
     this.gs.getAllGifts().subscribe(data => {
       this.gifts = data;
+      console.log(this.gifts );
+
     });
   }
 

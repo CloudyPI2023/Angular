@@ -1,11 +1,12 @@
 <br><br><br><br>
 <div style="display: flex; justify-content: center; align-items: center;">
-    <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
-    <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
-    <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
-    <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
-  </div>
-  <br>
+  <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;"
+    [routerLink]="['/reclamation-management']">Reclamations</button>
+</div>
+<br>
 <nav class="navbar navbar-expand-lg navbar-toggler bg-white">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +15,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <h1 style="margin-left: 10px;font-size: 30px;">Gift list</h1>
-     
+
     </ul>
   </div>
 </nav>
@@ -25,6 +26,7 @@
         <th> Created by </th>
         <th>Begins at</th>
         <th> Ends at </th>
+        <th> Description</th>
         <th> Assigned to </th>
       </thead>
       <tbody>
@@ -32,14 +34,17 @@
           <td> {{ g.userGift.firstName}} {{ g.userGift.lastName}}</td>
           <td> {{ g.beginsAtGift}} </td>
           <td> {{ g.endsAtGift}} </td>
-          <td>{{g.productsGift.nameProduct}}
-            <!--<select style="background-color: #333;">
-              <option value="name products"> </option>
+          <td>{{g.description}}</td>
 
-            </select>-->
-           
+          <td>
+            <select style="background-color: transparent; border-color: transparent; font-weight: bold;color: brown;">
+              <option value="" disabled selected hidden >Show products</option>
+              <option disabled  *ngFor="let pg of g.productsGift" style="color: #707070;" >
+                {{pg.nameProduct}}
+              </option>
+            </select>
           </td>
-          
+
         </tr>
 
 
@@ -72,13 +77,13 @@
             placeholder="idGift">
 
           <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.firstName}}" name="firstName"
-              class="form-control" id="firstName" aria-describedby="firstName" readonly>
+            <input type="text" ngModel="{{detailsGift?.userGift.firstName}}" name="firstName" class="form-control"
+              id="firstName" aria-describedby="firstName" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.lastName}}" name="lastName"
-              class="form-control" id="lastName" aria-describedby="lastName" readonly>
+            <input type="text" ngModel="{{detailsGift?.userGift.lastName}}" name="lastName" class="form-control"
+              id="lastName" aria-describedby="lastName" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
           <div class="input_box" style="float:left">
@@ -91,7 +96,7 @@
               id="endsAtGift" aria-describedby="endsAtGift" readonly>
             <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
           </div>
-                    <br>
+          <br>
         </form>
       </div>
     </div>

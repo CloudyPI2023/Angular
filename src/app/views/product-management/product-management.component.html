@@ -3,10 +3,11 @@
   <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
   <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
   <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
-  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;"
+    [routerLink]="['/reclamation-management']">Reclamations</button>
 </div>
-  
-  <br>
+
+<br>
 <nav class="navbar navbar-expand-lg navbar-toggler bg-white">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +16,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <h1 style="margin-left: 10px;font-size: 30px;">Product list</h1>
-      
+
     </ul>
   </div>
 </nav>
@@ -42,8 +43,8 @@
           <td> {{ p.categoryProduct.nameCategory}}</td>
           <td> {{ p.priceProduct}} DT</td>
           <td> {{p.quantityProduct}}</td>
-          <td>
-            image 
+          <td style="align-items: center;">
+            <img src="../../../assets/img/product.jpg" height="50" width="50">
           </td>
           <td>{{p.expirationDateProduct}}</td>
           <td>{{p.userProduct.firstName}} {{p.userProduct.lastName}}</td>
@@ -74,7 +75,8 @@
 
 <!-- Create chart here. -->
 <div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
-  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle" [dataLabels]="chartDataLabels"></apx-chart>
+  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle"
+    [dataLabels]="chartDataLabels"></apx-chart>
 </div>
 
 
@@ -86,30 +88,38 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <b><h5 class="modal-title" id="productDetailsModalLabel"> Details Product with id {{detailsProduct?.idProduct }}
-        </h5></b>
+        <b>
+          <h5 class="modal-title" id="productDetailsModalLabel"> Details Product with id {{detailsProduct?.idProduct }}
+          </h5>
+        </b>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form #editForm="ngForm">
-          <input type="hidden" ngModel="{{detailsProduct?.idProduct}}" name="idProduct" class="form-control" id="idProduct"
-            placeholder="idProduct">
+          <input type="hidden" ngModel="{{detailsProduct?.idProduct}}" name="idProduct" class="form-control"
+            id="idProduct" placeholder="idProduct">
 
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.referenceProduct}}" name="referenceProduct"
               class="form-control" id="referenceProduct" aria-describedby="referenceProduct" readonly>
             <div class="icon"><i class="fa fa-info-circle" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
-          <div class="input_box" style="float:left">
+          <div class="input_box" style="float:left; padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.nameProduct}}" name="nameProduct" class="form-control"
               id="nameProduct" aria-describedby="nameProduct" readonly>
             <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
-          <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsProduct?.categoryProduct.nameCategory}}" name="nameCategory"
-              class="form-control" id="nameCategory" aria-describedby="nameCategory" readonly>
+          <div class="input_box" style="float:left; padding-right: 10px;">
+            <input type="text" *ngIf="detailsProduct?.categoryProduct.archived"
+                ngModel="{{detailsProduct?.categoryProduct.nameCategory}}" name="nameCategory" class="form-control"
+                id="nameCategory" aria-describedby="nameCategory" readonly style="color: red;">
+              <input type="text" *ngIf="!detailsProduct?.categoryProduct.archived"
+               ngModel="{{detailsProduct?.categoryProduct.nameCategory}}" name="nameCategory"
+                class="form-control" id="nameCategory" aria-describedby="nameCategory" readonly>
+
+
             <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
@@ -120,7 +130,7 @@
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.quantityProduct}}" name="quantityProduct" class="form-control"
               id="quantityProduct" aria-describedby="quantityProduct" readonly>
-            <div class="icon"><i  class="fa fa-shopping-cart" aria-hidden="true" style="color: #4d82a3;"></i></div>
+            <div class="icon"><i class="fa fa-shopping-cart" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.expirationDateProduct}}" name="expirationDateProduct"
@@ -128,11 +138,12 @@
             <div class="icon"><i class="fa fa-calendar" aria-hidden="true" style="color: #4d82a3;"></i></div>
           </div>
           <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsProduct?.userProduct.firstName}} {{detailsProduct?.userProduct.lastName}}" name="firstName" class="form-control"
-              id="firstName" aria-describedby="firstName" readonly>
+            <input type="text"
+              ngModel="{{detailsProduct?.userProduct.firstName}} {{detailsProduct?.userProduct.lastName}}"
+              name="firstName" class="form-control" id="firstName" aria-describedby="firstName" readonly>
             <div class="icon"><i class="fa fa-user" style="color:#4d82a3;"></i></div>
           </div>
-          
+
           <div class="input_box" style="float:left;padding-right: 10px;">
             <input type="text" ngModel="{{detailsProduct?.userProduct.email}}" name="email" class="form-control"
               id="email" aria-describedby="email" readonly>
@@ -141,10 +152,10 @@
 
           <br>
           <div class="form-group" style="float:left; text-align: center;">
-            <label for="expired" style="color: #4d82a3;font-size: 17px;"><i   class="fa fa-clock-o" aria-hidden="true"></i> 
-             <label style="color: black;font-size: 17px">
-                {{getDateDiffInDays(detailsProduct?.expirationDateProduct)}} 
-              </label> 
+            <label for="expired" style="color: green ;font-size: 17px;"><i class="fa fa-clock-o" aria-hidden="true"></i>
+              <label style="color: black;font-size: 17px">
+                {{getDateDiffInDays(detailsProduct?.expirationDateProduct)}}
+              </label>
             </label>
             <br>
           </div>
