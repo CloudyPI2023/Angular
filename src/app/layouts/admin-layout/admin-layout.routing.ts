@@ -8,10 +8,10 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { AssociationComponent } from 'app/donation-association/association/association.component';
-import { DonationAssociationComponent } from 'app/donation-association/donation-association.component';
-import { DonationComponent } from 'app/donation-association/donation/donation.component';
-import { RequestComponent } from 'app/donation-association/request/request.component';
+import { AssociationComponent } from 'app/views/association/association.component';
+import { DonationAssociationComponent } from 'app/views/donation-association/donation-association.component';
+import { DonationComponent } from 'app/views/donation/donation.component';
+import { RequestComponent } from 'app/views/request/request.component';
 
 
 

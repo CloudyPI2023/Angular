@@ -7,10 +7,10 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AssociationComponent } from './donation-association/association/association.component';
-import { DonationAssociationComponent } from './donation-association/donation-association.component';
-import { DonationComponent } from './donation-association/donation/donation.component';
-import { RequestComponent } from './donation-association/request/request.component';
+import { AssociationComponent } from './views/association/association.component';
+import { DonationAssociationComponent } from './views/donation-association/donation-association.component';
+import { DonationComponent } from './views/donation/donation.component';
+import { RequestComponent } from './views/request/request.component';
 
 
 
