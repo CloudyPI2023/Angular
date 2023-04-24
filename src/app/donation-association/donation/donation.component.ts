@@ -4,15 +4,17 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Donation } from 'app/models/donation';
 import { DonationService } from 'app/services/donationService/donation.service';
-
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 @Component({
   selector: 'app-donation',
   templateUrl: './donation.component.html',
   styleUrls: ['./donation.component.scss']
 })
 export class DonationComponent implements OnInit {
- 
 
+  
+ 
+  hashMapDonationStatus:  Map<String, number> = new Map<string, number>();
   public editDonation?: Donation;
   public deleteDonation?: Donation;
   public detailsDonation?: Donation;
@@ -22,6 +24,16 @@ export class DonationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDonations();
+    this.statisticsDonationStatus();
+  }
+
+  private statisticsDonationStatus(){
+    this.donationService.statisticsDonationStatus().subscribe(data=>{
+      this.hashMapDonationStatus=data;
+      console.log("dataaaa"+data);
+    
+      console.log(this.hashMapDonationStatus);
+    })
   }
 
   private getDonations(){

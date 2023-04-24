@@ -38,5 +38,9 @@ export class DonationService {
     return this.httpClient.delete(`${this.url}/deleteDonation/${idDonation}`);
   }
 
+  statisticsDonationStatus(): Observable<Map<String,number>>{
+    return this.httpClient.get<Map<String,number>>(`${this.url}`+"/statisticsDonationStatus/");
+  }
+
   
 }

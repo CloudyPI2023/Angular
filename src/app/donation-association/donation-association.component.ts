@@ -21,6 +21,7 @@ export class DonationAssociationComponent implements OnInit {
   totalAssociation: number;
   totalDonations: number;
   totalRequests: number;
+  
 
   constructor(private associationService: AssociationService,private requestService: RequestService,
     private donationService: DonationService,private router: Router) { }

@@ -14,7 +14,7 @@ import { data } from 'jquery';
 @Component({
   selector: 'app-association',
   templateUrl: './association.component.html',
-  styleUrls: ['./association.component.scss']
+  styleUrls: ['./association.component.scss'],
 })
 export class AssociationComponent implements OnInit {
 

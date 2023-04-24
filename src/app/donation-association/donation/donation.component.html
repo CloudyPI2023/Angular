@@ -125,9 +125,9 @@
                      <th> Image </th>
                      <th> Date </th>
                      <th> Type </th>
+                     <th> Status </th>
                      <th> Request </th>
                      <th> User </th>
-                   
               
                   <th style="text-align: center;"> Actions </th> 
                  </thead>
@@ -140,10 +140,12 @@
                     <td>{{donation.imageDonation}}</td>  
                     <td>{{donation.dateDonation}}</td> 
                     <td>{{donation.donationType}}</td> 
-                    <td>
+                    <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'orange' : (donation.statusDonation === 'accepted' ? 'green' : 'red')}">
+                    <td>{{donation.statusDonation}}</td></span>
+                   <!-- <td>
                         <span class="badge badge-success rounded-pill d-inline">{{donation.statusDonation}}</span>
-                        
-                    </td> 
+                        <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'red' : (donation.statusDonation === 'accepted' ? 'green' : 'orange')}">
+                    </td> -->
                     <td>{{donation.idRequest}}</td> 
                     <td>{{donation.userDonation.firstName}}</td>  
 
@@ -379,9 +381,6 @@
      </div>
   </div>
 </div>
-
-
-
 
 
 

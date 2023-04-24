@@ -41,5 +41,20 @@ export class RequestService {
   getListRequestByIdAssociation(idAssociation: number): Observable<Request>{
     return this.httpClient.get<Request>(`${this.url}/getMyRequests/${idAssociation}`);
   }
+  getRequestInProgressList(): Observable<Request[]>{
+    return this.httpClient.get<Request[]>(this.url + '/retrieveAllRequestsInProgress');
+    
+   }
+   getRequestAcceptedList(): Observable<Request[]>{
+    return this.httpClient.get<Request[]>(this.url + '/retrieveAllRequestsAccepted');
+    
+   }
+   getRequestRefusedList(): Observable<Request[]>{
+    return this.httpClient.get<Request[]>(this.url + '/retrieveAllRequestsRefused');
+    
+   }
+   assignRequestToDonation(request: Request): Observable<Object> {
+    return this.httpClient.put<Request>(`${this.url+"/updateRequestDonation"}`,request);
+   }
   
 }
