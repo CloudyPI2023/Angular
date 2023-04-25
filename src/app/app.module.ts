@@ -13,6 +13,11 @@ import { DonationComponent } from './views/donation/donation.component';
 import { RequestComponent } from './views/request/request.component';
 
 
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import {NgToastModule} from 'ng-angular-popup';
+import { StatComponent } from './views/stat/stat.component';
+
 
 
 @NgModule({
@@ -24,6 +29,10 @@ import { RequestComponent } from './views/request/request.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    NgChartsModule,
+    NgApexchartsModule,
+    NgToastModule
+
   ],
   declarations: [
     AppComponent,
@@ -32,6 +41,7 @@ import { RequestComponent } from './views/request/request.component';
     DonationAssociationComponent,
     DonationComponent,
     RequestComponent,
+    StatComponent,
 
 
 

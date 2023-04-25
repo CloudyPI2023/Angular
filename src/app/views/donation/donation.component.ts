@@ -12,8 +12,28 @@ import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } 
 })
 export class DonationComponent implements OnInit {
 
+ // chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
+
+  chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
+  chartDetails: ApexChart = {
+    type: 'donut',
+    toolbar: {
+      show: true
+    }
+  };
+
+  //chartLabels = ["InProgress", "Accepted", "Refused"];
+
+  chartLabels = ["InProgress", "Accepted", "Refused"];
+  chartTitle: ApexTitleSubtitle = {
+    text: 'Products accourding to their categories',
+    align: 'center'
+  };
+
+  chartDataLabels: ApexDataLabels = {
+    enabled: true
+  };
   
- 
   hashMapDonationStatus:  Map<String, number> = new Map<string, number>();
   public editDonation?: Donation;
   public deleteDonation?: Donation;

@@ -119,10 +119,11 @@
                 <table class = "table table-striped">
                   <thead class="">
                      <th>#</th>
+                     <th> Image </th>
                      <th>Name </th>
                      <th> Description </th>
                      <th> Quantity </th>
-                     <th> Image </th>
+                     
                      <th> Date </th>
                      <th> Type </th>
                      <th> Status </th>
@@ -134,10 +135,15 @@
                  <tbody>
                     <tr *ngFor = "let  donation of donations" >
                     <td>{{donation.idDonation}}</td>  
+                    <td><img src="../../../assets/img/{{donation.imageDonation}}" height="50" width="50"></td>
                     <td>{{donation.nameDonation}}</td> 
                     <td>{{donation.descriptionDonation}}</td> 
                     <td>{{donation.quantityDonation}}</td> 
-                    <td>{{donation.imageDonation}}</td>  
+                    <!--<td>{{donation.imageDonation}}</td> -->
+                    
+                    
+                    
+                    <!--<td><img src = '../../../assets/img/angular.png' height="50" width="50"></td> -->
                     <td>{{donation.dateDonation}}</td> 
                     <td>{{donation.donationType}}</td> 
                     <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'orange' : (donation.statusDonation === 'accepted' ? 'green' : 'red')}">
@@ -331,6 +337,13 @@
      </div>
   
 </div>
+</div>
+
+
+<!-- Create chart here. -->
+<div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
+  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle"
+    [dataLabels]="chartDataLabels"></apx-chart>
 </div>
 
 
