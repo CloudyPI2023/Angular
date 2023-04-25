@@ -23,7 +23,7 @@ export class GiftService {
   }
 
   getAllProductsForGift(idGift:number): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/productsForGift"+`${idGift}`);
+    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/productsForGift/"+`${idGift}`);
   }
 
 }

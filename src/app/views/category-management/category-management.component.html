@@ -44,15 +44,21 @@
       </td>
           <td> 
           <span [ngClass]="{'green-tick': c.archived, 'red-cross': !c.archived}">
-            <i *ngIf="c.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
-            <i *ngIf="!c.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
+            <i *ngIf="!c.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+            <i *ngIf="c.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
           </span>
         </td>
         <td>
-          <a class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Edit"
-          (click)="onUpdateCategory(c)"><i class="fa fa-pencil"></i></a>
-          <a  class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Archive"
-          (click)="onUpdateArchive(c)"><i class="fa fa-archive" aria-hidden="true"></i></a>
+         <!-- <a class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Edit"
+          (click)="onUpdateCategory(c)"><i class="fa fa-pencil"></i></a>-->
+          <button (click)="onUpdateCategory(c)" mat-raised-button type="button" matTooltip="Edit category" class="btn btn-primary btn-link btn-sm btn-just-icon">
+            <i class="material-icons">edit</i>
+        </button>
+        <button (click)="onUpdateArchive(c)" mat-raised-button type="button" matTooltip="Archive/disarchive"  class="btn btn-success btn-link btn-sm btn-just-icon">
+          <i class="fa fa-archive"></i>
+      </button>
+          <!--<a  class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Archive"
+          (click)="onUpdateArchive(c)"><i class="fa fa-archive" aria-hidden="true"></i></a>-->
         </td>
         
         </tr>
@@ -79,12 +85,14 @@
           <form #addForm="ngForm" (ngSubmit)="onAddCategory(addForm)" novalidate>
           <div class="form-group">            
            <div class="input_box" style="float:left;padding-right: 10px;">
-              <input type="text" ngModel name="nameCategory" class="form-control" id="nameCategory" aria-describedby="name" placeholder="Name category" required>
+              <input type="text" ngModel name="nameCategory" class="form-control" id="nameCategory" aria-describedby="name" placeholder="Name category" #nameCategory="ngModel" required>
               <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
             </div>
+           <!-- <div style="float:left;padding-right: 10px;" class="alert alert-danger" *ngIf="nameCategory.errors?.['required'] || nameCategory.touched&& (nameCategory.touched || nameCategory.dirty)">Name category field is required</div>-->
             <div class="input_box" style="float:left;">
-              <input type="text" ngModel name="descriptionCategory" class="form-control" id="descriptionCategory" aria-describedby="description" placeholder="description category" required>
+              <input type="text" ngModel name="descriptionCategory" class="form-control" id="descriptionCategory" aria-describedby="description" placeholder="description category" #descriptionCategory="ngModel" required>
               <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
+              <!--<div class="alert alert-danger" *ngIf="descriptionCategory.errors?.['required'] || descriptionCategory.touched&& (descriptionCategory.touched || descriptionCategory.dirty)">Description category field is required</div>-->
                 <br><br>
             </div>
           </div>

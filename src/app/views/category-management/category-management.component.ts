@@ -50,8 +50,13 @@ export class CategoryManagementComponent implements OnInit {
   public onUpdateArchive(c: Category) {
     this.cs.setArchive(c).subscribe(
       (response: Category) => {
+        if(c.archived){
         console.log(response);
-        this.toast.success({detail:'Success',summary:'Successfully archived !',position:'tr',duration:1000})
+        this.toast.success({detail:'Success',summary:'Catgeory successfully archived !',position:'tr',duration:1000})}
+        else{
+          console.log(response);
+        this.toast.error({detail:'Error',summary:'Category disarchived !',position:'tr',duration:1000})
+        }
         this.getAllCategories();
       },
       (error: HttpErrorResponse) => {

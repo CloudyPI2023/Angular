@@ -35,16 +35,20 @@
           <td> {{ g.beginsAtGift}} </td>
           <td> {{ g.endsAtGift}} </td>
           <td>{{g.description}}</td>
-
-          <td>
-            <select style="background-color: transparent; border-color: transparent; font-weight: bold;color: brown;">
+          <!--<td>
+           <select style="background-color: transparent; border-color: transparent; font-weight: bold;color: brown;">
               <option value="" disabled selected hidden >Show products</option>
               <option disabled  *ngFor="let pg of g.productsGift" style="color: #707070;" >
                 {{pg.nameProduct}}
               </option>
             </select>
-          </td>
+          </td>-->
 
+          <td>
+
+            <a (click)="onOpenModal(g, 'productsForGift')" role="button" aria-pressed="true"
+              class="btn btn-info btn-link btn-sm btn-just-icon"><i class="fa fa-info"></i> </a>
+          </td>
         </tr>
 
 
@@ -60,49 +64,68 @@
 
 
 <!-- Details Gift Modal -->
-<div class="modal fade" id="giftDetailsModal" tabindex="-1" role="dialog" aria-labelledby="giftDetailsModalLabel"
+<div class="modal fade" id="productsForGiftModal" tabindex="-1" role="dialog" aria-labelledby="productsForGiftModal"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="width: 700px;">
       <div class="modal-header">
-        <h5 class="modal-title" id="giftDetailsModalLabel"> Details gift with id {{detailsGift?.idGift }}
-        </h5>
+        <h5 class="modal-title" id="productsForGiftModallabel">
+          style=" color: darkgreen;font-size: 20px;text-align: center;"> Products for gift </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form #editForm="ngForm">
-          <input type="hidden" ngModel="{{detailsGift?.idGift}}" name="idGift" class="form-control" id="idGift"
-            placeholder="idGift">
+        <form #detailForm="ngForm">
 
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.firstName}}" name="firstName" class="form-control"
-              id="firstName" aria-describedby="firstName" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+          <!--<div class="row col-md-12">
+              <a class="input_box col-md-3 text-warning">Reference product  </a>
+              <a class="input_box col-md-3 text-warning">Name product</a>
+              <a class="input_box col-md-3 text-warning">Quantity </a>
+              <a class="input_box col-md-3 text-warning">Expiration date</a>
+          </div>-->
+
+          <div class="col-md-12">
+            <div class="card">
+
+              <div class="card-body table-responsive">
+                <table class="table table-hover">
+                  <thead class="text-warning">
+                    <th>Reference product</th>
+                    <th>Name product</th>
+                    <th>Quantity</th>
+                    <th>Expiration date</th>
+
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of productsForOneGift">
+                      <td>{{product.referenceProduct}}</td>
+                      <td>{{product.nameProduct}}</td>
+                      <td>{{product.quantityProduct}}</td>
+                      <td>{{product.expirationDateProduct}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="input_box" style="float:left;padding-right: 10px;">
-            <input type="text" ngModel="{{detailsGift?.userGift.lastName}}" name="lastName" class="form-control"
-              id="lastName" aria-describedby="lastName" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
-          </div>
-          <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsGift?.beginsAtGift}}" name="beginsAtGift" class="form-control"
-              id="beginsAtGift" aria-describedby="beginsAtGift" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
-          </div>
-          <div class="input_box" style="float:left">
-            <input type="text" ngModel="{{detailsGift?.endsAtGift}}" name="endsAtGift" class="form-control"
-              id="endsAtGift" aria-describedby="endsAtGift" readonly>
-            <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
-          </div>
+
+
+
+
+
           <br>
+
+
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
 
 
 

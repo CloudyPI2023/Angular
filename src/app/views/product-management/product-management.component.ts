@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Product } from '../../Models/product';
 import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
+import { Category } from 'app/Models/category';
 
 
 
@@ -98,13 +99,18 @@ export class ProductManagementComponent implements OnInit {
     button.click();
   }
 
-  public getDateDiffInDays(dateString1: string): String {
+  public getDateDiffInDays(dateString1: string,c:Category): String {
     const date1 = new Date(dateString1);
     const date2 = new Date();
     const diffMs = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-    if(date2< date1){
-      return "Still available for "+diffDays+" days.";
+    if((date2< date1)&&(c.archived)){
+      return "Still available for "+diffDays+" days."+"\n"+
+          "Category is archived";
+    }
+    if((date2< date1)&&(!c.archived)){
+      return "Still available for "+diffDays+" days."+"\n"+
+          "Category is available";
     }
     else{
     return "Expired "+diffDays+" days ago.";

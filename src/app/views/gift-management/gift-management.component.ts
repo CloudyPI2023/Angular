@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Gift } from 'app/Models/gift';
 import { Product } from 'app/Models/product';
+import { Category } from 'app/Models/category';
 
 @Component({
   selector: 'app-gift-management',
@@ -15,7 +16,7 @@ export class GiftManagementComponent implements OnInit {
   constructor(private gs:GiftService ,router:Router,private toast: NgToastService) { }
   gifts:Gift[];
   detailsGift?:Gift;
-  productsForOneGift?:Product[];
+  productsForOneGift?:any;
 
   ngOnInit(): void {
     this.getGifts();
@@ -54,7 +55,30 @@ export class GiftManagementComponent implements OnInit {
       this.detailsGift = gift;
       button.setAttribute('data-target', '#giftDetailsModal');
     }
+    if(mode == 'productsForGift'){
+      this.getAllProductsForGift(gift.idGift);
+      this.toast.success({detail:'Success',summary:'List of products for gift',position:'tr',duration:2000})
+      button.setAttribute('data-target', '#productsForGiftModal');
+    }
     container?.appendChild(button);
     button.click();
+  }
+
+  public getDateDiffInDays(dateString1: string,c:Category): String {
+    const date1 = new Date(dateString1);
+    const date2 = new Date();
+    const diffMs = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    if((date2< date1)&&(c.archived)){
+      return "Still available for "+diffDays+" days."+"\n"+
+          "Category is archived";
+    }
+    if((date2< date1)&&(!c.archived)){
+      return "Still available for "+diffDays+" days."+"\n"+
+          "Category is available";
+    }
+    else{
+    return "Expired "+diffDays+" days ago.";
+    }
   }
 }
