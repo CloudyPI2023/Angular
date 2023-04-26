@@ -16,6 +16,8 @@
           </ul>
    </div>
  </nav>
+ 
+ <button id="roleStatisticsButton" type="button" style="display:yes;" data-toggle="modal" data-target="#roleStatisticsModal"><i class="material-icons" style="font-size: 25px;">person_add</i></button>
  <div class="card-body" >
  <div class="table-responsive" id="main-container">  
     <table class = "table table-striped" >
@@ -48,11 +50,24 @@
            <!-- <td>
                 <span [style.color]="user.enabled ? 'green' : 'red'">&#10004;</span><span [style.color]="user.enabled ? 'red' : 'green'">&#10008;</span>
             </td>-->
-            <td style="text-align: center;">
+          <!--  <td style="text-align: center;">
                 <a (click)="onOpenModal(user, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
             <a (click)="onOpenModal(user, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
-            <a (click)="onOpenModal(user, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a></td>
-
+            <a (click)="onOpenModal(user, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a>
+          
+          </td>-->
+          <td class="td-actions text-right">
+            <button mat-raised-button type="button" (click)="onOpenModal(user, 'edit')" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+              <i class="material-icons">edit</i>
+          </button>
+          <button mat-raised-button type="button" (click)="onOpenModal(user, 'delete')" matTooltip="Delete" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+            <i class="material-icons">close</i>
+        </button>
+        <button mat-raised-button type="button" (click)="onOpenModal(user, 'details')" matTooltip="Details" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+          <i class="material-icons">info_outline</i>
+      </button>
+          </td>
+   
         </tr> 
       
 
@@ -392,7 +407,9 @@
 
 </div>
 
-
+<ng-container *ngIf="roleStatistics">
+  <canvas id="roleStatisticsChart"></canvas>
+</ng-container>
 
 
 

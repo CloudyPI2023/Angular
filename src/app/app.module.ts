@@ -15,7 +15,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+import { JwtModule } from "@auth0/angular-jwt";
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -29,7 +31,14 @@ import { MatRadioModule } from '@angular/material/radio';
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule,
+    MatSelectModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter:  () => localStorage.getItem('token')
+      }
+    }) 
   ],
   declarations: [
     AppComponent,

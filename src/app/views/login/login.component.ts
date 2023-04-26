@@ -12,6 +12,10 @@ import { NgToastService } from 'ng-angular-popup';
 
 export class LoginComponent implements OnInit {
   user:UserLogin = new UserLogin();
+  loginAttempts = 0;
+  errorMessage: string;
+
+
   constructor(private fb: FormBuilder, private service: LoginService, private route: Router, private toast: NgToastService) { }
     /*formModel = {
       email: '',
@@ -30,39 +34,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
- /* onSubmit(form: NgForm) {
-    console.log(form.value);
-    this.service.login(form.value).subscribe(
-      (res: any) => {
-        console.log(res)
-        console.log(res.access_token)
-        localStorage.setItem('token', res.access_token);
-        localStorage.setItem('username', res.user);
-        alert("Welcome")
-        this.route.navigateByUrl('');       
-      }
-      ,error=>{
-        alert(console.log() )
-        this.route.navigate(['/login']);
-  
-      
-      });
-  }*/
   onSubmit() {
     if (this.formModel.valid) {
       this.service.login(this.formModel.value).subscribe(
         (res: any) => {
-          console.log(res)
-          console.log(res.access_token)
           localStorage.setItem('token', res.access_token);
           localStorage.setItem('username', res.user);
-          //alert("Welcome")
+          localStorage.setItem('idUser',res.idUser);
+
           this.toast.success({detail:'Success',summary:'You are successfully logged in !',position:'tr',duration:2000})
           this.route.navigateByUrl('');       
         },
         (error) => {
-          //alert(console.log() )
-          this.toast.error({detail:'Error',summary:'Email or password is incorrect',position:'tr',duration:3000})
+          // handle login error
+          if (error.status === 401 && error.error === 'Invalid email/password') {
+            this.toast.error({detail:'Error',summary:'Invalid email/password. Please try again.',position:'tr',duration:3000})
+
+          } else if (error.status === 401 && error.error === 'Your account is not enabled. Please verify your account.') {
+            this.toast.error({detail:'Error',summary:'Your account is not enabled. Please verify your account.',position:'tr',duration:3000})
+
+          } else  {
+            this.toast.error({detail:'Error',summary:'Your account has been locked for 24 Hours',position:'tr',duration:3000})
+          } 
+          
 
         this.route.navigate(['/login']);
         }

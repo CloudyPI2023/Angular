@@ -8,6 +8,10 @@ import { data } from 'jquery';
 import { NgToastService } from 'ng-angular-popup';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import Chart from 'chart.js/auto';
+import { environment } from 'environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -31,11 +35,21 @@ export class UserComponent implements OnInit {
   totalPages: number; // total number of pages
   currentPage = 1; // current page number
 
-  constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient ) { }
+
+  roleStatistics: RoleStatistics[];
+  private baseURL = environment.apiBaseUrl;
+  UserToken = localStorage.getItem('token');
+
+  constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient, private jwtHelper: JwtHelperService ) { }
 
   ngOnInit(): void {
 
-    if(localStorage.getItem('token') == null){
+    const decodedToken = this.jwtHelper.decodeToken(this.UserToken);
+     const rolesUser = decodedToken.roles;
+     const adminRole = rolesUser[0];
+       console.log(adminRole);
+
+    if(this.UserToken == null){
        this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
        this.router.navigateByUrl('/login');
        }
@@ -192,9 +206,76 @@ public onOpenModal(user: User, mode: string): void {
 
     button.setAttribute('data-target', '#addUserModal');
   }
+  if (mode === 'statistics') {
+
+    button.setAttribute('data-target', '#addUserModal');
+  }
   container?.appendChild(button);
   button.click();
 }
+
+
+//statistiques
+getRoleStatistics() {
+  this.httpClient.get<RoleStatistics[]>(`${this.baseURL+"/User/role-statistics"}`).subscribe(data => {
+    this.roleStatistics = data;
+    this.plotRoleStatistics();
+  });
+}
+plotRoleStatistics() {
+  const canvas = document.getElementById('roleStatisticsChart') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: this.roleStatistics.map(rs => rs.role),
+      datasets: [{
+        data: this.roleStatistics.map(rs => rs.percentage),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Statistiques des rôles'
+        }
+      }
+    }
+  });
+}
+public openRoleStatisticsModal(): void {
+  const container = document.getElementById('main-container');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.style.display = 'none';
+  button.setAttribute('data-toggle', 'modal');
+  button.setAttribute('data-target', '#roleStatisticsModal');
+  container?.appendChild(button);
+  this.getRoleStatistics();
+  button.click();
+}
+
+
+
+
+
+
+
 
 
 }

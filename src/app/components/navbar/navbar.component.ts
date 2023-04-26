@@ -2,7 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
-//import jwt_decode from 'jwt-decode';
+import { NgToastService } from 'ng-angular-popup';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-navbar',
@@ -16,22 +18,31 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     public userName : String;
+    UserToken = localStorage.getItem('token');
 
-    
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+
+
+    constructor(location: Location,  private element: ElementRef, private router: Router,private toast: NgToastService, private jwtHelper: JwtHelperService) {
       this.location = location;
           this.sidebarVisible = false;
     }
-
+   
     ngOnInit(){
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
+      
+        const decodedToken = this.jwtHelper.decodeToken(this.UserToken);
+        const lastName = decodedToken.lastName;
+        const firstName = decodedToken.firstName;
+        this.userName=lastName+" "+firstName;
+        const rolesUser = decodedToken.roles;
+        const adminRole = rolesUser[0];
 
-    
-      //Get the token and extract the username 
-    /*  const token = localStorage.getItem('token');
-      const decodedToken = jwt_decode(token);
-      const userName = decodedToken.name;*/
+        if( this.UserToken == null && adminRole!="Admin"){
+            this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
+            this.router.navigateByUrl('/login');
+            }
+
 
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
@@ -42,7 +53,12 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+
+     
+   
+
     }
+
 
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -139,7 +155,8 @@ export class NavbarComponent implements OnInit {
     onLogout() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
-    
+        localStorage.removeItem('idUser');
+
         this.router.navigate(['/login']);
     }
 }
