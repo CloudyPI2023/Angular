@@ -31,6 +31,7 @@ export class UserComponent implements OnInit {
   public detailsUser?: User;
   users: User[];
   selectedFile: File;
+  searchText:any;
 
   userFile : any;
   public imagePath: any;
@@ -97,9 +98,7 @@ export class UserComponent implements OnInit {
 
 
 private statisticsRoleUser(){
-  this.userService.statisticsUserRoles().subscribe(data=>{
-    console.log(data);
-    
+  this.userService.statisticsUserRoles().subscribe(data=>{    
     this.keys = Object.keys(data);
     this.values = Object.values(data);
     console.log(this.keys);
@@ -124,10 +123,68 @@ private statisticsRoleUser(){
         }
       ]
     };
-    console.log(this.hashMapUserRole);
   })
+
+}
+private statisticsGenderUser(){
+  this.userService.statisticsUserGender().subscribe(data=>{    
+    this.keys = Object.keys(data);
+    this.values = Object.values(data);
+    console.log(this.keys);
+    console.log(this.values[0]);
+    this.chartOptions = {
+      series:this.values,
+      chart: {
+        type: "donut"
+      },
+      labels:this.keys,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  })
+
 }
 
+private statisticsActivationStatusUser(){
+  this.userService.statisticsUserActivationStauts().subscribe(data=>{    
+    this.keys = Object.keys(data);
+    this.values = Object.values(data);
+    console.log(this.keys);
+    console.log(this.values[0]);
+    this.chartOptions = {
+      series:this.values,
+      chart: {
+        type: "donut"
+      },
+      labels:this.keys,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  })
+
+}
 
 private getUsers(){
   this.userService.getUsersList().subscribe(data => {
@@ -183,26 +240,6 @@ onFileSelected(event : any) {
 
 }
 
-/*onUpload() {
-  console.log(this.selectedFile);
-  
-  //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-  const uploadImageData = new FormData();
-  uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-
-  //Make a call to the Spring Boot Application to save the image
-  this.httpClient.post('', uploadImageData, { observe: 'response' })
-    .subscribe((response) => {
-      if (response.status === 200) {
-        this.message = 'Image uploaded successfully';
-      } else {
-        this.message = 'Image not uploaded successfully';
-      }
-    }
-    );
-
-
-}*/
 
 
 
@@ -257,69 +294,23 @@ public onOpenModal(user: User, mode: string): void {
 
     button.setAttribute('data-target', '#addUserModal');
   }
-  if (mode === 'statistics') {
-
-    button.setAttribute('data-target', '#addUserModal');
+  if (mode === 'statRole') {
+    button.setAttribute('data-target', '#chartRoleModal');
+    this.statisticsRoleUser();
+  }
+  if (mode === 'statGender') {
+    button.setAttribute('data-target', '#chartGenderModal');
+    this.statisticsGenderUser();
+  }
+  if (mode === 'status') {
+    button.setAttribute('data-target', '#chartStatusModal');
+    this.statisticsActivationStatusUser();
   }
   container?.appendChild(button);
   button.click();
 }
 
 
-//statistiques
-getRoleStatistics() {
-  this.httpClient.get<RoleStatistics[]>(`${this.baseURL+"/User/role-statistics"}`).subscribe(data => {
-    this.roleStatistics = data;
-    this.plotRoleStatistics();
-  });
-}
-plotRoleStatistics() {
-  const canvas = document.getElementById('roleStatisticsChart') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d');
-  const chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: this.roleStatistics.map(rs => rs.role),
-      datasets: [{
-        data: this.roleStatistics.map(rs => rs.percentage),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: 'Statistiques des rôles'
-        }
-      }
-    }
-  });
-}
-public openRoleStatisticsModal(): void {
-  const container = document.getElementById('main-container');
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.style.display = 'none';
-  button.setAttribute('data-toggle', 'modal');
-  button.setAttribute('data-target', '#roleStatisticsModal');
-  container?.appendChild(button);
-  this.getRoleStatistics();
-  button.click();
-}
 
 
 

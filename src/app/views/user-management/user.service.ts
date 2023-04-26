@@ -59,4 +59,11 @@ export class UserService {
     return this.httpClient.get<any>(`${this.baseURL}`+"/User/role-statistics",this.options);
 
   }
+  statisticsUserGender(): Observable<any>{
+    return this.httpClient.get<any>(`${this.baseURL}`+"/User/gender-statistics",this.options);
+  }
+
+  statisticsUserActivationStauts(): Observable<any>{
+    return this.httpClient.get<any>(`${this.baseURL}`+"/User/activationStatus-statistics",this.options);
+  }
 }

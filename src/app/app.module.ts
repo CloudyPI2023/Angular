@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { JwtModule } from "@auth0/angular-jwt";
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     UserComponent,
     DeliveryPersonComponent,
     LoginComponent,
+    SearchPipe,
 
   ],
   providers: [],
