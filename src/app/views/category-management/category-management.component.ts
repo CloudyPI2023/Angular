@@ -15,19 +15,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CategoryManagementComponent implements OnInit {
 
-  constructor(private cs:CategoryService ,router:Router,private toast: NgToastService) { }
-  categories:Category[];
-  categoriesArchived:Category[];
+  constructor(private cs: CategoryService, router: Router, private toast: NgToastService) { }
+  categories: Category[];
+  categoriesArchived: Category[];
   ngOnInit(): void {
     this.getAllCategories();
-    
+
   }
-  getAllCategories(){
+  getAllCategories() {
     this.cs.getAllCategories().subscribe(data => {
       this.categories = data;
     });
   }
-  getAllCategoriesArchived(){
+  getAllCategoriesArchived() {
     this.cs.getAllCategoriesArchived().subscribe(data => {
       this.categoriesArchived = data;
     });
@@ -36,60 +36,77 @@ export class CategoryManagementComponent implements OnInit {
     this.cs.updateCategory(c).subscribe(
       (response: Category) => {
         console.log(response);
-        this.toast.success({detail:'Success',summary:'Successfully updated !',position:'tr',duration:2000})
+        this.toast.success({ detail: 'Success', summary: 'Successfully updated !', position: 'tr', duration: 2000 })
         this.getAllCategories();
       },
       (error: HttpErrorResponse) => {
         //alert(error.message);
-        this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})
+        this.toast.error({ detail: 'Error', summary: 'Something wrong !', position: 'tr', duration: 2000 })
       }
     );
   }
-  
+
 
   public onUpdateArchive(c: Category) {
     this.cs.setArchive(c).subscribe(
       (response: Category) => {
-        if(c.archived){
-        console.log(response);
-        this.toast.success({detail:'Success',summary:'Catgeory successfully archived !',position:'tr',duration:1000})}
-        else{
+        if (c.archived) {
           console.log(response);
-        this.toast.error({detail:'Error',summary:'Category disarchived !',position:'tr',duration:1000})
+          this.toast.success({ detail: 'Success', summary: 'Catgeory successfully archived !', position: 'tr', duration: 1000 })
+        }
+        else {
+          console.log(response);
+          this.toast.error({ detail: 'Error', summary: 'Category disarchived !', position: 'tr', duration: 1000 })
         }
         this.getAllCategories();
       },
       (error: HttpErrorResponse) => {
         //alert(error.message);
-        this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:1000})
+        this.toast.error({ detail: 'Error', summary: 'Something wrong !', position: 'tr', duration: 1000 })
       }
     );
   }
+
   public onAddCategory(addForm: NgForm): void {
-    document.getElementById('add-Category-form')!.click();
-    this.cs.createCategory(addForm.value).subscribe(
-      (response: Category) => {
-        console.error
-        console.log(response);
-        this.toast.success({detail:'Success',summary:'Successfully added !',position:'tr',duration:2000})
-        this.getAllCategories();
-        addForm.reset();
+    const categoryName = addForm.value.nameCategory;
+
+    // Check if the category name already exists
+    this.cs.checkCategoryExists(categoryName).subscribe(
+      (exists: boolean) => {
+        if (exists) {
+          this.toast.error({ detail: 'Error', summary: 'Category name already exists!', position: 'tr', duration: 2000 });
+        } else {
+          // Create the category if it doesn't already exist
+          this.cs.createCategory(addForm.value).subscribe(
+            (response: Category) => {
+              console.log(response);
+              this.toast.success({ detail: 'Success', summary: 'Successfully added !', position: 'tr', duration: 2000 });
+              this.getAllCategories();
+              addForm.reset();
+            },
+            (error: HttpErrorResponse) => {
+              this.toast.error({ detail: 'Error', summary: 'Check fields !', position: 'tr', duration: 2000 });
+              alert(error.message);
+            }
+          );
+        }
       },
       (error: HttpErrorResponse) => {
-        this.toast.error({detail:'Error',summary:'Check fields !',position:'tr',duration:2000})
+        this.toast.error({ detail: 'Error', summary: 'An error occurred while checking for category name!', position: 'tr', duration: 2000 });
         alert(error.message);
       }
     );
   }
-  public onOpenModal(user: Category, mode: string): void {
+
+  public onOpenModal(c: Category, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-   
+
     if (mode === 'add') {
-  
+
       button.setAttribute('data-target', '#addCategoryModal');
     }
     container?.appendChild(button);

@@ -10,45 +10,50 @@ export class CategoryService {
   private baseURL = "http://localhost:8082/PharmaLife/Category";
 
   constructor(private httpClient: HttpClient) { }
-  
-  getAllCategories(): Observable<Category[]>{
-    return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categories");
+
+  getAllCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.baseURL}` + "/all-categories");
   }
-  getAllCategoriesArchived(): Observable<Category[]>{
-    return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categoriesArchived");
+  getAllCategoriesArchived(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.baseURL}` + "/all-categoriesArchived");
   }
-  getAllCategoriesCancelArchived(): Observable<Category[]>{
-    return this.httpClient.get<Category[]>(`${this.baseURL}`+"/all-categories");
-  }
- 
-  
-  createCategory(category: Category): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`+"/add-category", category);
+  getAllCategoriesCancelArchived(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.baseURL}` + "/all-categories");
   }
 
-  getCategoryById(idCategory: number): Observable<Category>{
-    return this.httpClient.get<Category>(`${this.baseURL}`+"/retrieve-category/"+`${idCategory}`);
+
+  createCategory(category: Category): Observable<Object> {
+    return this.httpClient.post(`${this.baseURL}` + "/add-category", category);
   }
 
-  updateCategory(category: Category): Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}`+"/update-category/",category);
+  getCategoryById(idCategory: number): Observable<Category> {
+    return this.httpClient.get<Category>(`${this.baseURL}` + "/retrieve-category/" + `${idCategory}`);
   }
 
-  deleteCategory(idCategory: number): Observable<Object>{
-    return this.httpClient.delete(`${this.baseURL}`+"/delete-category/"+`${idCategory}`);
-  }
-  setArchivedCategory(category:Category):Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}`+"/archive-category/",category);
-
-  }
-  setArchivedCancelCategory(category:Category):Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}`+"/cancel-archive-category/",category);
-
+  updateCategory(category: Category): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}` + "/update-category/", category);
   }
 
-  setArchive (category:Category):Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}`+"/set-archive-category/",category);
+  deleteCategory(idCategory: number): Observable<Object> {
+    return this.httpClient.delete(`${this.baseURL}` + "/delete-category/" + `${idCategory}`);
+  }
+  setArchivedCategory(category: Category): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}` + "/archive-category/", category);
 
+  }
+  setArchivedCancelCategory(category: Category): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}` + "/cancel-archive-category/", category);
+
+  }
+
+  setArchive(category: Category): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}` + "/set-archive-category/", category);
+
+  }
+
+  checkCategoryExists(name: string): Observable<boolean> {
+    const url = `${this.baseURL}/exists/${name}`;
+    return this.httpClient.get<boolean>(url);
   }
 
 }

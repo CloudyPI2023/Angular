@@ -10,24 +10,25 @@ export class ProductService {
   private baseURL = "http://localhost:8082/PharmaLife/Product";
 
   constructor(private httpClient: HttpClient) { }
-  
-  getAllProductsExpired(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-productsExpired");
+
+  getAllProductsExpired(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseURL}` + "/all-productsExpired");
   }
-  getAllProductsNotExpired(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-productsNotExpired");
+  getAllProductsNotExpired(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseURL}` + "/all-productsNotExpired");
   }
-  getAllProducts(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(`${this.baseURL}`+"/all-products");
-  }
-  
-  OnDetailsProduct(idProduct: number): Observable<Product>{
-    return this.httpClient.get<Product>(`${this.baseURL}`+"/retrieve-product/"+`${idProduct}`);
+  getAllProducts(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.baseURL}` + "/all-products");
   }
 
-  statisticsProductCategory(): Observable<any>{
-    return this.httpClient.get<any>(`${this.baseURL}`+"/statisticsProductCategory/");
+  OnDetailsProduct(idProduct: number): Observable<Product> {
+    return this.httpClient.get<Product>(`${this.baseURL}` + "/retrieve-product/" + `${idProduct}`);
+  }
 
-
+  statisticsProductCategory(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseURL}` + "/statisticsProductCategory/");
+  }
+  statisticsProductExpiration(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseURL}` + "/statisticsProductExpiration/");
   }
 }
