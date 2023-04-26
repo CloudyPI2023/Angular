@@ -18,6 +18,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { JwtModule } from "@auth0/angular-jwt";
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -34,6 +37,9 @@ import { JwtModule } from "@auth0/angular-jwt";
     MatRadioModule,
     MatTooltipModule,
     MatSelectModule,
+    NgChartsModule,
+    NgChartsModule,
+    NgApexchartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter:  () => localStorage.getItem('token')

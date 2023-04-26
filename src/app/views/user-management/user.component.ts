@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'app/models/user';
+import { User } from 'app/models/User/user';
 import { UserService } from './user.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,6 +11,14 @@ import { map } from 'rxjs/operators';
 import Chart from 'chart.js/auto';
 import { environment } from 'environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: any[];
+  labels: any;
+};
 
 @Component({
   selector: 'app-user',
@@ -40,16 +48,30 @@ export class UserComponent implements OnInit {
   private baseURL = environment.apiBaseUrl;
   UserToken = localStorage.getItem('token');
 
-  constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient, private jwtHelper: JwtHelperService ) { }
+
+ //stat
+ hashMapUserRole:  Map<String, number> = new Map<string, number>();
+ @ViewChild("chart") chart: ChartComponent;
+ public chartOptions: Partial<ChartOptions>;
+   
+ result!:any[]
+ keys!:any[]
+ values!:any[]
+
+
+  constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient, private jwtHelper: JwtHelperService ) {
+
+    this.statisticsRoleUser();
+   }
 
   ngOnInit(): void {
 
     const decodedToken = this.jwtHelper.decodeToken(this.UserToken);
-     const rolesUser = decodedToken.roles;
-     const adminRole = rolesUser[0];
-       console.log(adminRole);
+     //const rolesUser = decodedToken.roles;
+    // const adminRole = rolesUser[0];
+      // console.log(adminRole);
 
-    if(this.UserToken == null){
+    if(this.UserToken == null ){
        this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
        this.router.navigateByUrl('/login');
        }
@@ -57,7 +79,8 @@ export class UserComponent implements OnInit {
 
     this.totalPages = Math.ceil(this.users.length / this.pageSize);
         
-    
+   
+  
   }
   totalPagesArray() {
     return Array(this.totalPages).fill(0).map((x, i) => i + 1);
@@ -73,9 +96,37 @@ export class UserComponent implements OnInit {
 }
 
 
-
-
-
+private statisticsRoleUser(){
+  this.userService.statisticsUserRoles().subscribe(data=>{
+    console.log(data);
+    
+    this.keys = Object.keys(data);
+    this.values = Object.values(data);
+    console.log(this.keys);
+    console.log(this.values[0]);
+    this.chartOptions = {
+      series:this.values,
+      chart: {
+        type: "donut"
+      },
+      labels:this.keys,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+    console.log(this.hashMapUserRole);
+  })
+}
 
 
 private getUsers(){

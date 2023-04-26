@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from 'app/models/user';
+import { User } from 'app/models/User/user';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -18,6 +18,9 @@ export class UserService {
     headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)
   };
   
+
+
+
   getUsersList() : Observable<User[]>{
     console.log(this.options);
      return this.httpClient.get<User[]>(`${this.baseURL+"/User/all-Users"}`, this.options);
@@ -50,4 +53,10 @@ export class UserService {
     return this.httpClient.delete(`${this.baseURL+"/User/delete-User"}/${id}`, this.options);  
   }
 
+
+
+  statisticsUserRoles(): Observable<any>{
+    return this.httpClient.get<any>(`${this.baseURL}`+"/User/role-statistics",this.options);
+
+  }
 }

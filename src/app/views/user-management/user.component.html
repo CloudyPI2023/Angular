@@ -221,6 +221,11 @@
   </div>
   
 
+
+
+
+
+
 <!-- Edit User Modal -->
 <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -407,9 +412,17 @@
 
 </div>
 
-<ng-container *ngIf="roleStatistics">
-  <canvas id="roleStatisticsChart"></canvas>
-</ng-container>
+  <!-- Create chart here. -->
+  <div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [labels]="chartOptions.labels"
+        [responsive]="chartOptions.responsive"
+      ></apx-chart>
+    </div>
+  </div>
 
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DeliveryPerson } from '../../models/delivery-person';
+import { DeliveryPerson } from '../../models/DeliveryPerson/delivery-person';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
