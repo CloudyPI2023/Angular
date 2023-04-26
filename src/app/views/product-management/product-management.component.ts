@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from './product.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Product } from '../../Models/product';
-import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
 import { Category } from 'app/Models/category';
+import { log } from 'util';
 
 
 
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: any[];
+  labels: any;
+};
 
 
 
@@ -18,50 +25,74 @@ import { Category } from 'app/Models/category';
  
 })
 export class ProductManagementComponent implements OnInit {
+
+  hashMapProductCategory:  Map<String, number> = new Map<string, number>();
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
     
-  chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
-
-  chartDetails: ApexChart = {
-    type: 'donut',
-    toolbar: {
-      show: true
-    }
-  };
-
-  chartLabels = ["Apple", "Microsoft", "Facebook", "Google"];
-
-  chartTitle: ApexTitleSubtitle = {
-    text: 'Products accourding to their categories',
-    align: 'center'
-  };
-
-  chartDataLabels: ApexDataLabels = {
-    enabled: true
-  };
+ result!:any[]
   productsExpired: Product[];
   productsNotExpired: Product[];
   allProducts:Product[];
   detailsProduct?:Product;
-  hashMapProductCategory:  Map<String, number> = new Map<string, number>();
+  keys!:any[]
+  values!:any[]
+  
 
-  constructor(private ps:ProductService,router:Router,private toast: NgToastService) { }
+  constructor(private ps:ProductService,router:Router,private toast: NgToastService) 
+  {
+    this.statisticsProductCategory();
+
+   }
 
  
 
   ngOnInit(): void {         
     this.getAllProducts();
-    this.statisticsProductCategory();
+
+    console.log(this.keys);
+    
+   
+  
     
     
   }
  
   private statisticsProductCategory(){
     this.ps.statisticsProductCategory().subscribe(data=>{
-      this.hashMapProductCategory=data;
-      console.log("dataaaa"+data);
+      console.log(data);
+      
+      this.keys = Object.keys(data);
+      this.values = Object.values(data);
+      console.log(this.keys);
+      console.log(this.values[0]);
+      this.chartOptions = {
+        series:this.values,
+        chart: {
+          type: "donut"
+        },
+        labels:this.keys,
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      };
+      
+      
+    
       //const arraykeys=[...this.hashMapProductCategory.keys()];
       //const arrayvalues=[...this.hashMapProductCategory.values()];
-      
+
+
 
       //this.chartLabels=arraykeys;
       //this.chartSeries=arrayvalues;
