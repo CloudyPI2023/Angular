@@ -40,7 +40,7 @@ export class DonationService {
 
   statisticsDonationStatus(): Observable<Map<String,number>>{
     return this.httpClient.get<Map<String,number>>(`${this.url}`+"/statisticsDonationStatus/");
-  }
+  } 
 
   
 }

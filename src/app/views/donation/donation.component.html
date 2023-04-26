@@ -340,11 +340,17 @@
 </div>
 
 
-<!-- Create chart here. -->
-<div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
-  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle"
-    [dataLabels]="chartDataLabels"></apx-chart>
-</div>
+  <!-- Create chart here. -->
+  <div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [labels]="chartOptions.labels"
+        [responsive]="chartOptions.responsive"
+      ></apx-chart>
+    </div>
+  </div>
 
 
 
@@ -394,6 +400,7 @@
      </div>
   </div>
 </div>
+
 
 
 

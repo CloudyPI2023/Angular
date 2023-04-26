@@ -1,10 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Donation } from 'app/models/donation';
 import { DonationService } from 'app/services/donationService/donation.service';
-import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: any[];
+  labels: any;
+};
+
 @Component({
   selector: 'app-donation',
   templateUrl: './donation.component.html',
@@ -12,9 +21,18 @@ import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } 
 })
 export class DonationComponent implements OnInit {
 
+  //stat
+ hashMapUserRole:  Map<String, number> = new Map<string, number>();
+ @ViewChild("chart") chart: ChartComponent;
+ public chartOptions: Partial<ChartOptions>;
+   
+ result!:any[]
+ keys!:any[]
+ values!:any[]
+
  // chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
 
-  chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];
+/*  chartSeries: ApexNonAxisChartSeries = [40, 32, 28, 55];;
   chartDetails: ApexChart = {
     type: 'donut',
     toolbar: {
@@ -32,7 +50,7 @@ export class DonationComponent implements OnInit {
 
   chartDataLabels: ApexDataLabels = {
     enabled: true
-  };
+  };*/
   
   hashMapDonationStatus:  Map<String, number> = new Map<string, number>();
   public editDonation?: Donation;
@@ -40,21 +58,64 @@ export class DonationComponent implements OnInit {
   public detailsDonation?: Donation;
   donations: Donation[];
 
-  constructor(private donationService: DonationService,private router: Router) { }
+  donationsStat: { type: string, count: number }[] = [];
+
+  constructor(private donationService: DonationService,private router: Router) {
+    this.statisticsDonationStatus();
+   }
 
   ngOnInit(): void {
     this.getDonations();
-    this.statisticsDonationStatus();
+  
   }
 
   private statisticsDonationStatus(){
+    this.donationService.statisticsDonationStatus().subscribe(data=>{
+      console.log(data);
+      
+      this.keys = Object.keys(data);
+      this.values = Object.values(data);
+      console.log(this.keys);
+      console.log(this.values[0]);
+      this.chartOptions = {
+        series:this.values,
+        chart: {
+          type: "donut"
+        },
+        labels:this.keys,
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      };
+      console.log(this.hashMapUserRole);
+    })
+  }
+  
+
+
+
+
+
+
+
+  /*private statisticsDonationStatus(){
     this.donationService.statisticsDonationStatus().subscribe(data=>{
       this.hashMapDonationStatus=data;
       console.log("dataaaa"+data);
     
       console.log(this.hashMapDonationStatus);
     })
-  }
+  }*/
 
   private getDonations(){
     this.donationService.getDonationList().subscribe(data => {
