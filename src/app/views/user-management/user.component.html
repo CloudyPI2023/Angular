@@ -9,10 +9,7 @@
        <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav mr-auto">
             <h1 style="margin-left: 10px;font-size: 30px;">Users List</h1>
-             <li class="nav-item active">
-               <a style="margin-left: 900px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
-                </a>
-             </li>
+            <input class="form-control" style="margin-left: 800px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
           </ul>
    </div>
  </nav>
@@ -27,8 +24,10 @@
       <a class="dropdown-item" id="genderStatisticsButton" (click)="onOpenModal(null, 'statGender')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartGenderModal">Gender <img style="width: 25px" ></a>
       <a class="dropdown-item" id="actStatisticsButton" (click)="onOpenModal(null, 'status')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartStatusModal">Activation Status <img style="width: 25px" ></a>
   </div>
-  <input class="form-control" style="margin-left: 15px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
-
+  <li class="nav-item active">
+    <a style="margin-left: 900px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+     </a>
+  </li>
 </div>
 
 
@@ -36,7 +35,6 @@
  <div class="table-responsive" id="main-container">  
     <table class = "table table-striped" >
      <thead class="">
-      <th>Image</th>
         <th>First Name</th>
         <th>Last Name </th>
         <th> Email</th>
@@ -48,7 +46,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let user of users | search: searchText">
-          <td> {{ user.image_user}} </td>
             <td> {{ user.firstName}} </td>
             <td> {{ user.lastName}} </td>
             <td> {{ user.email}} </td>
@@ -74,7 +71,7 @@
             <button mat-raised-button type="button" (click)="onOpenModal(user, 'edit')" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
               <i class="material-icons">edit</i>
           </button>
-          <button mat-raised-button type="button" (click)="onOpenModal(user, 'delete')" matTooltip="Delete" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+          <button mat-raised-button type="button" style="color: red;" (click)="onOpenModal(user, 'delete')" matTooltip="Delete" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
             <i class="material-icons">close</i>
         </button>
         <button mat-raised-button type="button" (click)="onOpenModal(user, 'details')" matTooltip="Details" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
@@ -192,13 +189,13 @@
             <input type="button" (click)="onUpload()" value="Upload Image" class="btn1"> -->
              <!-- <div class="icon"><i class="fa fa-upload" style="color: green;"></i></div>
             </div>-->
-            <div class="form-group input_box" style="float:left;padding-bottom: 20px;">
+           <!-- <div class="form-group input_box" style="float:left;padding-bottom: 20px;">
               <label for="image_user" style="color: green;font-size: 17px;">Image</label>
               <div class="custom-file">
                   <input type="file" class="custom-file-input" id="image_user" accept="image/*" (change)="onFileSelected($event)">
                   <button class="btn " for="image_user">Choose Image</button>
               </div>
-          </div>
+          </div>-->
 
         
 
