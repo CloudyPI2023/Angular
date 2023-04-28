@@ -98,63 +98,40 @@
 
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-success">
-                                <div class="ct-chart" id="dailySalesChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Donations</h4>
-                                <p class="card-category">
-                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-warning">
-                                <div class="ct-chart" id="websiteViewsChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Associations</h4>
-                                <p class="card-category">Last Campaign Performance</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-danger">
-                                <div class="ct-chart" id="completedTasksChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Requests</h4>
-                                <p class="card-category">Last Campaign Performance</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
         </div>
+        
     </div>
+                           <!-- Create chart status here. -->
+                           <h1>Donations Stat</h1>
+<div class="row">
+  
+    <div  class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;margin-left: 140px;">
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [labels]="chartOptions.labels"
+          [responsive]="chartOptions.responsive"
+        ></apx-chart>
+      </div>
+   
+   </div>
+       
+      <!-- Create chart type here. -->
+    
+      <div  class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
+        <div id="chartT">
+          <apx-chart
+            [series]="chartType.series"
+            [chart]="chartType.chart"
+            [labels]="chartType.labels"
+            [responsive]="chartType.responsive"
+          ></apx-chart>
+        </div>
+      </div>
+   
+</div>  
   </div>
 
-
-  
-
+       
 

@@ -340,8 +340,9 @@
 </div>
 
 
-  <!-- Create chart here. -->
-  <div class="chartContainer" style="  width: 500px; height: 500px; justify-content: center; align-items: center;">
+  <!-- Create chart status here. -->
+  <div>
+  <div  class="chartContainer" style="display: inline-block; width: 50%;">
     <div id="chart">
       <apx-chart
         [series]="chartOptions.series"
@@ -352,6 +353,18 @@
     </div>
   </div>
 
+    <!-- Create chart type here. -->
+    <div  class="chartContainer" style="display: inline-block; width: 50%;">
+      <div id="chartT">
+        <apx-chart
+          [series]="chartType.series"
+          [chart]="chartType.chart"
+          [labels]="chartType.labels"
+          [responsive]="chartType.responsive"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
 
 
 

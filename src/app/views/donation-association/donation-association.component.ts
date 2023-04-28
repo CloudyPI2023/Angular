@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Association } from 'app/models/association';
 import { Donation } from 'app/models/donation';
@@ -6,7 +6,13 @@ import { AssociationService } from 'app/services/associationService/association.
 import { DonationService } from 'app/services/donationService/donation.service';
 import { RequestService } from 'app/services/requestService/request.service';
 import * as Chartist from 'chartist';
-
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: any[];
+  labels: any;
+};
 @Component({
   selector: 'app-donation-association',
   templateUrl: './donation-association.component.html',
@@ -21,10 +27,103 @@ export class DonationAssociationComponent implements OnInit {
   totalAssociation: number;
   totalDonations: number;
   totalRequests: number;
+
+   //stat
+ hashMapUserRole:  Map<String, number> = new Map<string, number>();
+ @ViewChild("chart") chart: ChartComponent;
+ @ViewChild("chartT") chartT: ChartComponent;
+ public chartOptions: Partial<ChartOptions>;
+ public chartType: Partial<ChartOptions>;
+ result!:any[]
+ keys!:any[]
+ values!:any[]
+
+ hashMapDonationStatus:  Map<String, number> = new Map<string, number>();
   
 
   constructor(private associationService: AssociationService,private requestService: RequestService,
-    private donationService: DonationService,private router: Router) { }
+    private donationService: DonationService,private router: Router) { 
+      this.statisticsDonationStatus();
+      this.statisticsDonationType();
+    }
+
+
+
+
+
+
+
+    private statisticsDonationStatus(){
+      this.donationService.statisticsDonationStatus().subscribe(data=>{
+        console.log(data);
+        
+        this.keys = Object.keys(data);
+        this.values = Object.values(data);
+        console.log(this.keys);
+        console.log(this.values[0]);
+        this.chartOptions = {
+          series:this.values,
+          chart: {
+            type: "donut"
+          },
+          labels:this.keys,
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
+        };
+        console.log(this.hashMapUserRole);
+      })
+    }
+  
+  
+    private statisticsDonationType(){
+      this.donationService.statisticsDonationType().subscribe(data=>{
+        console.log(data);
+        
+        this.keys = Object.keys(data);
+        this.values = Object.values(data);
+        console.log(this.keys);
+        console.log(this.values[0]);
+        this.chartType = {
+          series:this.values,
+          chart: {
+            type: "donut"
+          },
+          labels:this.keys,
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
+        };
+        console.log(this.hashMapUserRole);
+      })
+    }
+
+
+
+
+
+
+
 
   
 
