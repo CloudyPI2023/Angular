@@ -16,6 +16,7 @@ export class ReclamationManagementComponent implements OnInit {
   constructor(private rs:ReclamationService,private router:Router,toast:NgToastService) { }
   reclamations:Reclamation[];
   detailsReclamation:Reclamation;
+  searchText: any;
 
   
   ngOnInit(): void {

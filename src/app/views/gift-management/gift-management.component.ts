@@ -17,6 +17,7 @@ export class GiftManagementComponent implements OnInit {
   gifts:Gift[];
   detailsGift?:Gift;
   productsForOneGift?:any;
+  searchText: any;
 
   ngOnInit(): void {
     this.getGifts();

@@ -18,6 +18,7 @@
       <h1 style="margin-left: 10px;font-size: 30px;">Product list</h1>
 
     </ul>
+    <input class="form-control" style="margin-left: 15px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
   </div>
 </nav>
 <div class="card-body">
@@ -37,12 +38,12 @@
         <th style="text-align: center;"> Actions </th>
       </thead>
       <tbody>
-        <tr *ngFor="let p of allProducts">
+        <tr *ngFor="let p of allProducts | search:searchText">
           <td> {{ p.referenceProduct}} </td>
           <td> {{ p.nameProduct}} </td>
           <td> {{ p.categoryProduct.nameCategory}}</td>
           <td> {{ p.priceProduct}} DT</td>
-          <td> {{p.quantityProduct}}</td>
+          <td> {{p.quantityProduct}}</td> 
           <td style="align-items: center;">
             <img src="../../../assets/img/product.jpg" height="50" width="50">
           </td>
@@ -75,17 +76,17 @@
 
 <!-- Create chart here. -->
 <div>
-  <div class="chartContainer" style="display: inline-block; width: 50%;">
+  <div class="chartContainer" style="display: inline-block; width: 50%; height: 50%;">
     <div id="chart">
-      <div style="align-items: center; font-weight: bold;">Percentage of categories accourding to their products</div>
+      <div  style="font-weight: bold;">Percentage of categories accourding to their products</div>
       <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
         [responsive]="chartOptions.responsive"></apx-chart>
     </div>
   </div>
 
-  <div class="chartContainer2" style=" display: inline-block; width: 50%;">
+  <div class="chartContainer" style=" display: inline-block; width: 50%; height: 50%;">
     <div id="chartApex">
-      <div style="align-items: center; font-weight: bold;">Percentage of products expiration date</div>
+      <div style=" font-weight: bold;">Percentage of products expiration date</div>
       <apx-chart [series]="chartOptionsApex.series" [chart]="chartOptionsApex.chart" [labels]="chartOptionsApex.labels"
         [responsive]="chartOptionsApex.responsive"></apx-chart>
     </div>

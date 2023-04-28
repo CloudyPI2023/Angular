@@ -46,7 +46,7 @@ export class ProductManagementComponent implements OnInit {
   detailsProduct?: Product;
   keys!: any[]
   values!: any[]
-
+  searchText: any;
 
   constructor(private ps: ProductService, router: Router, private toast: NgToastService) {
     this.statisticsProductCategory();
@@ -74,13 +74,13 @@ export class ProductManagementComponent implements OnInit {
         labels: this.keys,
         responsive: [
           {
-            breakpoint: 480,
+            breakpoint: 400,
             options: {
               chart: {
-                width: 150
+                width: 50
               },
               legend: {
-                position: "bottom"
+                position: "right"
               }
             }
           }
@@ -105,13 +105,13 @@ export class ProductManagementComponent implements OnInit {
         labels: this.keys,
         responsive: [
           {
-            breakpoint: 480,
+            breakpoint: 400,
             options: {
               chart: {
-                width: 150
+                width: 50
               },
               legend: {
-                position: "bottom"
+                position: "left"
               }
             }
           }

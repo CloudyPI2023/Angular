@@ -14,9 +14,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
-      <h1 style="margin-left: 10px;font-size: 30px;">Reclamation list</h1>
-     
+      <h1 style="margin-left: 10px;font-size: 30px;">Reclamation list</h1>     
     </ul>
+    <input class="form-control" style="margin-left: 15px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
   </div>
 </nav>
 <div class="card-body">
@@ -31,7 +31,7 @@
         <th style="text-align: center;"> Actions </th>
       </thead>
       <tbody>
-        <tr *ngFor="let r of reclamations">
+        <tr *ngFor="let r of reclamations | search:searchText">
           <td> {{ r.descriptionReclamation}} </td>
           <td> {{ r.dateReclamation}} </td>
           <td> {{ r.userProduct.firstName}} {{ r.userProduct.lastName}} </td>
@@ -39,7 +39,7 @@
           <td style="text-align: center;">
             <span [ngClass]="{'green-tick': !r.archived, 'red-cross': r.archived}">
               <i *ngIf="!r.archived" class="fa fa-spinner" aria-hidden="true" style="color:  #4d82a3;font-size: 18px;"></i>
-              <i *ngIf="r.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
+              <i *ngIf="r.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
             </span>
           </td>
           <td style="text-align: center;">

@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import {NgToastModule} from 'ng-angular-popup';
+import { SearchPipe } from './search.pipe';
 
 
 
@@ -40,6 +41,7 @@ import {NgToastModule} from 'ng-angular-popup';
     CategoryManagementComponent,
     GiftManagementComponent,
     ReclamationManagementComponent,
+    SearchPipe,
   ],
   providers: [],
   bootstrap: [AppComponent]

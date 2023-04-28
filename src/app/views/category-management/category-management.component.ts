@@ -18,6 +18,7 @@ export class CategoryManagementComponent implements OnInit {
   constructor(private cs: CategoryService, router: Router, private toast: NgToastService) { }
   categories: Category[];
   categoriesArchived: Category[];
+  searchText: any;
   ngOnInit(): void {
     this.getAllCategories();
 
