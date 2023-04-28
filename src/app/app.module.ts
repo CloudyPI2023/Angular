@@ -21,6 +21,10 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SearchPipe } from './search.pipe';
+import { ProductManagementComponent } from './views/product-management/product-management.component';
+import { CategoryManagementComponent } from './views/category-management/category-management.component';
+import { GiftManagementComponent } from './views/gift-management/gift-management.component';
+import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
 
 @NgModule({
   imports: [
@@ -54,6 +58,10 @@ import { SearchPipe } from './search.pipe';
     DeliveryPersonComponent,
     LoginComponent,
     SearchPipe,
+    ProductManagementComponent,
+    CategoryManagementComponent,
+    GiftManagementComponent,
+    ReclamationManagementComponent
 
   ],
   providers: [],
