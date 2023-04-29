@@ -22,6 +22,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SearchPipe } from './search.pipe';
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,

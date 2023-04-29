@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'app/models/User/user';
+import { Role } from 'app/models/User/role';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -66,4 +67,15 @@ export class UserService {
   statisticsUserActivationStauts(): Observable<any>{
     return this.httpClient.get<any>(`${this.baseURL}`+"/User/activationStatus-statistics",this.options);
   }
+
+
+  getUsersByRole(role: Role): Observable<User[]> {
+    const url = `${this.baseURL}/find-ByRole/${role}`;
+    return this.httpClient.get<User[]>(url);
+  }
+
+  getRoles(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${this.baseURL}/roles`);
+  }
+
 }

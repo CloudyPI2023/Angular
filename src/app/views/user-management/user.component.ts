@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'app/models/User/user';
+import { Role } from 'app/models/User/role';
 import { UserService } from './user.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -30,6 +31,10 @@ export class UserComponent implements OnInit {
   public deleteUser?: User;
   public detailsUser?: User;
   users: User[];
+  roleFilter: Role = null;
+  roles: string[]; // Définir la propriété roles
+
+
   selectedFile: File;
   searchText:any;
 
@@ -186,12 +191,27 @@ private statisticsActivationStatusUser(){
 
 }
 
-private getUsers(){
+/*private getUsers(){
   this.userService.getUsersList().subscribe(data => {
      this.users = data;
 
   });
+}*/
+
+getUsers() {
+  if (this.roleFilter) {
+    this.userService.getUsersByRole(this.roleFilter).subscribe(users => this.users = users);
+  } else {
+    this.userService.getUsersList().subscribe(users => this.users = users);
+  }
 }
+
+onRoleFilterChanged(role: Role) {
+  this.roleFilter = role;
+  this.getUsers();
+}
+
+
 
 public OnDetailsUser(idUser: number){
   this.userService.getUserById(idUser).subscribe(
