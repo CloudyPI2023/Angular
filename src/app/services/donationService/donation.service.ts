@@ -4,6 +4,7 @@ import { Donation } from 'app/models/donation';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,6 +45,21 @@ export class DonationService {
   statisticsDonationType(): Observable<Map<String,number>>{
     return this.httpClient.get<Map<String,number>>(`${this.url}`+"/statisticsDonationType/");
   } 
+
+  getDonationStatisticsByDate(): Observable<any> {
+    return this.httpClient.get(`${this.url}/statisticsDonationDate1`);
+  }
+
+  getDonationStatisticsByDate1(): Observable<any> {
+    return this.httpClient.get(`${this.url}/statisticsDonationDate1`).pipe(
+      map((response: any) => {
+        const labels = Object.keys(response);
+        const values = Object.values(response).map((innerMap: any) => Object.values(innerMap));
+        return { labels, values };
+      })
+    );
+  }
+ 
 
   
 }

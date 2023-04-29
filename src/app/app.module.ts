@@ -17,6 +17,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import {NgToastModule} from 'ng-angular-popup';
 import { StatComponent } from './views/stat/stat.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -31,7 +32,8 @@ import { StatComponent } from './views/stat/stat.component';
     AppRoutingModule,
     NgChartsModule,
     NgApexchartsModule,
-    NgToastModule
+    NgToastModule,
+    BrowserModule
 
   ],
   declarations: [
@@ -41,9 +43,7 @@ import { StatComponent } from './views/stat/stat.component';
     DonationAssociationComponent,
     DonationComponent,
     RequestComponent,
-    StatComponent,
-
-
+    StatComponent
 
   ],
   providers: [],

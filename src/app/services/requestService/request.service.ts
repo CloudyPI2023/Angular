@@ -56,5 +56,13 @@ export class RequestService {
    assignRequestToDonation(request: Request): Observable<Object> {
     return this.httpClient.put<Request>(`${this.url+"/updateRequestDonation"}`,request);
    }
+
+
+   statisticsRequestsStatus(): Observable<Map<String,number>>{
+    return this.httpClient.get<Map<String,number>>(`${this.url}`+"/statisticsRequestStatus/");
+  } 
+  statisticsRequestsType(): Observable<Map<String,number>>{
+    return this.httpClient.get<Map<String,number>>(`${this.url}`+"/statisticsRequestType/");
+  } 
   
 }
