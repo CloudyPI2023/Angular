@@ -31,7 +31,7 @@ export class DonationComponent implements OnInit {
  keys!:any[]
  values!:any[]
 
- 
+ searchText:any;
   
   hashMapDonationStatus:  Map<String, number> = new Map<string, number>();
   public editDonation?: Donation;

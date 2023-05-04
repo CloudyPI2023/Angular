@@ -18,6 +18,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import {NgToastModule} from 'ng-angular-popup';
 import { StatComponent } from './views/stat/stat.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { SearchPipe } from './search.pipe';
 
 
 
@@ -43,7 +44,8 @@ import { BrowserModule } from '@angular/platform-browser';
     DonationAssociationComponent,
     DonationComponent,
     RequestComponent,
-    StatComponent
+    StatComponent,
+    SearchPipe
 
   ],
   providers: [],
