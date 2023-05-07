@@ -25,6 +25,11 @@ import { ProductManagementComponent } from './views/product-management/product-m
 import { CategoryManagementComponent } from './views/category-management/category-management.component';
 import { GiftManagementComponent } from './views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
+import { StatComponent } from './StatComponent/stat/stat.component';
+import { AssociationComponent } from './views/association/association.component';
+import { DonationAssociationComponent } from './views/donation-association/donation-association.component';
+import { DonationComponent } from './views/donation/donation.component';
+import { RequestComponent } from './views/request/request.component';
 
 @NgModule({
   imports: [
@@ -47,9 +52,11 @@ import { ReclamationManagementComponent } from './views/reclamation-management/r
     NgApexchartsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter:  () => localStorage.getItem('token')
+        tokenGetter:  (s) => localStorage.getItem('token')
       }
-    }) 
+    }) ,
+
+
   ],
   declarations: [
     AppComponent,
@@ -61,8 +68,12 @@ import { ReclamationManagementComponent } from './views/reclamation-management/r
     ProductManagementComponent,
     CategoryManagementComponent,
     GiftManagementComponent,
-    ReclamationManagementComponent
-
+    ReclamationManagementComponent,
+    StatComponent,
+    AssociationComponent,
+    DonationAssociationComponent,
+    DonationComponent,
+    RequestComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

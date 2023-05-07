@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UserService } from 'app/views/user-management/user.service';
 import * as Chartist from 'chartist';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+import Chart from 'chart.js/auto';
 
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: any[];
+  labels: any;
+};
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,7 +17,17 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+
+  hashMapUserRole:  Map<String, number> = new Map<string, number>();
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+    
+  result!:any[]
+  keys!:any[]
+  values!:any[]
+
+
+  constructor(private userService: UserService) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -146,5 +165,13 @@ export class DashboardComponent implements OnInit {
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
   }
+
+
+
+
+
+
+
+
 
 }

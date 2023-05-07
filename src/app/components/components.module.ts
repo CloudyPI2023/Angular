@@ -5,11 +5,14 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    NgChartsModule,
+    NgApexchartsModule
   ],
   declarations: [
     FooterComponent,

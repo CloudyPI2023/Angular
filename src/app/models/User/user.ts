@@ -1,6 +1,6 @@
 import { Gender } from "./gender";
 import { Role } from "./role";
-
+import { Donation } from "../AssociationAndDonation/donation";
 export class User {
   idUser: number;
   firstName: String;
@@ -17,5 +17,6 @@ export class User {
   locked: Boolean;
   enabled: Boolean;
   password: String;
+  donationsUser: Donation;
 
 }

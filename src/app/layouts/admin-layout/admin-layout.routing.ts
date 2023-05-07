@@ -13,6 +13,11 @@ import { ProductManagementComponent } from 'app/views/product-management/product
 import { CategoryManagementComponent } from 'app/views/category-management/category-management.component';
 import { GiftManagementComponent } from 'app/views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from 'app/views/reclamation-management/reclamation-management.component';
+import { StatComponent } from 'app/StatComponent/stat/stat.component';
+import { AssociationComponent } from 'app/views/association/association.component';
+import { DonationComponent } from 'app/views/donation/donation.component';
+import { RequestComponent } from 'app/views/request/request.component';
+import { DonationAssociationComponent } from 'app/views/donation-association/donation-association.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,6 +75,11 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-
+    {path:'home',component:StatComponent},
+    { path: 'associations',   component: AssociationComponent },
+   
+    { path: 'donations',   component: DonationComponent },
+    { path: 'requests',   component: RequestComponent },
+    { path: 'DonationAssociation',  component: DonationAssociationComponent },
 
 ];

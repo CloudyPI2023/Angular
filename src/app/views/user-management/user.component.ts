@@ -15,12 +15,6 @@ import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, C
 import { createClient } from '@supabase/supabase-js';
 import { Role } from 'app/models/User/role';
 
-export type ChartOptions = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: any[];
-  labels: any;
-};
 const supabaseUrl = 'https://nwkxroquvbmhbchbkbjk.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53a3hyb3F1dmJtaGJjaGJrYmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMzMjQ4MTYsImV4cCI6MTk5ODkwMDgxNn0.2JdZTjvuXGIHJ_gfcohLMM-I22pGBSlLEQiNwI9Hoto';
 
@@ -60,15 +54,6 @@ export class UserComponent implements OnInit {
   UserToken = localStorage.getItem('token');
 
 
- //stat
- hashMapUserRole:  Map<String, number> = new Map<string, number>();
- @ViewChild("chart") chart: ChartComponent;
- public chartOptions: Partial<ChartOptions>;
-   
- result!:any[]
- keys!:any[]
- values!:any[]
-
 
    /////
    selectedFile: File;
@@ -83,7 +68,6 @@ export class UserComponent implements OnInit {
    years: string[];
   constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient, private jwtHelper: JwtHelperService ) {
 
-    this.statisticsRoleUser();
    }
 
   ngOnInit(): void {
@@ -188,94 +172,7 @@ createChart(year: string) {
 
 
 
-private statisticsRoleUser(){
-  this.userService.statisticsUserRoles().subscribe(data=>{    
-    this.keys = Object.keys(data);
-    this.values = Object.values(data);
-    console.log(this.keys);
-    console.log(this.values[0]);
-    this.chartOptions = {
-      series:this.values,
-      chart: {
-        type: "donut"
-      },
-      labels:this.keys,
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
-  })
 
-}
-private statisticsGenderUser(){
-  this.userService.statisticsUserGender().subscribe(data=>{    
-    this.keys = Object.keys(data);
-    this.values = Object.values(data);
-    console.log(this.keys);
-    console.log(this.values[0]);
-    this.chartOptions = {
-      series:this.values,
-      chart: {
-        type: "donut"
-      },
-      labels:this.keys,
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
-  })
-
-}
-
-private statisticsActivationStatusUser(){
-  this.userService.statisticsUserActivationStauts().subscribe(data=>{    
-    this.keys = Object.keys(data);
-    this.values = Object.values(data);
-    console.log(this.keys);
-    console.log(this.values[0]);
-    this.chartOptions = {
-      series:this.values,
-      chart: {
-        type: "donut"
-      },
-      labels:this.keys,
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
-  })
-
-}
 
 /*private getUsers(){
   this.userService.getUsersList().subscribe(data => {
@@ -405,18 +302,6 @@ public onOpenModal(user: User, mode: string): void {
   if (mode === 'add') {
 
     button.setAttribute('data-target', '#addUserModal');
-  }
-  if (mode === 'statRole') {
-    button.setAttribute('data-target', '#chartRoleModal');
-    this.statisticsRoleUser();
-  }
-  if (mode === 'statGender') {
-    button.setAttribute('data-target', '#chartGenderModal');
-    this.statisticsGenderUser();
-  }
-  if (mode === 'status') {
-    button.setAttribute('data-target', '#chartStatusModal');
-    this.statisticsActivationStatusUser();
   }
   container?.appendChild(button);
   button.click();

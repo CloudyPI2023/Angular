@@ -8,6 +8,7 @@ import { UserComponent } from './views/user-management/user.component';
 import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-person.component';
 import { LoginComponent } from './views/login/login.component';
 import { ProductManagementComponent } from './views/product-management/product-management.component';
+import { StatComponent } from './StatComponent/stat/stat.component';
 
 const routes: Routes =[
   {
@@ -25,7 +26,8 @@ const routes: Routes =[
   {path: 'users', component: UserComponent},
   {path: 'deliveryPersons', component: DeliveryPersonComponent},
   {path: 'login', component:LoginComponent},
-  {path:'product-management',component: ProductManagementComponent}
+  {path:'product-management',component: ProductManagementComponent},
+  {path:'',component:StatComponent}
 ];
 
 @NgModule({
