@@ -1,8 +1,8 @@
 import { Component, ElementRef, NgModule, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AssociationService } from 'app/services/associationService/association.service';
-import { DonationService } from 'app/services/donationService/donation.service';
-import { RequestService } from 'app/services/requestService/request.service';
+import { AssociationService } from 'app/views/association/association.service';
+import { DonationService } from 'app/views/donation/donation.service';
+import { RequestService } from 'app/views/request/request.service';
 import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
 //import * as Chart from 'chart.js';
 import { HttpClient } from '@angular/common/http';

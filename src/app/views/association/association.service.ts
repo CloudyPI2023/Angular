@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Association } from 'app/models/association';
+import { Association } from 'app/models/AssociationAndDonation/association';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 

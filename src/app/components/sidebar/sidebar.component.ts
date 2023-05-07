@@ -12,7 +12,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-profile', title: 'User management',  icon:'person', class: '' },
     { path: '/table-list', title: 'Product and gifts',  icon:'content_paste', class: '' },
 
-    { path: '/DonationAssociation', title: 'Donation and association',  icon:'library_books', class: '' },
+    { path: '/DonationAssociation', title: 'Donation and association',  icon:'volunteer_activism', class: '' },
     
     { path: '/icons', title: 'Event and reservation',  icon:'bubble_chart', class: '' },
     { path: '/maps', title: 'Article and comment',  icon:'location_on', class: '' },

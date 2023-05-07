@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Donation } from 'app/models/donation';
-import { Request } from 'app/models/request';
+import { Donation } from 'app/models/AssociationAndDonation/donation';
+import { Request } from 'app/models/AssociationAndDonation/request';
 import { environment } from 'environments/environment';
 import { request } from 'http';
 import { Observable } from 'rxjs';
@@ -77,7 +77,7 @@ export class RequestService {
       return this.httpClient.post<Request>(`${this.url}/assignRequestToDonation/${idDonation}/${idAssociation}`, request);
       //console.log(this.httpClient.post<Request>(`${this.url}/assignRequestToDonation/${idDonation}/${idAssociation}`, request));
     }
-
+  
      //assignRequestToDonationByAdmin
      assignRequestToDonationByAdmin( request: Request, idDonation: number): Observable<Request> {
       return this.httpClient.put<Request>(`${this.url}/assignRequestToDonationByAdmin/${idDonation}`, request);

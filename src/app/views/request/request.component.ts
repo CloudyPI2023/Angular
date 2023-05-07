@@ -2,13 +2,13 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { DonationRequestType } from "app/enumeration/donation-request-type";
-import { Association } from "app/models/association";
-import { Donation } from "app/models/donation";
-import { Request } from "app/models/request";
-import { AssociationService } from "app/services/associationService/association.service";
-import { DonationService } from "app/services/donationService/donation.service";
-import { RequestService } from "app/services/requestService/request.service";
+import { DonationRequestType } from "app/models/AssociationAndDonation/enumeration/donation-request-type";
+import { Association } from "app/models/AssociationAndDonation/association";
+import { Donation } from "app/models/AssociationAndDonation/donation";
+import { Request } from "app/models/AssociationAndDonation/request";
+import { AssociationService } from "app/views/association/association.service";
+import { DonationService } from "app/views/donation/donation.service";
+import { RequestService } from "app/views/request/request.service";
 import { NgToastService } from 'ng-angular-popup';
 
 

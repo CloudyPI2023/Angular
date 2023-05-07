@@ -1,6 +1,6 @@
-import { DonationRequestType } from "app/enumeration/donation-request-type";
+import { DonationRequestType } from "app/models/AssociationAndDonation/enumeration/donation-request-type";
 import { Association } from "./association";
-import { RequestDonationStatus } from "app/enumeration/request-donation-status";
+import { RequestDonationStatus } from "app/models/AssociationAndDonation/enumeration/request-donation-status";
 
 export class Request {
     idRequest: number;
