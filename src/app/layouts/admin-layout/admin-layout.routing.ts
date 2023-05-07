@@ -18,6 +18,9 @@ import { AssociationComponent } from 'app/views/association/association.componen
 import { DonationComponent } from 'app/views/donation/donation.component';
 import { RequestComponent } from 'app/views/request/request.component';
 import { DonationAssociationComponent } from 'app/views/donation-association/donation-association.component';
+import { EventReservationComponent } from 'app/views/event-reservation/event-reservation.component';
+import { EventComponent } from 'app/views/event/event.component';
+import { ReservationComponent } from 'app/views/reservation/reservation.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -75,11 +78,14 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-    {path:'home',component:StatComponent},
+    {path:  'home',component:StatComponent},
     { path: 'associations',   component: AssociationComponent },
    
     { path: 'donations',   component: DonationComponent },
     { path: 'requests',   component: RequestComponent },
     { path: 'DonationAssociation',  component: DonationAssociationComponent },
+    { path: 'EventReservation',  component: EventReservationComponent },
+    { path: 'events',  component: EventComponent },
+    { path: 'reservations',  component: ReservationComponent },
 
 ];

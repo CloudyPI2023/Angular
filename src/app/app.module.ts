@@ -30,6 +30,9 @@ import { AssociationComponent } from './views/association/association.component'
 import { DonationAssociationComponent } from './views/donation-association/donation-association.component';
 import { DonationComponent } from './views/donation/donation.component';
 import { RequestComponent } from './views/request/request.component';
+import { ReservationComponent } from './views/reservation/reservation.component';
+import { EventComponent } from './views/event/event.component';
+import { EventReservationComponent } from './views/event-reservation/event-reservation.component';
 
 @NgModule({
   imports: [
@@ -74,6 +77,9 @@ import { RequestComponent } from './views/request/request.component';
     DonationAssociationComponent,
     DonationComponent,
     RequestComponent,
+    ReservationComponent,
+    EventComponent,
+    EventReservationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
