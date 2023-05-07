@@ -10,8 +10,8 @@
                         <div class="card-icon">
                             <i class="material-icons">content_copy</i>
                         </div>
-                        <p class="card-category">Total Articles</p>
-                        <h3 class="card-title">{{totalArticle}}</h3>
+                        <p class="card-category">Total Comments</p>
+                        <h3 class="card-title">{{totalComment}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -82,7 +82,7 @@
   
             <div class="col-md-3">
               <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark"
-                [routerLink]="['/comment-management']"> Comment </button>
+                [routerLink]="['/article-management']"> Article </button>
             </div>
           <!--  <div class="col-md-3">
               <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark"
@@ -104,8 +104,8 @@
        <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-success">
-                <h4 class="card-title">Articles</h4>
-                <p class="card-category"> All Article For PharmaLife
+                <h4 class="card-title">Comments</h4>
+                <p class="card-category"> All Comment For PharmaLife
                   
               <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded" (click)="onOpenModal(null!, 'add')">New</button>
                 
@@ -116,7 +116,6 @@
              
               </div>
   
-             
             <div class="card-body">
               <div class="col-md-3">
                 <input class="form-control" style="margin-right: 1190px;width: 250px;" type="text" placeholder="Search"
@@ -124,20 +123,17 @@
               </div>
                 <div class="table-responsive" id="main-container">
                   <table class = "table table-striped">
-                   
                     <thead class="">
-                       <th> Name</th>
-                       <th> Image </th>
-                       <th> Description </th>
+                        <th> Description </th>
                         <th> Date </th>
+
                 
                     <th style="text-align: center;"> Actions </th> 
                    </thead>
-                   <tr *ngFor="let article of article | search: searchText">
-                    <td>{{article.nameArticle}}</td> 
-                    <td><img src="../../../assets/img/article/{{article.imageArticle}}.jpg" height="100" width="100"></td>
-                    <td>{{article.descriptionArticle}}</td> 
-                    <td>{{article.dateArticle}}</td> 
+                   <tr *ngFor="let comment of comment | search: searchText">
+                    <td>{{comment.descriptionComment}}</td> 
+                    <td>{{comment.dateComment}}</td> 
+
                     <!--  <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'orange' : (donation.statusDonation === 'accepted' ? 'green' : 'red')}">
                        <td>{{donation.statusDonation}}</td></span>
                       <td>
@@ -148,13 +144,11 @@
                       <td>{{donation.userDonation.firstName}}</td>   -->
   
                            <td style="text-align: center;">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'edit')">edit</button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'delete')">delete</button>
-                          <!--   <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'detail')">detail</button>
+                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(comment, 'delete')">delete</button>
   
                            
   
-                           
+                            <!--
                             <td style="text-align: center;">
                               <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
                           <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
@@ -172,38 +166,29 @@
   </div>
   </div>
   </div>
-     <!-- Add Article Modal -->
-     <div class="modal fade" id="addArticleModal" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel" aria-hidden="true" >
+     <!-- Add Comment Modal -->
+     <div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="addCommentModalLabel" aria-hidden="true" >
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="width: 800px;">
            <div class="modal-header">
-              <h5 class="modal-title" id="addArticleModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Article</B></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <h5 class="modal-title" id="addCommentModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Comment</B></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
            </div>
              <div class="modal-body" >
-                <form #addForm="ngForm" (ngSubmit)="onAddArticle(addForm)" novalidate >
+                <form #addForm="ngForm" (ngSubmit)="onAddComment(addForm)" novalidate >
                 <div class="form-group" >
   
-                <div class="row">
-                 <div class="input_box col-md-6">
-                    <input type="text" ngModel name="nameArticle" class="form-control" id="nameArticle" aria-describedby="emailHelp" placeholder="Article Name" required>
-                    <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
-                  </div>
-                  <div class="input_box col-md-6">
-                    <input type="text" ngModel name="imageArticle" class="form-control" id="imageArticle" aria-describedby="imageArticle" placeholder="Aticle Image" required>
-                    <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
-                  </div>
-                </div>
+              
   
                 <div class="row">
                   <div class="input_box col-md-6">
-                    <input type="text" ngModel name="descriptionArticle" class="form-control" id="descriptionArticle" aria-describedby="emailHelp" placeholder="Article Description" required>
+                    <input type="text" ngModel name="descriptionComment" class="form-control" id="descriptionComment" aria-describedby="emailHelp" placeholder="description Comment" required>
                     <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
                   </div>
                   <div class="input_box col-md-6">
-                    <input type="date" ngModel name="dateArticle" class="form-control" id="dateArticle" aria-describedby="dateArticle" placeholder="dateArticle" required>
+                    <input type="date" ngModel name="dateComment" class="form-control" id="dateComment" aria-describedby="dateComment" placeholder="dateComment" required>
                     <div class="icon"><i class="fa fa-date" style="color: darkgreen;"></i></div>
                   </div>
                 </div>
@@ -219,8 +204,8 @@
    
                 
                 <div class="modal-footer">
-                   <button type="button" id="add-Article-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" (click)="playSound()">Save</button>
+                   <button type="button" id="add-Comment-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" >Save</button>
                 </div>
              </div>
   
@@ -230,44 +215,32 @@
 </div>
 </div>
 
-  <!-- Edit Article Modal -->
-  <div class="modal fade" id="updateArticleModal" tabindex="-1" role="dialog" aria-labelledby="updateArticleModalLabel" aria-hidden="true">
+  <!-- Edit Comment Modal -->
+  <div class="modal fade" id="updateCommentModal" tabindex="-1" role="dialog" aria-labelledby="updateCommentModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
           <div class="modal-header">
-             <h5 class="modal-title" id="updateArticleModalLabel"> Edit Article with id {{editArticle?.idArticle }} </h5>
+             <h5 class="modal-title" id="updateCommentModalLabel"> Edit Comment with id {{editComment?.idComment }} </h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
           </div>
           <div class="modal-body">
              <form #editForm="ngForm">
-              <input type="hidden" ngModel="{{editArticle?.idArticle}}" name="idArticle" class="form-control" id="idArticle" placeholder="idArticle">
-  
-              <div class="row">
-              <div class="input_box col-md-6">
-                <input type="text" ngModel="{{editArticle?.nameArticle}}" name="nameArticle" class="form-control" id="nameArticle" aria-describedby="emailHelp" placeholder="nameArticle" required>
-                <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
-              </div>
-              <div class="input_box col-md-6">
-                <input type="text" ngModel="{{editArticle?.imageArticle}}" name="imageArticle" class="form-control" id="imageArticle" aria-describedby="imageArticle" placeholder="imageArticle" required>
-                <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
-              </div>
-            </div>
-  
+              <input type="hidden" ngModel="{{editComment?.idComment}}" name="idComment" class="form-control" id="idComment" placeholder="idComment">  
             <div class="row">
               <div class="input_box col-md-6">
-                <input type="text" ngModel="{{editArticle?.descriptionArticle}}" name="descriptionArticle" class="form-control" id="descriptionArticle" aria-describedby="descriptionArticle" placeholder="descriptionArticle" required>
+                <input type="text" ngModel="{{editComment?.descriptionComment}}" name="descriptionComment" class="form-control" id="descriptionComment" aria-describedby="descriptionComment" placeholder="descriptionComment" required>
                 <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
               </div>
               <div class="input_box col-md-6">
-                <input type="date" ngModel="{{editArticle?.dateArticle}}" class="form-control" name="dateArticle" id="dateArticle" aria-describedby="dateArticle" placeholder="dateArticle" required>
+                <input type="date" ngModel="{{editComment?.dateComment}}" class="form-control" name="dateComment" id="dateComment" aria-describedby="dateComment" placeholder="dateComment" required>
                 <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
               </div>
             </div>
             
              <!-- <div class="input_box col-md-6">
-                <input type="text" ngModel="{{editArticle?.userArticle}}" name="idUser" class="form-control" id="userArticle" aria-describedby="userArticle" placeholder="userArticle" required>
+                <input type="text" ngModel="{{editComment?.userComment}}" name="idUser" class="form-control" id="userComment" aria-describedby="userComment" placeholder="userComment" required>
                 <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
               </div> -->
             
@@ -280,7 +253,7 @@
   
                 <div class="modal-footer">
                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                   <button (click)="onUpdateArticle(editForm.value)" data-dismiss="modal" class="btn btn-success" (click)="playSound3()">Edit</button>
+                   <button  data-dismiss="modal" class="btn btn-success">Edit</button>
                 </div>
              </form>
           </div>
@@ -291,20 +264,20 @@
   
   
   <!-- Delete Modal -->
-  <div class="modal fade" id="deleteArticleModal" tabindex="-1" role="dialog" aria-labelledby="deleteArticleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
           <div class="modal-header">
-             <h5 class="modal-title" id="deleteArticleModalLabel">Delete Article</h5>
+             <h5 class="modal-title" id="deleteCommentModalLabel">Delete Comment</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
           </div>
           <div class="modal-body">
-             <p>Are you sure you want to delete {{deleteArticle?.idArticle}}?</p>
+             <p>Are you sure you want to delete {{deleteComment?.idComment}}?</p>
              <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button (click)="onDeleteArticle(deleteArticle?.idArticle)" class="btn btn-danger" data-dismiss="modal" (click)="playSound2()">Yes</button>
+                <button (click)="onDeleteComment(deleteComment?.idComment)" class="btn btn-danger" data-dismiss="modal" (click)="playSound4()">Yes</button>
              </div>
           </div>
        </div>
@@ -315,12 +288,12 @@
   
   
   
-   <!-- Detail Article Modal
-   <div class="modal fade" id="detailArticleModal" tabindex="-1" role="dialog" aria-labelledby="detailArticleModalLabel" aria-hidden="true">
+   <!-- Detail Comment Modal -->
+   <div class="modal fade" id="detailCommentModal" tabindex="-1" role="dialog" aria-labelledby="detailCommentModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content" style="width: 700px;">
           <div class="modal-header">
-             <h5 class="modal-title" id="detailArticleModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Article : {{editArticle?.idArticle }} </h5>
+             <h5 class="modal-title" id="detailCommentModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Comment : {{editComment?.idComment }} </h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
@@ -361,7 +334,7 @@
     </div>
   </div>
   
-   -->
+  
   
   
   

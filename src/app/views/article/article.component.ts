@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Article } from '../../Models/article';
-import { ArticleService } from '../../services/article.service';
-
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Article } from 'app/Models/article';
+import { ArticleService } from 'app/services/article.service';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -10,64 +12,160 @@ import { ArticleService } from '../../services/article.service';
 })
 export class ArticleComponent implements OnInit {
 
-  articleS: Article[] = [];
-  showForm = false;
-  article: Article = new Article();
-  closeResult: string | undefined;
-  content: any;
+  
+ 
+  hashMapArticleStatus:  Map<String, number> = new Map<string, number>();
+  public editArticle?: Article;
+  public deleteArticle?: Article;
+  public detailsArticle?: Article;
+  article: Article[];
+  totalArticle: number;
+  searchName :string ;
+  articless: Article[];
+  searchText: any;
 
-  constructor(private articleService: ArticleService, private modalService: NgbModal) { }
+
+
+
+
+  constructor(private articleService: ArticleService,private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllArticles();
+    this.getArticles();
+   /* this.statisticsArticleStatus(); */
   }
 
-  getAllArticles(): void {
-    this.articleService.getAllArticles().subscribe(articles => this.articleS = articles as Article[]);
+  /*private statisticsArticleStatus(){
+    this.articleService.statisticsArticleStatus().subscribe(data=>{
+      this.hashMapArticleStatus=data;
+      console.log("dataaaa"+data);
+    
+      console.log(this.hashMapArticleStatus);
+    })
+  }*/
+
+  private getArticles(){
+    this.articleService.getArticleList().subscribe(data => {
+       this.article = data;
+       this.totalArticle= this.article.length;
+
+  
+    });
   }
   
-
-  addArticle(article: Article): void {
-    this.articleService.addArticle(article).subscribe(() => {
-      this.getAllArticles();
-      this.showForm = false;
-    });
+  public OnDetailsArticle(idArticle: number){
+    this.articleService.getArticleById(idArticle).subscribe(
+      (response: Article) => {
+        console.log(response);
+      });
   }
 
-  editArticle(article: Article): void {
-    this.articleService.updateArticle(article).subscribe();
+  
+  public onAddArticle(addForm: NgForm): void {
+    document.getElementById('add-Article-form')!.click();
+    this.articleService.createArticle(addForm.value).subscribe(
+      (response: Article) => {
+        console.error
+        console.log(response);
+        this.getArticles();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+  
+  /*public onUpdateArticle(article: Article) {
+    this.articleService.updateArticle(article).subscribe(
+      (response: Article) => {
+        console.log(response);
+        this.getArticles();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }*/
+  
+  public onUpdateArticle(article: Article) {
+    this.articleService.updateArticle(article).subscribe(
+      (response: Article) => {
+        console.log(response);
+        this.getArticles();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-  deleteArticle(idArticle: number): void {
-    this.articleService.deleteArticle(idArticle).subscribe(() => {
-      this.getAllArticles();
-    });
-  }
 
-  open(content: any): void {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
+  public onDeleteArticle(idArticle: number): void {
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+    this.articleService.deleteArticle(idArticle).subscribe(() => { this.getArticles() }
+    
+    ),
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    };
+  }
+  
+  public onOpenModal(article: Article, mode: string): void {
+    console.log("test")
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'edit') {
+      this.editArticle = article;
+      button.setAttribute('data-target', '#updateArticleModal');
     }
+    if (mode === 'delete') {
+      this.deleteArticle = article;
+      button.setAttribute('data-target', '#deleteArticleModal');
+    }
+    if (mode === 'add') {
+  
+      button.setAttribute('data-target', '#addArticleModal');
+    }
+    if (mode === 'detail') {
+  
+      button.setAttribute('data-target', '#detailArticleModal');
+    }
+  
+    container?.appendChild(button);
+    button.click();
   }
 
-  closeForm(): void {
-    this.showForm = false;
-  }
+  //
 
-  cancel(): void {
-    this.showForm = false;
-  }
+  searchArticlesByName() {
+    this.articleService.getArticlesByName(this.searchName).subscribe(
+      articless => this.article = articless,
+        error => console.log(error)
+    );
 }
 
+playSound(){
+  let audio = new Audio();
+  audio.src = "../../../assets/img/V1.mp3"
+  audio.load();
+  audio.play();
+}
+
+playSound2(){
+  let audio = new Audio();
+  audio.src = "../../../assets/img/V2.mp3"
+  audio.load();
+  audio.play();
+}
+
+playSound3(){
+  let audio = new Audio();
+  audio.src = "../../../assets/img/V3.mp3"
+  audio.load();
+  audio.play();
+}
+}

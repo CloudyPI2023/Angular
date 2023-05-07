@@ -5,13 +5,16 @@ import { UserProfileComponent } from '../../user-profile/user-profile.component'
 import { TableListComponent } from '../../table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ProductManagementComponent } from 'app/views/product-management/product-management.component';
 import { CategoryManagementComponent } from 'app/views/category-management/category-management.component';
 import { GiftManagementComponent } from 'app/views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from 'app/views/reclamation-management/reclamation-management.component';
+import { ArticleComponent } from 'app/views/article/article.component';
+import { AddArticleComponent } from 'app/views/add-article/add-article.component';
+import { StatComponent } from 'app/views/article/stat/stat.component';
+import { CommentComponent } from 'app/views/comment/comment.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -65,7 +68,12 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
+    { path: 'article-management',         component: ArticleComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'add-article',   component: AddArticleComponent },
+    { path: 'comment-management',   component: CommentComponent },
+
+    { path: 'statArticles',   component: StatComponent },
+
 ];

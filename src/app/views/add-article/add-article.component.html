@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Article</h4>
+                        <p class="card-category">Complete Your Article</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                
+                                <div class="col-md-5">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder=" Article Name " >
+                                    </mat-form-field>
+                                </div>
+                                                                
+                               <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Description Article">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Date Article" type="date">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+
+                                <div class="row">
+
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="user Article" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Image Article" type="file">
+                                    </mat-form-field>
+                                </div>
+                            
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Confirm</button> (click)="addArticle(article)"
+                                <button mat-raised-button routerLink="/article-management" class="btn btn-info pull-right" >Liste des articles</button>
+
+                            <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+       

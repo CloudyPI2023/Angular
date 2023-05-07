@@ -18,6 +18,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { ProductManagementComponent } from 'app/views/product-management/product-management.component';
+import { AddArticleComponent } from 'app/views/add-article/add-article.component';
+
 
 @NgModule({
   imports: [
@@ -38,9 +40,9 @@ import { ProductManagementComponent } from 'app/views/product-management/product
     TableListComponent,
     TypographyComponent,
     IconsComponent,
-    MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    AddArticleComponent,
   ]
 })
 

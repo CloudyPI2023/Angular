@@ -4,10 +4,10 @@ import {User} from "./user"
 export class Article {
 
     idArticle:number;
-    NameArticle:String;
-    DescriptionArticle:String;
-    ImageArticle:String;
-    DateArticle:Date;
+    nameArticle:String;
+    descriptionArticle:String;
+    imageArticle:String;
+    dateArticle:Date;
     userArticle:User[];
-   
+    
 }

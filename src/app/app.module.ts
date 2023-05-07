@@ -12,8 +12,17 @@ import { CategoryManagementComponent } from './views/category-management/categor
 import { GiftManagementComponent } from './views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
 import { ArticleComponent } from './views/article/article.component';
+import { AddArticleComponent } from './views/add-article/add-article.component';
+import { StatComponent } from './views/article/stat/stat.component';
 
 
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import {NgToastModule} from 'ng-angular-popup';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { CommentComponent } from './views/comment/comment.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   imports: [
@@ -24,6 +33,9 @@ import { ArticleComponent } from './views/article/article.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+
+ 
+    
   ],
   declarations: [
     AppComponent,
@@ -33,6 +45,10 @@ import { ArticleComponent } from './views/article/article.component';
     GiftManagementComponent,
     ReclamationManagementComponent,
     ArticleComponent,
+    StatComponent,
+    CommentComponent,
+    SearchPipe
+    /*AddArticleComponent,*/
   ],
   providers: [],
   bootstrap: [AppComponent]

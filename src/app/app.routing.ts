@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductManagementComponent } from './views/product-management/product-management.component';
 import { ArticleComponent } from './views/article/article.component';
+import { CommentComponent } from './views/comment/comment.component';
 
 const routes: Routes =[
   {
@@ -33,6 +34,11 @@ const routes: Routes =[
   {
     path:'article-management',
     component: ArticleComponent
+  },
+
+  {
+    path:'comment-management',
+    component: CommentComponent
   }
   
 ];
