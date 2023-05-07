@@ -41,6 +41,8 @@ export class DonationComponent implements OnInit {
 
   donationsStat: { type: string, count: number }[] = [];
 
+
+
   constructor(private donationService: DonationService,private router: Router) {
     this.statisticsDonationStatus();
     this.statisticsDonationType();
@@ -49,7 +51,11 @@ export class DonationComponent implements OnInit {
   ngOnInit(): void {
     this.getDonations();
   
+    
   }
+
+
+
 
   private statisticsDonationStatus(){
     this.donationService.statisticsDonationStatus().subscribe(data=>{
@@ -82,7 +88,7 @@ export class DonationComponent implements OnInit {
       console.log(this.hashMapUserRole);
     })
   }
-
+ 
 
   private statisticsDonationType(){
     this.donationService.statisticsDonationType().subscribe(data=>{
@@ -197,6 +203,8 @@ export class DonationComponent implements OnInit {
   
       button.setAttribute('data-target', '#detailDonationModal');
     }
+
+    
   
     container?.appendChild(button);
     button.click();

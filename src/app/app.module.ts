@@ -19,7 +19,7 @@ import {NgToastModule} from 'ng-angular-popup';
 import { StatComponent } from './views/stat/stat.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SearchPipe } from './search.pipe';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { SearchPipe } from './search.pipe';
     NgChartsModule,
     NgApexchartsModule,
     NgToastModule,
-    BrowserModule
+    BrowserModule,
+    NgxChartsModule
 
   ],
   declarations: [

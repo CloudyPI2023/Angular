@@ -80,35 +80,8 @@
 <!--stat Requests-->
 
 <!-- Create chart status here. -->
-<div class="row">
-    <div class="col-md-6 ml-auto mr-auto text-center">
-        <h4 class="card-title">
-            
-            <p class="category">Requests statistics</p>
-        </h4>
-    </div>
-</div>
-<div class="row">
 
-    <div class="chartContainer"
-        style="  width: 500px; height: 350px; justify-content: center; align-items: center;margin-left: 140px;">
-        <div id="chart">
-            <apx-chart [series]="chartRtStatus.series" [chart]="chartRtStatus.chart" [labels]="chartRtStatus.labels"
-                [responsive]="chartRtStatus.responsive"></apx-chart>
-        </div>
 
-    </div>
-
-    <!-- Create chart type here. -->
-
-    <div class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
-        <div id="chartT">
-            <apx-chart [series]="chartRtType.series" [chart]="chartRtType.chart" [labels]="chartRtType.labels"
-                [responsive]="chartRtType.responsive"></apx-chart>
-        </div>
-    </div>
-
-</div>
 
 <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
@@ -118,12 +91,30 @@
         </h4>
     </div>
 </div>
+<div>
+    <h2>Donation Statistics</h2>
 
-<div class="chart-container">
-    <canvas id="donationChart"></canvas>
+  </div>
+  <div class="mouna">
+    <select [(ngModel)]="selectedYear" (ngModelChange)="updateChart()">
+      <option *ngFor="let year of years" [value]="year">{{year}}</option>
+    </select>
+  </div>
+  <div>
+    <canvas id="donationChart" style="width: 2000px;height: 1000px;"></canvas>
+  </div>
+    
+
+    
+
+    
 </div>
-<!--*************************************************************-->
+  
+   
 
+    
+
+<!--*************************************************************-->
 
 
 
@@ -138,6 +129,29 @@
   margin: auto;
   height: 400px;
   width: 80%;
+}
+
+mouna {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0066cc;
 }
 </style>
 

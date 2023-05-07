@@ -15,6 +15,10 @@ export class DonationService {
   url=environment.apiBaseUrl+"donations";
   constructor(private httpClient: HttpClient) { }
 
+  getDisabledDonations(idRequest): Observable<Donation[]>{
+    return this.httpClient.get<Donation[]>(`${this.url}/getDisabledDonations/${idRequest}`);  
+   }
+
   getDonationList(): Observable<Donation[]>{
    return this.httpClient.get<Donation[]>(this.url + '/retrieveAllDonations');  
   }
@@ -60,6 +64,19 @@ export class DonationService {
     );
   }
  
+  getDonationsByAssociation(idAssociation: number): Observable<Donation>{
+    return this.httpClient.get<Donation>(`${this.url}/getDonationsByAssociation/${idAssociation}`);
+  }
+  ////////////////////////////////////////////////////
+
+  getDonationStatisticsByDate2(): Observable<any> {
+    return this.httpClient.get(`${this.url}/statisticsDonationDate1/`);
+  }
+
+  //Partie Request 
+  getDonationsByRequest(idRequest: number): Observable<Donation>{
+    return this.httpClient.get<Donation>(`${this.url}/getDonationsByRequest/${idRequest}`);
+  }
 
   
 }

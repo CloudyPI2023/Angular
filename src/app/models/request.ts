@@ -9,6 +9,6 @@ export class Request {
     requestType: DonationRequestType;
     dateRequest: Date;
     statusRequest: RequestDonationStatus; 
-    association: Association[];
+    association: Association;
     idDonation: number[];
 }

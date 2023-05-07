@@ -9,7 +9,7 @@ import { Request } from "app/models/request";
 import { AssociationService } from "app/services/associationService/association.service";
 import { DonationService } from "app/services/donationService/donation.service";
 import { RequestService } from "app/services/requestService/request.service";
-import { response } from "express";
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -18,84 +18,69 @@ import { response } from "express";
   styleUrls: ['./request.component.scss']
 })
 export class RequestComponent implements OnInit {
+  searchText: any;
 
-  
   public editRequest?: Request;
   public deleteRequest?: Request;
   public detailsRequest?: Request;
   public assignRequest?: Request;
+  public assignRequestByAdmin?: Request;
+  public donationbyadmin?: Donation;
   requests: Request[];
   requestsInProgress: any;
   requestsAccepted: Request[];
   requestsRefused: Request[];
-  r:DonationRequestType[];
+  r: DonationRequestType[];
   selectedTypeRequest: DonationRequestType;
-  typeOption: any =[];
+  typeOption: any = [];
 
   associationList: Association[];
   donationList: Donation[];
-  isDisabled:Boolean = true;
+  isDisabled: Boolean = true;
   associations: Association[];
-  req:Request;
+  req: Request;
 
-  constructor(private requestService: RequestService,private associationService: AssociationService,
-    private donationService: DonationService,private router: Router) { }
+  donations: any;
+  public takeDonationA?: Association;
+  public takeA?: Association;
+  myRequest: Request = new Request();
+  idDonation: number;
+  idAssociation: number;
+  d: Donation;
+  idD: number;
+  donation1: Donation;
+  r1: number;
+  constructor(private requestService: RequestService, private associationService: AssociationService,
+    private donationService: DonationService, private router: Router, private toast: NgToastService) { }
 
   ngOnInit(): void {
     this.getRequests();
-    this.getAssociations();
-    this.getDonations();
+
   }
 
-  private getAssociations(){
-    this.associationService.getAssociationList().subscribe(data => {
-      this.associationList = data;
-    });
-  }
-  private getDonations(){
-    this.donationService.getDonationList().subscribe(data => {
-      this.donationList = data;
-  
-    });
-  }
 
   getEnumValues(enumObj: any) {
     return Object.keys(enumObj).filter(key => !isNaN(Number(enumObj[key])));
   }
 
-  private getRequestsInProgress(){
-    this.requestService.getRequestInProgressList().subscribe(data => {
-      this.requests = data; 
-  
-    });
-  }
-  private getRequestsAccepted(){
-    this.requestService.getRequestAcceptedList().subscribe(data => {
+
+
+  private getRequests() {
+    this.requestService.getRequestList1().subscribe(data => {
       this.requests = data;
-  
+      console.log(this.requests)
+
     });
   }
-  private getRequestsRefused (){
-    this.requestService.getRequestRefusedList().subscribe(data => {
-      this.requests = data;
-  
-    });
-  }
-  private getRequests(){
-    this.requestService.getRequestList().subscribe(data => {
-      this.requests = data;
-  
-    });
-  }
-  
-  public OnDetailsRequest(idRequest: number){
+
+  public OnDetailsRequest(idRequest: number) {
     this.requestService.getRequestById(idRequest).subscribe(
       (response: Request) => {
         console.log(response);
       });
   }
 
-  
+
   public onAddRequest(addForm: NgForm): void {
     document.getElementById('add-Request-form')!.click();
     this.requestService.createRequest(addForm.value).subscribe(
@@ -110,7 +95,7 @@ export class RequestComponent implements OnInit {
       }
     );
   }
-  
+
   public onUpdateRequest(request: Request) {
     this.requestService.updateRequest(request).subscribe(
       (response: Request) => {
@@ -123,28 +108,28 @@ export class RequestComponent implements OnInit {
     );
   }
 
-  public assignRequestToDonation(request: Request) {
-    this.requestService.assignRequestToDonation(request).subscribe(
-      (response: Request) => {
-        console.log(response);
-        this.getRequests();
-        //this.isDisabled = true;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-  
+  /* public assignRequestToDonation(request: Request) {
+     this.requestService.assignRequestToDonation(request).subscribe(
+       (response: Request) => {
+         console.log(response);
+         this.getRequests();
+         //this.isDisabled = true;
+       },
+       (error: HttpErrorResponse) => {
+         alert(error.message);
+       }
+     );
+   }*/
+
   public onDeleteRequest(idRequest: number): void {
     this.requestService.deleteRequest(idRequest).subscribe(() => { this.getRequests() }
-    
+
     ),
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    };
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      };
   }
-  
+
   public onOpenModal(request: Request, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -164,23 +149,77 @@ export class RequestComponent implements OnInit {
       button.setAttribute('data-target', '#addRequestModal');
     }
     if (mode === 'detail') {
-  
+
       button.setAttribute('data-target', '#detailRequestModal');
     }
-    if (mode === 'assignRequestToDonation') {
-      this.assignRequest= request;
-      button.setAttribute('data-target', '#assignRequestToDonationModal');
+
+    if (mode === 'takeDonation') {
+      this.getDonationsByRequest(request.association.idAssociation);
+      this.takeDonationA = request.association;
+      this.assignRequestByAdmin = request;
+      this.r1 = request.idRequest;
+      // this.myRequest= request,
+      button.setAttribute('data-target', '#takeDonationModal');
+    }
+    if (mode === 'assignDonationToRequestByAdmin') {
+
+      this.assignDonationToRequestByAdmin(this.donation1, this.r1);
+      this.assignRequestByAdmin = request;
+
+      button.setAttribute('data-target', '#assignRequestToDonationByAdminModal');
     }
     container?.appendChild(button);
     button.click();
   }
 
-  /*getColor(nomAssociation: string): string {
-    // Exemple de fonction de hachage pour générer une couleur en fonction du nom de l'association
-    const hashCode = Array.from(nomAssociation).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const color = `hsl(${hashCode % 360}, 50%, 70%)`;
-    return color;
-  }*/
+
+
+  private getDonationsByRequest(idAssociation: number) {
+    this.donationService.getDonationsByRequest(idAssociation).subscribe(data => {
+      this.donations = data;
+
+    });
+  }
+
+
+
+
+  ////Fonctionnalité avancé
+  public assignRequestToDonation(request: Request, idDonation: number, idAssociation: number) {
+    this.requestService.assignRequestToDonationByAdmin(this.myRequest, idDonation).subscribe(
+      (response: Request) => {
+        console.log(response);
+        //this.goToAssociationsList();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+
+
+
+
+  public assignDonationToRequestByAdmin(donation: Donation, idRequestD: number) {
+    this.requestService.assignDonationToRequestByAdmin(donation, idRequestD).subscribe(
+      (response: Request) => {
+        console.log(response);
+
+        this.toast.success({ detail: "SUCCESS", summary: 'Donation added successfully !', duration: 5000 });
+
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  goTorequestsList() {
+    this.router.navigate(['/requests']);
+  }
+
+
 
 
 }
