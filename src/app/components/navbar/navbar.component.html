@@ -48,8 +48,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)">
-                        <i class="material-icons">person</i>
-                        
+                        <i class="material-icons" >person</i>
+
                         <i class="material-icons"  (click)="onLogout()" style="margin-left: 10px">logout</i>
                         <p>
                             <span class="d-lg-none d-md-block">Account</span>   
@@ -60,6 +60,99 @@
         </div>
     </div>
 </nav>
+
+
+<!-- Edit User Modal 
+<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateUserModalLabel"> Update My Profile </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+              <input type="hidden" ngModel="{{editUser?.idUser}}" name="idUser" class="form-control" id="idUser" placeholder="idUser">
+  
+  
+              <div class="input_box"style="float:left;padding-right: 10px;">
+                 <input type="text" ngModel="{{editUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp"  required>
+                 <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+               </div>
+               <div class="input_box"style="float:left">
+                 <input type="text" ngModel="{{editUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp"  required>
+                 <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+               </div>
+  
+               <div class="input_box" style="float:left;padding-right: 10px;">
+                 <input type="text" ngModel="{{editUser?.email}}"  name="email" class="form-control" id="email" aria-describedby="emailHelp"  required>
+                 <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
+               </div>
+               <div class="input_box" style="float:left"> 
+                <input type="text" ngModel="{{editUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
+                <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
+              </div>
+              <div class="input_box" style="float:left;padding-right: 10px;">
+                <input type="password" ngModel="{{editUser?.password}}" name="password" class="form-control" id="password" aria-describedby="password" placeholder="Password" required>
+                <div class="icon"><i class="fa fa-lock" style="color: green;"></i></div>
+              </div> 
+              <div class="input_box" style="float:left">
+                <input type="date" ngModel="{{editUser?.birthDate}}" name="birthDate" class="form-control" id="birthDate" aria-describedby="birthDate" placeholder="Birth Date" required>
+                <div class="icon"><i class="fa fa-calendar" style="color: green;"></i></div>
+              </div>
+    
+              <div class="input_box" style="float:left;padding-right: 10px;">
+                <input type="text" ngModel="{{editUser?.address}}" name="address" class="form-control" id="address" aria-describedby="address" placeholder="Address" required>
+                <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+              </div>
+              <div class="input_box" style="float:left">
+                <input type="text" ngModel="{{editUser?.city}}" name="city" class="form-control" id="city" aria-describedby="city" placeholder="City" required>
+                <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+              </div>
+  
+               <div class="form-group" style="float:left;align-items: center;">
+                 <label for="gender" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Gender</label><br>
+                <input type="radio" id="FEMALE" ngModel="{{editUser?.gender}}"  name="gender" value="FEMALE">
+                <label for="FEMALE">FEMALE</label>
+                <input type="radio" id="MALE" ngModel="{{editUser?.gender}}" name="gender" value="MALE">
+                <label for="MALE">MALE</label>
+            </div>
+  
+            <div class="column input_box" style="float:right">
+              <div class="select-box">
+                 <label for="role" style="color: green;font-size: 17px;"><i class="fa fa-cogs"></i> Role</label><br>
+                <select id="role" name="role" ngModel="{{editUser?.role}}">
+                 <option value="Admin" >Admin</option>
+                  <option value="Patient">Patient</option>
+                  <option value="Donator">Donator</option>
+                  <option value="AssociationMember">Association Member</option>
+                  <option value="DrugsProvider">Drugs Provider</option> 
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="float:right; display: none;">
+              <label for="enabled" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Enabled</label><br>
+             <input type="radio" id="true" ngModel="{{editUser?.enabled}}"  name="enabled" value="true">
+             <label for="true" type="hidden">True</label>
+             <input type="radio" id="false" ngModel="{{editUser?.enabled}}" name="enabled" value="false">
+             <label for="false" >False</label>
+         </div>
+            <br>
+            <br>
+  
+  
+                <div class="modal-footer" style="float:left;justify-content: center;" >
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button (click)="onUpdateUser(editForm.value)" data-dismiss="modal" class="btn btn-success">Save changes</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>-->
+        
 
 <!--
 

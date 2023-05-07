@@ -1,10 +1,13 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { UserService } from 'app/views/user-management/user.service';
+import { User } from 'app/models/User/user';
+import { NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -19,10 +22,14 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
     public userName : String;
     UserToken = localStorage.getItem('token');
+    userModalVisible = false;
+    currentUser: any;
+    idUser: any;
 
+    user: User[];
+    public editUser?: User;
 
-
-    constructor(location: Location,  private element: ElementRef, private router: Router,private toast: NgToastService, private jwtHelper: JwtHelperService) {
+    constructor(private userService: UserService ,location: Location,  private element: ElementRef, private router: Router,private toast: NgToastService, private jwtHelper: JwtHelperService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -37,6 +44,7 @@ export class NavbarComponent implements OnInit {
         this.userName=lastName+" "+firstName;
         const rolesUser = decodedToken.roles;
         const adminRole = rolesUser[0];
+        const idUser = decodedToken.idUser;
 
         if( this.UserToken == null && adminRole!="Admin"){
             this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
@@ -149,8 +157,37 @@ export class NavbarComponent implements OnInit {
       return 'Dashboard';
     }
 
+    public onUpdateUser(user: User) {
+        this.userService.updateUser(user).subscribe(
+          (response: User) => {
+            console.log(response);
+            this.toast.success({detail:'Success',summary:'Successfully updated !',position:'tr',duration:2000})
+          },(error) => {
+            //alert(error.message);
+          if (error.status === 403) {
+            this.toast.error({detail:'Error',summary:'Your are not authorized to do this action .',position:'tr',duration:3000})
+      
+          } else  {
+            this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})    }     
+          }
+        );
+      }
+
+      loadUsers() {
+        this.userService.getUserById(this.idUser).subscribe((user) => {
+          
+        });
+      }
 
 
+      
+
+      showUserModal() {        
+        this.userService.getUserById(this.idUser).subscribe((user) => {
+          this.currentUser = user;
+          this.userModalVisible = true;
+        });
+      }
 
     onLogout() {
         localStorage.removeItem('token');

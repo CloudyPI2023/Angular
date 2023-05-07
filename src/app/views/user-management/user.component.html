@@ -24,8 +24,21 @@
       <a class="dropdown-item" id="genderStatisticsButton" (click)="onOpenModal(null, 'statGender')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartGenderModal">Gender <img style="width: 25px" ></a>
       <a class="dropdown-item" id="actStatisticsButton" (click)="onOpenModal(null, 'status')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartStatusModal">Activation Status <img style="width: 25px" ></a>
   </div>
+  
+  <!--<div>
+    <label for="role">Role:</label>
+    <select id="role" [(ngModel)]="selectedRole">
+      <option value="Admin">Admin</option>
+      <option value="Danotor">Danotor</option>
+      <option value="Patient">Patient</option>
+      <option value="AssociationMember">Association Member</option>
+      <option value="DrugsProvider">Drugs Provider</option>
+    </select>
+    <button (click)="searchUsersByRole()">Search</button>
+  </div> -->
+
   <li class="nav-item active">
-    <a style="margin-left: 900px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+    <a style="margin-left: 500px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
      </a>
   </li>
 </div>
@@ -137,7 +150,7 @@
                   <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
                 </div>
                 <div class="input_box" style="float:left;">
-                  <input type="number" ngModel name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
+                  <input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
                   <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
                 </div>
                 <div class="input_box" style="float:left;padding-right: 10px;">
@@ -150,11 +163,6 @@
                 </div>
                
 
-            
-
-            
-
-            
              <div class="input_box" style="float:left;padding-right: 10px;">
                <input type="text" ngModel name="address" class="form-control" id="address" aria-describedby="address" placeholder="Address" required>
                <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
@@ -186,8 +194,12 @@
                  </select>
                </div>
              </div>
-
-             <!-- <div class="input_box col-6" >   
+            <!--  <div class="form-group" style="float:left;align-items: center;">
+              <img [src]="avatarUrl" alt="User avatar">
+              <label for="avatar">Select Avatar:</label>
+              <input type="file" id="avatar" name="avatar" (change)="onFileSelected($event)">
+            </div>
+             <div class="input_box col-6" >   
               <div class="form-group">
 								<label for="birthDate" style="color: black;">Image</label>
 								<input type="file" accept="image/*" (change)="onFileSelected($event)" >
@@ -256,7 +268,7 @@
                <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
              </div>
              <div class="input_box" style="float:left"> 
-              <input type="number" ngModel="{{editUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
+              <input type="text" ngModel="{{editUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
               <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
             </div>
             <div class="input_box" style="float:left;padding-right: 10px;">
@@ -349,7 +361,7 @@
                <div class="icon" ><i class="fa fa-envelope" style="color: green;"></i></div>
              </div>
              <div class="input_box" style="float:left"> 
-              <input type="number" ngModel="{{detailsUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" readonly>
+              <input type="text" ngModel="{{detailsUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" readonly>
               <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
             </div>
             <div class="input_box" style="float:left;padding-right: 10px;">
@@ -488,6 +500,18 @@
      </div>
 </div>
 </div>
+
+
+<div class="tttttt">
+  <label style="color: black;">Choose The Year : </label>
+  <select [(ngModel)]="selectedYear" (ngModelChange)="updateChart()">
+    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+  </select>
+</div>
+<div>
+  <canvas id="UserChart" style="width: 2000px;height: 1000px;"></canvas>
+</div>
+
 
 <style>
    .button {
@@ -672,6 +696,31 @@ form a:hover{
 .input-box {
   width: 50%;
   position: relative;
+}
+
+
+
+tttttt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0066cc;
 }
  
    </style>

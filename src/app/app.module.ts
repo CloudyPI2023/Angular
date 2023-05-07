@@ -21,6 +21,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SearchPipe } from './search.pipe';
+import { ChatComponent } from './views/chat/chat.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { SearchPipe } from './search.pipe';
     DeliveryPersonComponent,
     LoginComponent,
     SearchPipe,
+    ChatComponent,
 
   ],
   providers: [],

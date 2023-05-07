@@ -6,7 +6,7 @@ export class User {
   firstName: String;
   lastName: String;
   gender: Gender;
-  birthDate: Date;
+  birthDate: string;
   address: String;
   city: String;
   email: String;
