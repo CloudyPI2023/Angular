@@ -66,4 +66,18 @@ export class UserService {
   statisticsUserActivationStauts(): Observable<any>{
     return this.httpClient.get<any>(`${this.baseURL}`+"/User/activationStatus-statistics",this.options);
   }
+
+  
+  getUsersByRole(role: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.baseURL}/User/find-ByRole/${role}`);
+  }
+
+  getRoles(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${this.baseURL}/User/roles`);
+  }
+
+
+  getCreatedAtStatisticsByDate(): Observable<any> {
+    return this.httpClient.get(`${this.baseURL}`+"/User/statisticsCreatedAtUser",this.options);
+  }
 }

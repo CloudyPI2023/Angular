@@ -44,9 +44,9 @@
           <td> {{ p.categoryProduct.nameCategory}}</td>
           <td> {{ p.priceProduct}} DT</td>
           <td> {{p.quantityProduct}}</td> 
-          <!--<td>{{p.imageProduct}}</td>-->
+      
           <td style="align-items: center;">
-            <img src="../../../assets/img/product.jpg" height="50" width="50">
+            <img src="../../../assets/img/ProductsAndGiftManagement/{{p.imageProduct}}" height="50" width="50">
           </td>
           <td>{{p.expirationDateProduct}}</td>
           <td>{{p.userProduct.firstName}} {{p.userProduct.lastName}}</td>
@@ -137,6 +137,7 @@
             <input type="text" *ngIf="!detailsProduct?.categoryProduct.archived"
               ngModel="{{detailsProduct?.categoryProduct.nameCategory}}" name="nameCategory" class="form-control"
               id="nameCategory" aria-describedby="nameCategory" readonly>
+              
 
 
             <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style="color: #4d82a3;"></i></div>

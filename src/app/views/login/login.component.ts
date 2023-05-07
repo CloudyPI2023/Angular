@@ -39,9 +39,6 @@ export class LoginComponent implements OnInit {
       this.service.login(this.formModel.value).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.access_token);
-          localStorage.setItem('username', res.user);
-          localStorage.setItem('idUser',res.idUser);
-          localStorage.setItem('role',res.role);
           this.toast.success({detail:'Success',summary:'You are successfully logged in !',position:'tr',duration:2000})
           this.route.navigateByUrl('');       
         },

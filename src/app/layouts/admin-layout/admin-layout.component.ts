@@ -4,6 +4,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { filter, Subscription } from 'rxjs';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,10 +15,18 @@ export class AdminLayoutComponent implements OnInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  UserToken = localStorage.getItem('token');
 
-  constructor( public location: Location, private router: Router) {}
+  constructor( public location: Location, private router: Router,private toast: NgToastService ) {}
 
   ngOnInit() {
+     ///
+     if(this.UserToken == null ){
+        this.toast.error({detail:'Error',summary:'You are not allowed ! ',position:'tr',duration:2000})
+        this.router.navigateByUrl('/login');
+        }
+     ////
+
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {

@@ -12,6 +12,8 @@ import Chart from 'chart.js/auto';
 import { environment } from 'environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+import { createClient } from '@supabase/supabase-js';
+import { Role } from 'app/models/User/role';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -19,6 +21,10 @@ export type ChartOptions = {
   responsive: any[];
   labels: any;
 };
+const supabaseUrl = 'https://nwkxroquvbmhbchbkbjk.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53a3hyb3F1dmJtaGJjaGJrYmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMzMjQ4MTYsImV4cCI6MTk5ODkwMDgxNn0.2JdZTjvuXGIHJ_gfcohLMM-I22pGBSlLEQiNwI9Hoto';
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 @Component({
   selector: 'app-user',
@@ -30,7 +36,11 @@ export class UserComponent implements OnInit {
   public deleteUser?: User;
   public detailsUser?: User;
   users: User[];
-  selectedFile: File;
+  roleFilter: Role = null;
+  selectedRole: string;
+
+
+
   searchText:any;
 
   userFile : any;
@@ -60,6 +70,17 @@ export class UserComponent implements OnInit {
  values!:any[]
 
 
+   /////
+   selectedFile: File;
+   selectedFileUrl: string | null = null;
+   /////
+   avatarUrl: string = '';
+
+   UserData: any;
+   chartNew: any;
+   document: Document;
+   selectedYear: string;
+   years: string[];
   constructor(private userService: UserService,private router: Router,private toast: NgToastService,private httpClient: HttpClient, private jwtHelper: JwtHelperService ) {
 
     this.statisticsRoleUser();
@@ -78,23 +99,93 @@ export class UserComponent implements OnInit {
        }
     this.getUsers();
 
-    this.totalPages = Math.ceil(this.users.length / this.pageSize);
         
-   
-  
-  }
-  totalPagesArray() {
-    return Array(this.totalPages).fill(0).map((x, i) => i + 1);
+
+    this.userService.getCreatedAtStatisticsByDate().subscribe(data => {
+      this.UserData = data;
+      this.selectedYear = '2023';
+      console.log("pst",this.selectedYear)
+      this.createChart(this.selectedYear);
+      this.years = Object.keys(this.UserData);
+    });
+    this.document = document;
   }
 
-  onPageChange(pageNumber: number) {
-  if (pageNumber < 1 || pageNumber > this.totalPages) {
-    return; // Do nothing if page number is out of range
+////
+public onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.selectedFile = file;
+      this.selectedFileUrl = reader.result as string;
+    };
   }
-  this.currentPage = pageNumber;
-  // Fetch items from the database based on the current page number and items per page
-  // ...
+  
 }
+
+searchUsersByRole() {
+  this.userService.getUsersByRole(this.selectedRole)
+    .subscribe(users => this.users = users);
+}
+
+public onAddUser(addForm: NgForm): void {
+  document.getElementById('add-User-form')!.click();
+  this.userService.createUser(addForm.value).subscribe(
+    (response: User) => {
+      console.error
+      console.log(response);
+      this.getUsers();
+      addForm.reset();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
+}
+////
+updateChart() {
+  const labels = Object.keys(this.UserData[this.selectedYear]);
+  const data = Object.values(this.UserData[this.selectedYear]);
+  console.log(labels , data);
+  this.chartNew.data.labels = labels;
+  this.chartNew.data.datasets[0].data = data;
+  this.chartNew.update();
+}
+
+createChart(year: string) {
+  const labels = Object.keys(this.UserData[year]);
+  const data = Object.values(this.UserData[year]);
+  
+  if (!this.chartNew) {
+    this.chartNew = new Chart('UserChart', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Statistics of users registration',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+    });
+  } else {
+    this.chartNew.data.labels = labels;
+    this.chartNew.data.datasets[0].data = data;
+    this.chartNew.options.title.text = 'User by Month';
+    this.chartNew.update();
+  }
+}
+
+
+
+/////
+
 
 
 private statisticsRoleUser(){
@@ -186,21 +277,35 @@ private statisticsActivationStatusUser(){
 
 }
 
-private getUsers(){
+/*private getUsers(){
   this.userService.getUsersList().subscribe(data => {
      this.users = data;
 
   });
+}*/
+
+getUsers() {
+ 
+    this.userService.getUsersList().subscribe(users => this.users = users,);
+  
 }
+
+onRoleFilterChanged(role: Role) {
+  this.roleFilter = role;
+  this.getUsers();
+}
+
+
 
 public OnDetailsUser(idUser: number){
   this.userService.getUserById(idUser).subscribe(
     (response: User) => {
+      this.avatarUrl = `https://nwkxroquvbmhbchbkbjk.supabase.co/storage/v1/object/avatars/${response.image_user}`;
       console.log(response);
     });
 }
 
-public onAddUser(addForm: NgForm): void {
+/*public onAddUser(addForm: NgForm): void {
   document.getElementById('add-User-form')!.click();
   this.userService.createUser(addForm.value).subscribe(
     (response: User) => {
@@ -213,32 +318,34 @@ public onAddUser(addForm: NgForm): void {
       alert(error.message);
     }
   );
-}
+}*/
+/*prepareFormData(user: User) {
+  const formdata = new FormData();
+  this.productToAdd.ProductImages.forEach(image => {
+    formdata.append('image',
+      image.file,
+      image.file.name);
+  });
+  formdata.append(
+    'user',
+    new Blob([JSON.stringify(user)], {type: 'application/json'})
+  )
+  return formdata;
+}*/
 
-onFileSelected(event : any) {
-  console.log(event);
-  if (event.target.files.length > 0)
-  {
-    const file = event.target.files[0];
-    this.userFile = file;
-   // this.f['profile'].setValue(file);
-
-  var mimeType = event.target.files[0].type;
-  if (mimeType.match(/image\/*/) == null) {
-    this.message = "Only images are supported.";
-    return;
+/*onFileSelected(event: any) {
+  if (event.target.files) {
+    const files = event.target.files;
+    for (let file of files) {
+      const image: Image = {
+        file: file,
+        url: false
+      }
+      this.productToAdd.ProductImages.push(image);
+    }
   }
+}*/
 
-  var reader = new FileReader();
-  
-  this.imagePath = file;
-  reader.readAsDataURL(file); 
-  reader.onload = (_event) => { 
-    this.imgURL = reader.result; 
-  }
-}
-
-}
 
 
 
@@ -249,13 +356,18 @@ public onUpdateUser(user: User) {
       console.log(response);
       this.toast.success({detail:'Success',summary:'Successfully updated !',position:'tr',duration:2000})
       this.getUsers();
-    },
-    (error: HttpErrorResponse) => {
+    },(error) => {
       //alert(error.message);
-      this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})
+    if (error.status === 403) {
+      this.toast.error({detail:'Error',summary:'Your are not authorized to do this action .',position:'tr',duration:3000})
+
+    } else  {
+      this.toast.error({detail:'Error',summary:'Something wrong !',position:'tr',duration:2000})    }
+
     }
   );
 }
+
 
 public onDeleteUser(idUser: number): void {
   this.userService.deleteUser(idUser).subscribe(() => { 

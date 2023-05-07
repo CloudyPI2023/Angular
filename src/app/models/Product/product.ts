@@ -14,7 +14,7 @@ export class Product {
     expired:number;
     expirationDateProduct:Date;
     userProduct:User[];
-    categoryProduct:Category[];
+    categoryProduct:Category;
     ReclamationsProduct:Reclamation[]
 
 }
