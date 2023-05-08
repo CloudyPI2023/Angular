@@ -13,7 +13,6 @@ import { ProductManagementComponent } from 'app/views/product-management/product
 import { CategoryManagementComponent } from 'app/views/category-management/category-management.component';
 import { GiftManagementComponent } from 'app/views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from 'app/views/reclamation-management/reclamation-management.component';
-import { StatComponent } from 'app/StatComponent/stat/stat.component';
 import { AssociationComponent } from 'app/views/association/association.component';
 import { DonationComponent } from 'app/views/donation/donation.component';
 import { RequestComponent } from 'app/views/request/request.component';
@@ -21,6 +20,11 @@ import { DonationAssociationComponent } from 'app/views/donation-association/don
 import { EventReservationComponent } from 'app/views/event-reservation/event-reservation.component';
 import { EventComponent } from 'app/views/event/event.component';
 import { ReservationComponent } from 'app/views/reservation/reservation.component';
+import { StatComponent } from 'app/StatComponent/stat/stat.component';
+import { ArticleComponent } from 'app/views/article/article.component';
+import { CommentComponent } from 'app/views/comment/comment.component';
+import { PurchaseCommandsComponent } from 'app/views/purchase-commands/purchase-commands.component';
+import { CommandsComponent } from 'app/views/purchase-commands/commands/commands.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -78,7 +82,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-    {path:  'home',component:StatComponent},
     { path: 'associations',   component: AssociationComponent },
    
     { path: 'donations',   component: DonationComponent },
@@ -88,4 +91,14 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'events',  component: EventComponent },
     { path: 'reservations',  component: ReservationComponent },
 
+
+
+    { path: 'comment-management',   component: CommentComponent },
+    { path: 'article-management',  component: ArticleComponent },
+    { path: 'statArticles',   component: StatComponent },
+
+        //fakher
+    { path: 'dashboardCommandsPurchase',  component: PurchaseCommandsComponent },
+    { path: 'commands',component: CommandsComponent },
+   
 ];

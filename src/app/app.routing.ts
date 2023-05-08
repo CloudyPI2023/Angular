@@ -9,6 +9,9 @@ import { DeliveryPersonComponent } from './views/deliveryP-management/delivery-p
 import { LoginComponent } from './views/login/login.component';
 import { ProductManagementComponent } from './views/product-management/product-management.component';
 import { StatComponent } from './StatComponent/stat/stat.component';
+import { ArticleComponent } from './views/article/article.component';
+import { CommentComponent } from './views/comment/comment.component';
+import { CommandsComponent } from './views/purchase-commands/commands/commands.component';
 
 const routes: Routes =[
   {
@@ -27,7 +30,13 @@ const routes: Routes =[
   {path: 'deliveryPersons', component: DeliveryPersonComponent},
   {path: 'login', component:LoginComponent},
   {path:'product-management',component: ProductManagementComponent},
-  {path:'',component:StatComponent}
+  {path:'',component:StatComponent},
+  {path:'article-management',component: ArticleComponent},
+  {path:'comment-management',component: CommentComponent},
+  {path:'dashboardCommandsPurchase',component: CommandsComponent},
+
+  
+
 ];
 
 @NgModule({

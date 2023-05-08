@@ -25,7 +25,7 @@ import { ProductManagementComponent } from './views/product-management/product-m
 import { CategoryManagementComponent } from './views/category-management/category-management.component';
 import { GiftManagementComponent } from './views/gift-management/gift-management.component';
 import { ReclamationManagementComponent } from './views/reclamation-management/reclamation-management.component';
-import { StatComponent } from './StatComponent/stat/stat.component';
+import { StatComponent } from './views/purchase-commands/stat/stat.component';
 import { AssociationComponent } from './views/association/association.component';
 import { DonationAssociationComponent } from './views/donation-association/donation-association.component';
 import { DonationComponent } from './views/donation/donation.component';
@@ -33,6 +33,12 @@ import { RequestComponent } from './views/request/request.component';
 import { ReservationComponent } from './views/reservation/reservation.component';
 import { EventComponent } from './views/event/event.component';
 import { EventReservationComponent } from './views/event-reservation/event-reservation.component';
+import { CommentComponent } from './views/comment/comment.component';
+import { ArticleComponent } from './views/article/article.component';
+
+import { PurchaseCommandsComponent } from './views/purchase-commands/purchase-commands.component';
+import { CommandsComponent } from './views/purchase-commands/commands/commands.component';
+
 
 @NgModule({
   imports: [
@@ -79,7 +85,12 @@ import { EventReservationComponent } from './views/event-reservation/event-reser
     RequestComponent,
     ReservationComponent,
     EventComponent,
-    EventReservationComponent
+    EventReservationComponent,
+    CommentComponent,
+    ArticleComponent,
+    PurchaseCommandsComponent,
+    CommandsComponent,
+    StatComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

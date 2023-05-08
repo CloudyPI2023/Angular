@@ -5,7 +5,16 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { filter, Subscription } from 'rxjs';
 import { NgToastService } from 'ng-angular-popup';
+import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle, ChartComponent } from 'ng-apexcharts';
+import Chart from 'chart.js/auto';
+import { UserService } from 'app/views/user-management/user.service';
 
+export type ChartOptions = {
+    series: ApexNonAxisChartSeries;
+    chart: ApexChart;
+    responsive: any[];
+    labels: any;
+  };
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
@@ -16,8 +25,15 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
   UserToken = localStorage.getItem('token');
-
-  constructor( public location: Location, private router: Router,private toast: NgToastService ) {}
+  hashMapUserRole:  Map<String, number> = new Map<string, number>();
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+    
+  result!:any[]
+  keys!:any[]
+  values!:any[]
+  
+  constructor( public location: Location, private router: Router,private toast: NgToastService ,private userService: UserService) {}
 
   ngOnInit() {
      ///
